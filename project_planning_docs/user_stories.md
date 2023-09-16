@@ -64,9 +64,10 @@
 
 ### Update Portfolio
 * As a User with a portfolio I should see a option on the left hand side to add funds.
-    * Clicking add funds should take me to `/:userId/add-funds` where I can add money to my funds.
+    * Clicking add funds should opens, a modal asking me to input a value lower than $10,000,000, where I can add money to my funds.
         * Adding funds should update my total investing allowance
             *  The new total allowance should be seen on the portfolio page ,`/`, in the middle of the pie chart under 'Funds'.
+
     <!-- this could also be a modal instead of having to create a whole page -->
 
 ### Delete Stock
@@ -87,13 +88,24 @@
   <!-- check that with group -->
   * The stocks current position, percent change, current valuation, and change in price in USD
   * A table containing the stocks price, change in price, percent change, opening price, closing price, high, low, and volume.
+  * I should be able to see a description of the company and their logo? <-- MAYBE
 
 ### Purchasing Stock
 * When accessing a stocks detail page ,`/:tickerSymbol`,as a logged in user I should be able to:
 <!-- check this with group, could be ticker symbol or an id -->
-  * Buy shares in the stock or sell them if I already own shares.
+  * Buy shares in the stock or sell them if I already own shares at the bottom of the page
+    * The Transaction componet should open automaticallty with the stock ticker autofilling.
+      * Depending on the ticker field inputed by me, the current share price should auto update.
+    * If I do not have enough money to buy the amount of shares I would like, the submit button should be disabled.
 
-**need help on this section**
+  ### Update Amount of Stock Shares Purchased
+  * When buying shares I should be able to update the total amount of shares I would like to be greater than 1.
+
+  ### Delete Stocks from my Order
+  * When purchasing shares I should be able to decrease the amount of shares I would like to order.
+   * I should not be able to delete more shares than I have in my order.
+
+
 
 
 
