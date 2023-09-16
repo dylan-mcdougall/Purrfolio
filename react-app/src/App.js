@@ -15,7 +15,7 @@ function App() {
 
   return (
     <>
-      <Navigation isLoaded={isLoaded} />
+      <Navigation />
       {isLoaded && (
         <Switch>
           <Route path="/login" >

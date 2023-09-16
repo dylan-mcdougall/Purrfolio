@@ -1,7 +1,93 @@
-.profile-dropdown {
-  position: absolute;
+body {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
 }
 
-.hidden {
-  display: none;
+html {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+div.nav-wrapper {
+  height: 100vh;
+}
+
+ul.navigation-shell {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-between;
+  background-color: #1f1f1f;
+  height: 100%;
+  width: 220px;
+}
+
+div.navigation-layer {
+  margin: 10px 18px;
+  border-radius: 12px;
+}
+
+li.navigation-item {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  color: white;
+  width: 100%;
+}
+
+li.navigation-item a {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  text-decoration: none;
+  color: white;
+  width: 100%;
+  font-size: 18px;
+  padding: 6px 8px;
+}
+
+li.navigation-item.add-funds {
+  font-size: 18px;
+  padding: 6px 8px;
+}
+
+li.navigation-item.add-funds div.nav-context {
+  padding-right: 22px;
+}
+
+li.navigation-item.current-funds p {
+  padding: 12.8px 8px 0 8px;
+  margin: 0;
+}
+
+div.nav-content-wrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
+  padding: 4px;
+}
+
+div.nav-top {
+  width: 100%;
+}
+
+div.nav-bottom {
+  width: 100%
+}
+
+p.current-funds-context {
+  font-size: 12px;
+}
+
+p.current-funds-number {
+  font-size: 12px;
+}
+
+.active {
+  background-color: grey;
 }
