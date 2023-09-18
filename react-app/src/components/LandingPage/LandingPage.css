@@ -1,0 +1,109 @@
+div.page-wrapper {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    height: 100%;
+    width: 100%;
+    background-color: black;
+}
+
+div.landing-navigation-wrapper {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+    justify-content: space-between;
+    border-bottom: 2px solid white;
+    height: 60px;
+}
+
+div.landing-navigation-right {
+    width: 200px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-right: 20px;
+}
+
+div.landing-navigation-left h1 {
+    color: white;
+    margin: 12px;
+    margin-bottom: 6px;
+}
+
+div.landing-navigation-right a {
+    text-decoration: none;
+    color: white;
+    margin: 10px;
+    font-size: 24px;
+}
+
+div.landing-navigation-right a:hover {
+    color: lightgrey;
+    cursor: pointer;
+}
+
+div.landing-content-wrapper {
+    display: flex;
+    flex-direction: column;
+}
+
+div.landing-content {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-evenly;
+    margin: 0 12px;
+}
+
+div.landing-content-text {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: white;
+    height: 30%;
+    margin: 24px;
+}
+
+div.landing-content-text h2 {
+    font-size: 24px;
+}
+
+div.landing-content-image img {
+    max-height: 550px;
+    max-width: 550px;
+}
+
+div.shadow {
+    position: absolute;
+    height: 550px;
+    width: 550px;
+    box-shadow: inset 10px 10px 10px 10px black;
+}
+
+div.landing-signup-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+div.landing-signup-statement {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: yellow;
+    margin: 20px;
+}
+
+div.landing-signup-statement p {
+    margin: 0;
+    padding: 0;
+    font-size: 14px;
+}
+
+button.signup-button {
+    font-size: 18px;
+    border-radius: 20px;
+    padding: 8px 12px;
+    margin-bottom: 20px;
+    cursor: pointer;
+}
