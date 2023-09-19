@@ -1,6 +1,5 @@
 from .db import db, environment, SCHEMA, add_prefix_for_prod
-from .transaction import Transaction
-from .portfolio_stock import PortfolioStock
+from sqlalchemy.orm import relationship
 
 class Stock(db.Model):
     __tablename__ = 'stocks'
@@ -17,3 +16,7 @@ class Stock(db.Model):
     high = db.Column(db.Float(2), nullable=False)
     low = db.Column(db.Float(2), nullable=False)
     volume = db.Column(db.Integer, nullable=False)
+
+    portfolios = db.relationship("PortfolioStock", back_populates="stock")
+    transactions = db.relationship("Transaction", back_populates="stock")
+    watchlists = db.relationship("WatchlistStock", back_populates="stock")
