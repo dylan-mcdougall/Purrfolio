@@ -1,3 +1,7 @@
+html {
+    overflow: hidden;
+}
+
 div.page-wrapper {
     margin: 0;
     padding: 0;
@@ -17,7 +21,7 @@ div.landing-navigation-wrapper {
 }
 
 div.landing-navigation-right {
-    width: 200px;
+    width: 300px;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -30,14 +34,16 @@ div.landing-navigation-left h1 {
     margin-bottom: 6px;
 }
 
-div.landing-navigation-right a {
+div.landing-navigation-right button {
     text-decoration: none;
+    border: none;
     color: white;
+    background-color: black;
     margin: 10px;
     font-size: 24px;
 }
 
-div.landing-navigation-right a:hover {
+div.landing-navigation-right button:hover {
     color: lightgrey;
     cursor: pointer;
 }
@@ -100,7 +106,7 @@ div.landing-signup-statement p {
     font-size: 14px;
 }
 
-button.signup-button {
+div.landing-signup-section button {
     font-size: 18px;
     border-radius: 20px;
     padding: 8px 12px;

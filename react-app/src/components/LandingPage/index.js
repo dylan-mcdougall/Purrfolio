@@ -2,23 +2,35 @@ import React from 'react';
 import { NavLink, useHistory } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import './LandingPage.css';
+import OpenModalButton from '../OpenModalButton';
+import SignupFormModal from '../SignupFormModal';
+import LoginFormModal from '../LoginFormModal';
 
 
 function LandingPage() {
     const sessionUser = useSelector(state => state.session.user);
     const navigate = useHistory();
 
-    if (sessionUser) return navigate.push('/portfolio');
+    console.log(sessionUser)
 
-    return (
-        <div className='page-wrapper'>
+    if (sessionUser) return navigate.push('/portfolio');
+    else {
+
+        return (
+            <div className='page-wrapper'>
             <div className='landing-navigation-wrapper'>
                 <div className='landing-navigation-left'>
                     <h1 className='title'>Purrfolio</h1>
                 </div>
                 <div className='landing-navigation-right'>
-                    <a href='#' className='signup'>Sign Up</a>
-                    <a href='#' className='login'>Log In</a>
+                    <OpenModalButton
+                     buttonText={"Sign Up"}
+                     modalComponent={<SignupFormModal />}
+                    />
+                    <OpenModalButton
+                     buttonText={"Log In"}
+                     modalComponent={<LoginFormModal />}
+                    />
                 </div>
             </div>
             <div className='landing-content-wrapper'>
@@ -43,11 +55,15 @@ function LandingPage() {
                             Invest Today
                         </p>
                     </div>
-                    <button className='signup-button'>Sign Up</button>
+                    <OpenModalButton
+                     buttonText={"Sign Up"}
+                     modalComponent={<SignupFormModal />}
+                     />
                 </div>
             </div>
         </div>
     )
+    }
 }
 
 export default LandingPage;
