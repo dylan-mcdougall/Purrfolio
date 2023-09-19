@@ -48,15 +48,26 @@ li.navigation-item a {
   width: 100%;
   font-size: 18px;
   padding: 6px 8px;
+  border-radius: 20px;
 }
 
-li.navigation-item.add-funds {
+li.navigation-item.add-funds button {
   font-size: 18px;
   padding: 6px 8px;
+  background-color: #1f1f1f;
+  border: none;
+  border-radius: 20px;
 }
 
-li.navigation-item.add-funds div.nav-context {
-  padding-right: 22px;
+li.navigation-item.add-funds button:hover {
+  cursor: pointer;
+  background-color: slategray;
+}
+
+li.navigation-item.add-funds button div.nav-context {
+  padding-left: 48px;
+  padding-right: 8px;
+  color: white;
 }
 
 li.navigation-item.current-funds p {
@@ -88,6 +99,23 @@ p.current-funds-number {
   font-size: 12px;
 }
 
+li.navigation-item a:hover {
+  background-color: slategray;
+}
+
 .active {
-  background-color: grey;
+  background-color: slategray;
+}
+
+li.navigation-item.logout > div.nav-content-wrapper {
+  width: 100%;
+  font-size: 18px;
+  padding: 10px 14px;
+  border-radius: 40px;
+}
+
+li.navigation-item.logout div.nav-content-wrapper:hover {
+  cursor: pointer;
+  background-color: slategray;
+  border-radius: 20px;
 }
