@@ -30,7 +30,7 @@ function GrowthButton({ symbol }) {
       {stockInfo && (
         <div>
           {/* Display stockInfo data as needed */}
-          <p>Stock Info: {JSON.stringify(stockInfo)}</p>
+          <p>Stock Info: {stockInfo}</p>
         </div>
       )}
     </div>
