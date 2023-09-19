@@ -1,7 +1,7 @@
-/* html {
+html {
      overflow: hidden;
 }
-*/
+
 
 div.page-wrapper {
     margin: 0;
@@ -75,15 +75,13 @@ div.landing-content-text {
     color: white;
     height: 100%;
     width: 100%;
-    margin-top: 10%;
+    margin: 10% 0 10% 5%;
 }
 
 div.landing-content-image {
     width: 100%;
     height: fit-content;
-    margin-top: 5%;
-    margin-right: 5%;
-    margin-bottom: 5%;
+    margin: 5% 5% 3% 0;
 }
 
 div.landing-content-text h2 {
@@ -96,17 +94,11 @@ div.landing-content-image img {
     width: 100%;
 }
 
-/* div.shadow {
-    position: absolute;
-    height: 100%;
-    width: 100%;
-    box-shadow: inset 10px 10px 10px 10px black;
-} */
-
 div.landing-signup-section {
     display: flex;
     flex-direction: column;
     align-items: center;
+    margin: 2%;
 }
 
 div.landing-signup-statement {
@@ -118,15 +110,16 @@ div.landing-signup-statement {
 }
 
 div.landing-signup-statement p {
+    font-family: cursive;
     margin: 0;
     padding: 0;
-    font-size: 14px;
+    font-size: 18px;
 }
 
 div.landing-signup-section button {
     font-size: 18px;
     border-radius: 20px;
     padding: 8px 12px;
-    margin-bottom: 20px;
+    margin: 10%;
     cursor: pointer;
 }
