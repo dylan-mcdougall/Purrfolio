@@ -2,7 +2,9 @@ import React, { createContext, useEffect, useState } from "react";
 import alpacaApi from "../../services/alpaca";
 import DoughnutChart from "../DoughnutChart";
 import GrowthButton from "../GrowthButton";
+import { useSelector } from "react-redux";
 import './index.css'
+
 function PortfolioPage() {
   const [buyingPower, setBuyingPower] = useState(0);
   const [cash, setCash] = useState(0);
@@ -13,6 +15,9 @@ function PortfolioPage() {
   const [stocks, setStocks] = useState([]);
   const [isLoaded, setIsLoaded] = useState(false);
   const [data, setData] = useState(null);
+  const sessionUser = useSelector((state) => state.session.user);
+
+  console.log(sessionUser)
 
   useEffect(() => {
 

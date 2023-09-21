@@ -5,11 +5,8 @@ import SignupFormPage from "./components/SignupFormPage";
 import LoginFormPage from "./components/LoginFormPage";
 import { authenticate } from "./store/session";
 import Navigation from "./components/Navigation";
-<<<<<<< HEAD
 import PortfolioPage from "./components/PortfolioPage";
-=======
 import LandingPage from "./components/LandingPage";
->>>>>>> e4f3758a3ccbfcba347ff2b2c86d072c5a8e5e2b
 
 function App() {
   const dispatch = useDispatch();
