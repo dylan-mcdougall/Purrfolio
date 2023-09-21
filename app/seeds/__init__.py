@@ -23,6 +23,12 @@ def seed():
         # the schema name (see comment in users.py undo_users function).
         # Make sure to add all your other model's undo functions below
         undo_users()
+        undo_portfolios()
+        undo_stocks()
+        undo_watchlists()
+        undo_transactions()
+        undo_portfolio_stocks()
+        undo_watchlist_stocks()
     seed_users()
     seed_portfolios()
     seed_stocks()
