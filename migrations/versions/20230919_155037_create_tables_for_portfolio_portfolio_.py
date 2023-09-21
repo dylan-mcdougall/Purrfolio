@@ -40,6 +40,8 @@ def upgrade():
     sa.Column('current_funds', sa.Float(precision=2), nullable=False),
     sa.Column('fund_history', sa.Float(precision=2), nullable=True),
     sa.Column('user_id', sa.Integer(), nullable=False),
+    sa.Column('created_at', sa.DateTime(), nullable=False),
+    sa.Column('last_modified', sa.DateTime(), nullable=False),
     sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
@@ -47,6 +49,8 @@ def upgrade():
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('name', sa.String(length=40), nullable=True),
     sa.Column('user_id', sa.Integer(), nullable=False),
+    sa.Column('created_at', sa.DateTime(), nullable=False),
+    sa.Column('last_modified', sa.DateTime(), nullable=False),
     sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
@@ -63,9 +67,10 @@ def upgrade():
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('quantity', sa.Integer(), nullable=False),
     sa.Column('price', sa.Float(precision=2), nullable=False),
-    sa.Column('timestamp', sa.DateTime(), nullable=False),
     sa.Column('portfolio_id', sa.Integer(), nullable=False),
     sa.Column('stock_id', sa.Integer(), nullable=False),
+    sa.Column('created_at', sa.DateTime(), nullable=False),
+    sa.Column('last_modified', sa.DateTime(), nullable=False),
     sa.ForeignKeyConstraint(['portfolio_id'], ['portfolios.id'], ),
     sa.ForeignKeyConstraint(['stock_id'], ['stocks.id'], ),
     sa.PrimaryKeyConstraint('id')
