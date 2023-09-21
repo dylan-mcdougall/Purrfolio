@@ -2,7 +2,7 @@ import React, { createContext, useEffect, useState } from "react";
 import alpacaApi from "../../services/alpaca";
 import DoughnutChart from "../DoughnutChart";
 import GrowthButton from "../GrowthButton";
-
+import './index.css'
 function PortfolioPage() {
   const [buyingPower, setBuyingPower] = useState(0);
   const [cash, setCash] = useState(0);
@@ -11,11 +11,10 @@ function PortfolioPage() {
   const [longMarketValue, setLongMarketValue] = useState(0);
   const [totalStocks, setTotalStocks] = useState(0);
   const [stocks, setStocks] = useState([]);
-  const [isLoaded, setIsLoaded] = useState(false); // Track data loading
-  const [data, setData] = useState(null); // Initialize with null
+  const [isLoaded, setIsLoaded] = useState(false);
+  const [data, setData] = useState(null);
 
   useEffect(() => {
-    console.log("fetch data from alpaca");
 
     const api = alpacaApi();
     const fetchData = async () => {
@@ -81,14 +80,17 @@ function PortfolioPage() {
   let stockSymbols = stocks.map((stock) => stock.symbol)
 
   return (
-    <div>
-      <h1>Portfolio</h1>
+    <div className="main-page">
       {isLoaded ? (
         <div>
+          <div className="chart">
         <DoughnutChart chartData={data} total={portfolioValue} cash={cash} />
+        </div>
+        <div className="growth-buttons">
         {stockSymbols.map((symbol) => {
             return <GrowthButton symbol={symbol} key={symbol} />;
           })}
+          </div>
         </div>
       ) : (
         <h1>Loading...</h1>

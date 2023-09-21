@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
-import alpacaApi from "../../services/alpaca";
+import alpacaStockApi from "../../services/alpacaStock";
+import './index.css'
 
 function GrowthButton({ symbol }) {
-  const api = alpacaApi();
+  const api = alpacaStockApi();
   const [stockInfo, setStockInfo] = useState(null);
 
   useEffect(() => {
@@ -10,8 +11,8 @@ function GrowthButton({ symbol }) {
       try {
         const response = await api.getStock(symbol);
         if (response.ok) {
+          console.log(response.data)
           setStockInfo(response.data);
-          console.log(response.data); // Log the data here
         } else {
           console.error("Error fetching stock data:", response.problem);
         }
@@ -24,13 +25,11 @@ function GrowthButton({ symbol }) {
   }, [api, symbol]);
 
   return (
-    <div>
+    <div className="growth-button">
       <h2>{symbol}</h2>
-      {/* Render stockInfo data here */}
       {stockInfo && (
         <div>
-          {/* Display stockInfo data as needed */}
-          <p>Stock Info: {JSON.stringify(stockInfo)}</p>
+          <p>Stock Info: {stockInfo}</p>
         </div>
       )}
     </div>
