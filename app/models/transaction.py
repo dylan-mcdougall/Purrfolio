@@ -19,3 +19,14 @@ class Transaction(db.Model):
 
     portfolio = db.relationship("Portfolio", back_populates="transactions")
     stock = db.relationship("Stock", back_populates="transactions")
+
+    def to_dict(self):
+        return {
+            "id": self.id,
+            "quantity": self.quantity,
+            "price": self.price,
+            "portfolio_id": self.portfolio_id,
+            "stock_id": self.stock_id,
+            "created_at": self.created_at,
+            "last_modified": self.last_modified
+        }

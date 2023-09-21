@@ -23,3 +23,12 @@ def user(id):
     """
     user = User.query.get(id)
     return user.to_dict()
+
+@user_routes.route('/<int:id>/portfolio')
+@login_required
+def portfolio(id):
+    """
+    Query to return the portfolio associated with the user.id
+    """
+    user = User.query.get(id)
+    return user.portfolio.to_dict()
