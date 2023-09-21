@@ -9,8 +9,8 @@ class WatchlistStock(db.Model):
         __table_args__ = {'schema': SCHEMA}
 
     id = db.Column(db.Integer, primary_key=True)
-    watchlist_id = db.Column(db.Integer, ForeignKey("watchlists.id"), nullable=False)
-    stock_id = db.Column(db.Integer, ForeignKey("stocks.id"), nullable=False)
+    watchlist_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod("watchlists.id")), nullable=False)
+    stock_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod("stocks.id")), nullable=False)
 
     watchlist = db.relationship("Watchlist", back_populates="stocks")
     stock = db.relationship("Stock", back_populates="watchlists")
