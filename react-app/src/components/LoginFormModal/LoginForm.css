@@ -1,0 +1,105 @@
+div.login-form-wrapper {
+    display: flex;
+    flex-direction: column;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    width: 400px;
+    height: auto;
+    background-color: #f2f2f2;
+}
+
+div.login-form-nav {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    width: 100%;
+}
+
+div.login-form-signup-title {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+div.login-form-login-title {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+div.login-form-nav > div.login-form-signup-title > button {
+    border: none;
+    font-size: 20px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+div.login-form-nav h2 {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+div.login-form-wrapper form {
+    display: flex;
+    flex-direction: column;
+}
+
+div.login-form-wrapper ul {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    list-style: none;
+    color: red;
+    margin: 4px 0;
+    padding: 0;
+}
+
+div.login-form-wrapper label {
+    display: flex;
+    flex-direction: column;
+    margin: 6px 10px;
+}
+
+div.login-form-wrapper input {
+    width: 100%;
+    align-self: center;
+    border-radius: 6px;
+}
+
+div.button-interface {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
+div.login-form-wrapper button.submit {
+    color: white;
+    background-color: black;
+    border: none;
+    margin: 10px;
+    width: 28%;
+    font-size: 16px;
+    padding: 6px 10px;
+    border-radius: 16px;
+}
+
+div.login-form-wrapper button.demo-user {
+    color: white;
+    background-color: grey;
+    border: none;
+    margin: 10px;
+    width: 28%;
+    font-size: 16px;
+    padding: 6px 10px;
+    border-radius: 16px;
+}
+
+div.login-form-signup-title {
+    background-color: #d2d2d2;
+}
+
+div.login-form-signup-title > button {
+    color: #808080;
+    background-color: #d2d2d2;
+}
