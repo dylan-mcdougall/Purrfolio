@@ -32,4 +32,3 @@ def portfolio(id):
     """
     user = User.query.get(id)
     return user.portfolio.to_dict()
->>>>>>> ed0d0e3947c91d535629469582a61c0721084b95

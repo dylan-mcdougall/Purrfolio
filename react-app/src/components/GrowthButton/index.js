@@ -11,7 +11,6 @@ function GrowthButton({ symbol }) {
       try {
         const response = await api.getStock(symbol);
         if (response.ok) {
-          console.log(response.data)
           setStockInfo(response.data);
         } else {
           console.error("Error fetching stock data:", response.problem);
