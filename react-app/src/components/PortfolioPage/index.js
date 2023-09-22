@@ -25,7 +25,7 @@ function PortfolioPage() {
 
 
   useEffect(() => {
-    dispatch(getPortfolio(sessionUser.id))
+    dispatch(getPortfolio(sessionUser.id)).then(() => setPortfolioValue(sessionPortfolio.current_funds))
     dispatch(getStocks(sessionUser.id))
 
 
@@ -90,8 +90,7 @@ function PortfolioPage() {
   }, []);
 
   useEffect(() => {
-    console.log(sessionPortfolio);
-    setPortfolioValue(sessionPortfolio.current_funds)
+    console.log(portfolioValue);
   }, [sessionStocks, sessionPortfolio])
 
   let stockSymbols = stocks.map((stock) => stock.symbol)
