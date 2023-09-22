@@ -1,6 +1,7 @@
 from .db import db, environment, SCHEMA, add_prefix_for_prod
 from sqlalchemy.orm import relationship
 from sqlalchemy.schema import ForeignKey
+from .stock import Stock
 
 class WatchlistStock(db.Model):
     __tablename__ = 'watchlist_stocks'
@@ -14,3 +15,10 @@ class WatchlistStock(db.Model):
 
     watchlist = db.relationship("Watchlist", back_populates="stocks")
     stock = db.relationship("Stock", back_populates="watchlists")
+
+    def to_dict(self):
+        return {
+            "id": self.id,
+            "watchlist_id": self.watchlist_id,
+            "stock_id": self.stock_id
+        }
