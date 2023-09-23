@@ -10,8 +10,8 @@ class Portfolio(db.Model):
         __table_args__ = {'schema': SCHEMA}
 
     id = db.Column(db.Integer, primary_key=True)
-    current_funds = db.Column(db.Float(2), nullable=False)
-    fund_history = db.Column(db.Float(2))
+    current_funds = db.Column(db.Float(2), default=0, nullable=False)
+    fund_history = db.Column(db.Float(2), default=0)
     user_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod("users.id")), nullable=False)
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
     last_modified = db.Column(db.DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)

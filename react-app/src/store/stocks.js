@@ -8,8 +8,9 @@ const setStocks = (stocks) => ({
 const initialState = { stocks: null }
 
 export const getStocks = (id) => async (dispatch) => {
-    const response = await fetch(`/api/portfolios/${id}/stocks`);
-    const data = await response.json();
+    const response = await fetch(`/api/users/current/portfolio`);
+    let data = await response.json();
+    data = data.portfolio
     dispatch(setStocks(data));
     return data;
 };

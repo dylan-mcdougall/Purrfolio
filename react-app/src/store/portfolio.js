@@ -9,7 +9,7 @@ const setPortfolio = (portfolio) => ({
 const initialState = { portfolio: null };
 
 export const getPortfolio = (id) => async (dispatch) => {
-    const response = await fetch(`/api/users/${id}/portfolio`);
+    const response = await fetch(`/api/users/current/portfolio`);
     const data = await response.json();
     dispatch(setPortfolio(data));
     return data;

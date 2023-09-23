@@ -1,35 +1,43 @@
 import React, { useEffect, useState } from "react";
-import alpacaStockApi from "../../services/alpacaStock";
 import './index.css'
 
 function GrowthButton({ symbol }) {
-  const api = alpacaStockApi();
-  const [stockInfo, setStockInfo] = useState(null);
+  const [stockData, setStockData] = useState(null);
+  const [growth, setGrowth] = useState(null);
+  const [isLoaded, setIsLoaded] = useState(null);
+  const [color, setColor] = useState("green");
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await api.getStock(symbol);
-        if (response.ok) {
-          setStockInfo(response.data);
-        } else {
-          console.error("Error fetching stock data:", response.problem);
-        }
-      } catch (error) {
-        console.error("Error fetching stock data:", error);
-      }
-    };
+    async function fetchStockData() {
+        const res = await fetch(`/api/stocks/${symbol}`);
+        const data = await res.json();
+        setStockData(data);
+        console.log(data);
+    }
+    fetchStockData();
+  }, [symbol]);
 
-    fetchData();
-  }, [api, symbol]);
+  useEffect(() => {
+    if (stockData) {
+      let calculated = ((stockData.price - stockData.open) / stockData.open) * 100;
+      calculated = calculated.toFixed(2);
+      const newColor = calculated > 0 ? "green" : "red";
+      setGrowth(calculated);
+      setColor(newColor);
+      setIsLoaded(true);
+    }
+  }, [stockData])
 
   return (
     <div className="growth-button">
-      <h2>{symbol}</h2>
-      {stockInfo && (
+      {isLoaded ? (
         <div>
-          <p>Stock Info: {stockInfo}</p>
+          <h2>Growth/Loss</h2>
+          <h3>{symbol}</h3>
+          <h3 className={color}>{growth}</h3>
         </div>
+      ) : (
+        <h2>loading...</h2>
       )}
     </div>
   );
