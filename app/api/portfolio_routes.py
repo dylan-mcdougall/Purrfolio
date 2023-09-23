@@ -79,6 +79,8 @@ def portfolio_purchase(id):
     # Authentication that current user is owner of portfolio
     form = TransactionForm()
     portfolio = Portfolio.query.options(joinedload(Portfolio.stocks)).get(id)
+    if not portfolio:
+        return {"errors": "Portfolio associated with this id does not exist"}
     res = authenticate()
     if res['id'] != portfolio.user_id:
         return {"errors": ["Unauthorized"]}
@@ -86,9 +88,9 @@ def portfolio_purchase(id):
     # Grab stock for validation
     funds = portfolio.current_funds
     stock = Stock.query.filter(Stock.ticker == form.data['ticker']).first()
-    portfolio_stock = PortfolioStock.query.filter(PortfolioStock.stock_id == stock.id).first()
     if stock is None:
         return {"errors": ["Stock not found"]}, 404
+    portfolio_stock = PortfolioStock.query.filter(PortfolioStock.stock_id == stock.id).first()
     # Split logic for buying and selling
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
