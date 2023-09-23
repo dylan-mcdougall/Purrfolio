@@ -36,7 +36,8 @@ def fetch_portfolio_details(id):
 def fetch_watchlist_stocks(id):
     watchlist = Watchlist.query.get(id)
     watchlist_stocks = [stock.to_dict() for stock in watchlist.stocks]
-    stock_ids = [stock['id'] for stock in watchlist_stocks]
+    stock_ids = [stock['stock_id'] for stock in watchlist_stocks]
     stocks = Stock.query.filter(Stock.id.in_(stock_ids)).all()
     final_stocks = [stock.to_dict() for stock in stocks]
     return final_stocks
+
