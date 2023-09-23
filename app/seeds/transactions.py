@@ -4,10 +4,10 @@ from datetime import datetime
 
 def seed_transactions():
     first = Transaction(
-        portfolio_id=2, stock_id=100, quantity=20, price=7.77 
+        portfolio_id=2, stock_id=100, quantity=20, price=7.77, buy=True 
     )
     second = Transaction(
-        portfolio_id=2, stock_id=99, quantity=31, price=8.175
+        portfolio_id=2, stock_id=99, quantity=31, price=8.175, buy=True
     )
 
     db.session.add(first)

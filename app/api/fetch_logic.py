@@ -41,3 +41,5 @@ def fetch_watchlist_stocks(id):
     final_stocks = [stock.to_dict() for stock in stocks]
     return final_stocks
 
+def purchase_stocks(portfolio):
+    pass
