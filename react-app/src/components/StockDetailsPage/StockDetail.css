@@ -1,0 +1,99 @@
+.stockDetailContainer {
+    background: blue;
+    display: flexbox;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: auto;
+    width: auto;
+    margin-top: 0;
+    margin-right: 0;
+}
+.StockDetailsTopBar {
+    background: yellow;
+    border: 3px solid black;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+.sdtb_left {
+background: purple;
+display: flex;
+flex-direction: row;
+}
+.sdtb_left > p {
+    margin: 5px;
+}
+
+.StockDetailsMiddle {
+    background: beige;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+.sdm_left {
+    background: brown;
+    grid-column-start: 1;
+    grid-column-end: 2;
+}
+.sdm_right {
+    background-color: blueviolet;
+    grid-column-start: 2;
+    grid-column-end: 3;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+}
+.rightdiv {
+margin: auto;
+border: 2px solid black;
+
+}
+
+table {
+    table-layout: fixed;
+    width: 100%;
+    border-collapse: collapse;
+    border: 3px solid purple;
+  }
+  thead tr:nth-child(1) {
+    width: 11%;
+    background: black;
+  }
+
+  thead th:nth-child(2) {
+    width: 11%;
+  }
+
+  thead th:nth-child(3) {
+    width: 11%;
+  }
+
+  thead th:nth-child(4) {
+    width: 11%;
+  }
+  thead th:nth-child(5) {
+    width: 11%;
+  }
+  thead th:nth-child(6) {
+    width: 11%;
+  }
+  thead th:nth-child(7) {
+    width: 11%;
+  }
+  thead th:nth-child(8) {
+    width: 11%;
+  }
+  thead th:nth-child(9) {
+    width: 11%;
+  }
+
+  th,
+td {
+  padding: 20px;
+}
+thread {
+
+display: grid;
+grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+}
