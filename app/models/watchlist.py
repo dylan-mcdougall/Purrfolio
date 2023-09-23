@@ -18,7 +18,7 @@ class Watchlist(db.Model):
     last_modified = db.Column(db.DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
 
     user = db.relationship("User", back_populates="watchlists")
-    stocks = db.relationship("WatchlistStock", back_populates="watchlist")
+    stocks = db.relationship("WatchlistStock", back_populates="watchlist", cascade="all, delete")
 
     def to_dict(self):
         return {

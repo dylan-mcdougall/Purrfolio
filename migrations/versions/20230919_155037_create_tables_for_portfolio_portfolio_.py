@@ -42,7 +42,7 @@ def upgrade():
     sa.Column('user_id', sa.Integer(), nullable=False),
     sa.Column('created_at', sa.DateTime(), nullable=False),
     sa.Column('last_modified', sa.DateTime(), nullable=False),
-    sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
+    sa.ForeignKeyConstraint(['user_id'], ['users.id'], ondelete='CASCADE'),
     sa.PrimaryKeyConstraint('id')
     )
     op.create_table('watchlists',
@@ -51,7 +51,7 @@ def upgrade():
     sa.Column('user_id', sa.Integer(), nullable=False),
     sa.Column('created_at', sa.DateTime(), nullable=False),
     sa.Column('last_modified', sa.DateTime(), nullable=False),
-    sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
+    sa.ForeignKeyConstraint(['user_id'], ['users.id'], ondelete='CASCADE'),
     sa.PrimaryKeyConstraint('id')
     )
     op.create_table('portfolio_stocks',
@@ -59,8 +59,8 @@ def upgrade():
     sa.Column('quantity', sa.Integer(), nullable=False),
     sa.Column('portfolio_id', sa.Integer(), nullable=False),
     sa.Column('stock_id', sa.Integer(), nullable=False),
-    sa.ForeignKeyConstraint(['portfolio_id'], ['portfolios.id'], ),
-    sa.ForeignKeyConstraint(['stock_id'], ['stocks.id'], ),
+    sa.ForeignKeyConstraint(['portfolio_id'], ['portfolios.id'], ondelete='CASCADE'),
+    sa.ForeignKeyConstraint(['stock_id'], ['stocks.id'], ondelete='SET NULL'),
     sa.PrimaryKeyConstraint('id')
     )
     op.create_table('transactions',
@@ -72,16 +72,16 @@ def upgrade():
     sa.Column('stock_id', sa.Integer(), nullable=False),
     sa.Column('created_at', sa.DateTime(), nullable=False),
     sa.Column('last_modified', sa.DateTime(), nullable=False),
-    sa.ForeignKeyConstraint(['portfolio_id'], ['portfolios.id'], ),
-    sa.ForeignKeyConstraint(['stock_id'], ['stocks.id'], ),
+    sa.ForeignKeyConstraint(['portfolio_id'], ['portfolios.id'], ondelete='CASCADE'),
+    sa.ForeignKeyConstraint(['stock_id'], ['stocks.id'], ondelete='SET NULL'),
     sa.PrimaryKeyConstraint('id')
     )
     op.create_table('watchlist_stocks',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('watchlist_id', sa.Integer(), nullable=False),
     sa.Column('stock_id', sa.Integer(), nullable=False),
-    sa.ForeignKeyConstraint(['stock_id'], ['stocks.id'], ),
-    sa.ForeignKeyConstraint(['watchlist_id'], ['watchlists.id'], ),
+    sa.ForeignKeyConstraint(['stock_id'], ['stocks.id'], ondelete='SET NULL'),
+    sa.ForeignKeyConstraint(['watchlist_id'], ['watchlists.id'], ondelete='CASCADE'),
     sa.PrimaryKeyConstraint('id')
     )
 

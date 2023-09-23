@@ -18,7 +18,7 @@ class Transaction(db.Model):
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
     last_modified = db.Column(db.DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
 
-    portfolio = db.relationship("Portfolio", back_populates="transactions")
+    portfolio = db.relationship("Portfolio", back_populates="transactions", cascade="all, delete-orphan", single_parent=True)
     stock = db.relationship("Stock", back_populates="transactions")
 
     def to_dict(self):
