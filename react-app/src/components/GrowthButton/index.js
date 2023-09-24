@@ -12,7 +12,6 @@ function GrowthButton({ symbol }) {
         const res = await fetch(`/api/stocks/${symbol}`);
         const data = await res.json();
         setStockData(data);
-        console.log(data);
     }
     fetchStockData();
   }, [symbol]);
