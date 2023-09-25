@@ -3,6 +3,8 @@ import { login } from "../../store/session";
 import { useDispatch } from "react-redux";
 import { useModal } from "../../context/Modal";
 import "./LoginForm.css";
+import OpenModalButton from "../OpenModalButton";
+import SignupFormModal from "../SignupFormModal";
 
 function LoginFormModal() {
   const dispatch = useDispatch();
@@ -22,12 +24,22 @@ function LoginFormModal() {
   };
 
   return (
-    <>
-      <h1>Log In</h1>
+    <div className="login-form-wrapper">
+      <div className="login-form-nav">
+        <div className="login-form-signup-title">
+          <OpenModalButton
+            buttonText={"Sign Up"}
+            modalComponent={<SignupFormModal />}
+          />
+          </div>
+          <div className="login-form-login-title">
+            <h2>Log In</h2>
+          </div>
+      </div>
       <form onSubmit={handleSubmit}>
         <ul>
           {errors.map((error, idx) => (
-            <li key={idx}>{error}</li>
+            <li key={idx}>{error.split(' : ')[1]}</li>
           ))}
         </ul>
         <label>
@@ -48,9 +60,12 @@ function LoginFormModal() {
             required
           />
         </label>
-        <button type="submit">Log In</button>
+        <div className="button-interface">
+        <button className="demo-user" type="submit">Demo User</button>
+        <button className="submit" type="submit">Log In</button>
+        </div>
       </form>
-    </>
+    </div>
   );
 }
 

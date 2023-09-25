@@ -6,6 +6,7 @@ import LoginFormPage from "./components/LoginFormPage";
 import { authenticate } from "./store/session";
 import Navigation from "./components/Navigation";
 import PortfolioPage from "./components/PortfolioPage";
+import LandingPage from "./components/LandingPage";
 
 function App() {
   const dispatch = useDispatch();
@@ -19,11 +20,8 @@ function App() {
       <Navigation />
       {isLoaded && (
         <Switch>
-          <Route path="/login" >
-            <LoginFormPage />
-          </Route>
-          <Route path="/signup">
-            <SignupFormPage />
+          <Route exact path='/'>
+            <LandingPage />
           </Route>
           <Route path="/portfolio">
             <PortfolioPage />
