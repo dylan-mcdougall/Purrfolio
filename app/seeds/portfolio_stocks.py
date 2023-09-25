@@ -9,7 +9,8 @@ def seed_portfolio_stocks():
         portfolio_id=2, stock_id=99, quantity=31
     )
 
-    db.session.add(first, second)
+    db.session.add(first)
+    db.session.add(second)
     db.session.commit()
 
 def undo_portfolio_stocks():

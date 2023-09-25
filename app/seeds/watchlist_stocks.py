@@ -8,6 +8,9 @@ def seed_watchlist_stocks():
     second = WatchlistStock(
         watchlist_id=3, stock_id=100
     )
+    db.session.add(first)
+    db.session.add(second)
+    db.session.commit()
 
 def undo_watchlist_stocks():
     if environment == "production":

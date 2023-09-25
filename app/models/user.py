@@ -20,8 +20,8 @@ class User(db.Model, UserMixin):
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
     last_modified = db.Column(db.DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
 
-    portfolio = db.relationship("Portfolio", back_populates="user", uselist=False)
-    watchlists = db.relationship("Watchlist", back_populates="user")
+    portfolio = db.relationship("Portfolio", back_populates="user", uselist=False, cascade="all, delete")
+    watchlists = db.relationship("Watchlist", back_populates="user", cascade="all, delete")
 
     @property
     def password(self):
@@ -37,6 +37,8 @@ class User(db.Model, UserMixin):
     def to_dict(self):
         return {
             'id': self.id,
+            'first_name': self.first_name,
+            'last_name': self.last_name,
             'username': self.username,
             'email': self.email
         }
