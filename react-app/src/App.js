@@ -7,6 +7,7 @@ import { authenticate } from "./store/session";
 import Navigation from "./components/Navigation";
 import PortfolioPage from "./components/PortfolioPage";
 import LandingPage from "./components/LandingPage";
+import StockDetails from "./components/StockDetailsPage";
 
 function App() {
   const dispatch = useDispatch();
@@ -22,6 +23,9 @@ function App() {
         <Switch>
           <Route exact path='/'>
             <LandingPage />
+          </Route>
+          <Route path='/stocks/:ticker'>
+            <StockDetails />
           </Route>
           <Route path="/portfolio">
             <PortfolioPage />

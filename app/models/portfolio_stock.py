@@ -14,7 +14,7 @@ class PortfolioStock(db.Model):
     portfolio_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod("portfolios.id")), nullable=False)
     stock_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod("stocks.id")), nullable=False)
 
-    portfolio = db.relationship("Portfolio", back_populates="stocks")
+    portfolio = db.relationship("Portfolio", back_populates="stocks", cascade="all, delete")
     stock = db.relationship("Stock", back_populates="portfolios")
 
     def to_dict(self):
