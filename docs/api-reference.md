@@ -313,3 +313,163 @@
     "ticker": "NIO",
     "volume": 429525
   }
+  ```
+
+
+  ## Watchlist Routes
+
+  ### Create a new Watchlist
+  * Request
+    * Method: POST
+    * URL: /api/watchlists/new
+    * Body:
+        None
+  
+  * Successful Response
+    * Body:
+
+  ```json
+  {
+    "created_at": "Mon, 25 Sep 2023 23:25:42 GMT",
+    "id": 4,
+    "last_modified": "Mon, 25 Sep 2023 23:25:42 GMT",
+    "name": "Watchlist",
+    "user_id": 2
+  }
+
+  ### Get the details of a Watchlist by id
+  * Request
+    * Method: GET
+    * URL: /api/watchlists/:id
+    * Body:
+      None
+    
+  * Successful Response
+    * Body:
+
+  ```json
+  {
+    "created_at": "Sat, 23 Sep 2023 20:17:39 GMT",
+    "id": 3,
+    "last_modified": "Mon, 25 Sep 2023 23:30:05 GMT",
+    "name": "Henry",
+    "stocks": [
+        {
+            "close": 8.395,
+            "high": 8.405,
+            "id": 99,
+            "low": 8.13,
+            "name": "Bausch Health Companies Inc.",
+            "open": 8.405,
+            "price": 8.215,
+            "ticker": "BHC",
+            "volume": 68902
+        }
+    ],
+    "user_id": 2
+  }
+  ```
+
+  ### Change the name of an existing Watchlist
+  * Request
+    * Method: PATCH
+    * URL: /api/watchlists/:id
+    * Body:
+    
+  ```json
+  {
+    "name": "Some name here"
+  }
+  ```
+
+  * Successful Response
+    * Body:
+
+  ```json
+  {
+    "message": "Watchlist name updated successfully"
+  }
+  ```
+
+  ### Delete a Watchlist by id
+  * Request
+    * Method: DELETE
+    * URL: /api/watchlists/:id
+    * Body: 
+      None
+  
+  * Successful Response
+    * Body:
+
+  ```json
+  {
+    "message": "Watchlist successfully deleted"
+  }
+  ```
+
+  ### Add a Stock to a Watchlist by id
+  * Request
+    * Method: POST
+    * URL: /api/watchlists/:id/add-by-id
+    * Body:
+  
+  ```json
+  {
+    "stock_id": "id"
+  }
+  ```
+
+  * Successful Response
+    * Body:
+  
+  ```json
+  {
+    "id": 1,
+    "stock_id": 12,
+    "watchlist_id": 5
+  }
+  ```
+
+  ### Add a Stock to a Watchlist by ticker
+  * Request
+    * Method: POST
+    * URL: /api/watchlists/:id/add-by-ticker
+    * Body:
+
+  ```json
+  {
+    "stock_ticker": "ABC"
+  }
+  ```
+
+  * Successful Response:
+    * Body:
+  
+  ```json
+  {
+    "id": 1,
+    "stock_id": 12,
+    "watchlist_id": 5
+  }
+  ```
+
+  ### Remove a Stock from a Watchlist
+  * Request
+    * Method: DELETE
+    * URL: /api/watchlists/:id/remove-stock
+    * Body:
+  
+  ```json
+  {
+    "stock_id": "id"
+  }
+  ```
+
+  * Successful Response
+    * Body:
+  
+  ```json
+  {
+    "message": "Stock successfully removed from Watchlist"
+  }
+  ```
