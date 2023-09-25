@@ -5,9 +5,8 @@ import { useSelector, useDispatch } from "react-redux";
 import "./index.css";
 import { getPortfolio } from "../../store/portfolio";
 import { getStocks } from "../../store/stocks";
-import BottomTabMenu from "../BottomTabMenu";
 
-function PortfolioPage() {
+function DoughnutChartWithButtons() {
   const [portfolioValue, setPortfolioValue] = useState(0);
   const [isLoaded, setIsLoaded] = useState(false);
   const [data, setData] = useState({
@@ -22,17 +21,27 @@ function PortfolioPage() {
 
   useEffect(() => {
     dispatch(getPortfolio(sessionUser.id));
-  }, [dispatch, sessionUser.id]);
-
-  useEffect(() => {
     dispatch(getStocks(sessionUser.id));
   }, [dispatch, sessionUser.id]);
 
   useEffect(() => {
-    async function fetchStockTickers(stockId) {
-      const res = await fetch(`/api/stocks/${stockId}`);
-      const data = await res.json();
-      return data;
+    async function fetchStockData(stockId) {
+      try {
+        const res = await fetch(`/api/stocks/${stockId}`);
+        if (!res.ok) {
+          // Handle non-200 status codes here, e.g., log the error
+          console.error(`Error fetching data for stock with ID ${stockId}: ${res.statusText}`);
+          return null;
+        }
+        const stockData = await res.json();
+        const calculated = ((stockData.price - stockData.open) / stockData.open) * 100;
+        stockData.growth = calculated.toFixed(2);
+        return stockData;
+      } catch (error) {
+        // Handle network errors or unexpected exceptions here
+        console.error('An error occurred while fetching data:', error);
+        return null;
+      }
     }
 
     const uniqueTickers = [];
@@ -40,14 +49,15 @@ function PortfolioPage() {
     if (sessionStocks) {
       Promise.all(
         sessionStocks.map(async (stock) => {
-          const stockTicker = await fetchStockTickers(stock.stock_id);
-          const stockData = {
-            ticker: stockTicker.ticker,
-            quantity: stock.quantity,
-          };
-
-          if (!uniqueTickers.includes(stockData.ticker)) {
-            uniqueTickers.push(stockData.ticker);
+          const stockData = await fetchStockData(stock.id);
+          if (stockData) {
+            const stockInfo = {
+              ticker: stockData.ticker,
+              quantity: stock.quantity,
+            };
+            if (!uniqueTickers.includes(stockInfo.ticker)) {
+              uniqueTickers.push(stockInfo.ticker);
+            }
           }
         })
       ).then(() => {
@@ -82,44 +92,47 @@ function PortfolioPage() {
 
           setData(stockInfo);
           setIsLoaded(true);
+          console.log(isLoaded)
           setStockTickers(uniqueTickers);
         }
       });
     }
-  }, [sessionStocks]);
+  }, [sessionStocks, isLoaded]);
 
   useEffect(() => {
-    if (
-      sessionPortfolio &&
-      sessionPortfolio.portfolio &&
-      sessionPortfolio.portfolio.current_funds
-    ) {
+    if (sessionPortfolio && sessionPortfolio.portfolio && sessionPortfolio.portfolio.current_funds) {
       setPortfolioValue(sessionPortfolio.portfolio.current_funds);
     }
   }, [sessionPortfolio]);
 
+  useEffect(() => {
+    if (sessionStocks) {
+      sessionStocks.sort((a, b) => a.growth - b.growth);
+      const topStocks = sessionStocks.slice(0, 4);
+      setStockTickers(topStocks.map((stock) => stock.ticker));
+    }
+  }, [sessionStocks]);
+
   return (
     <div className="main-page">
-        {isLoaded ? (
-          <div>
-            <div className="chart">
-              <DoughnutChart chartData={data} total={portfolioValue} />
-            </div>
-            <div className="growth-buttons">
-              {stockTickers.map((symbol) => {
-                return <GrowthButton symbol={symbol} key={symbol} />;
-              })}
-            </div>
-            <div>
-              <BottomTabMenu />
-            </div>
+      {isLoaded ? (
+        <div>
+          <div className="chart">
+            <DoughnutChart chartData={data} total={portfolioValue} />
           </div>
-        ) : (
-          <h1>Loading...</h1>
-        )}
-
+          <div className="growth-buttons">
+            {stockTickers.map((symbol, index) => (
+              <GrowthButton symbol={symbol} key={`${symbol}-${index}`} />
+            ))}
+          </div>
+          <div>
+          </div>
+        </div>
+      ) : (
+        <h1>Loading...</h1>
+      )}
     </div>
   );
 }
 
-export default PortfolioPage;
+export default DoughnutChartWithButtons;

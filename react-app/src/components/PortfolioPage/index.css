@@ -1,0 +1,25 @@
+.main-page {
+    background-color: black;
+    border-radius: 25px;
+    font-family: 'Montserrat', sans-serif;
+    color: white;
+    width: 70%;
+    height: 100%;
+    position: absolute;
+    right: 15%;
+    top: 10%;
+    overflow-y: auto;
+}
+
+.chart {
+    width: 50%;
+    margin: 50px;
+}
+
+.growth-buttons {
+    position: absolute;
+    display: flex;
+    float: right;
+    top: 10%;
+    right: 25%
+}

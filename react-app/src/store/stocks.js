@@ -1,7 +1,7 @@
-const STOCK = 'stocks/singleStock'
+const SINGLESTOCK = 'stocks/singleStock'
 
 const singleStock = (stock) => ({
-    type: STOCK,
+    type: SINGLESTOCK,
     payload: stock,
 })
 
@@ -18,6 +18,22 @@ export const getStock = (stockTicker) => async(dispatch) => {
     }
 }
 
+const SET_ALL_STOCKS = "stocks/SET_ALL_STOCKS";
+
+const setAllStocks = (stocks) => ({
+    type: SET_ALL_STOCKS,
+    payload: stocks,
+});
+
+
+export const getAllStocks = (id) => async (dispatch) => {
+    const response = await fetch(`/api/users/current/portfolio`);
+    let data = await response.json();
+    data = data.portfolio
+    dispatch(setAllStocks(data));
+    return data;
+};
+
 
 const initialState = {
     stock: null
@@ -25,13 +41,17 @@ const initialState = {
 
 const stocksReducer = (state = initialState, action) => {
     switch (action.type){
-        case STOCK:
+        case SINGLESTOCK:
             return {
                 ...state,
                 stock: action.payload
+            }
+        case SET_ALL_STOCKS: {
+            const newState = {...state, ...action.payload};
+            return newState;
             }
         default: return state
     }
 }
 
-export default stocksReducer
+export default stocksReducer;

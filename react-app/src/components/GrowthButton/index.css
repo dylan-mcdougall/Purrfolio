@@ -1,0 +1,17 @@
+.growth-button {
+    border: 3px solid #888888;
+    background-color:  #808080 ;
+    border-radius: 25px;
+    margin: 15px;
+    padding: 15px;
+    color: white;
+    
+}
+
+.green {
+    color: green;
+}
+
+.red {
+    color: red;
+}

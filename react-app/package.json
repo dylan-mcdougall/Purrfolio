@@ -8,8 +8,12 @@
     "@testing-library/user-event": "^12.8.3",
     "apisauce": "^3.0.0",
     "axios": "^1.5.0",
+    "browserify-zlib": "^0.2.0",
     "chart.js": "^4.4.0",
+    "crypto-browserify": "^3.12.0",
     "http-proxy-middleware": "^1.0.5",
+    "path-browserify": "^1.0.1",
+    "querystring-es3": "^0.2.1",
     "react": "^17.0.2",
     "react-chartjs-2": "^5.2.0",
     "apexcharts": "^3.42.0",
@@ -20,7 +24,10 @@
     "react-scripts": "^5.0.1",
     "redux": "^4.1.0",
     "redux-logger": "^3.0.6",
-    "redux-thunk": "^2.3.0"
+    "redux-thunk": "^2.3.0",
+    "stream-browserify": "^3.0.0",
+    "url": "^0.11.3",
+    "util": "^0.12.5"
   },
   "scripts": {
     "start": "react-scripts start",
