@@ -16,6 +16,9 @@ def user(id):
     """
     Query for a user by id and returns that user in a dictionary
     """
+    res = authenticate()
+    if res.get('errors'):
+        return res, 401
     user = User.query.get(id)
     return user.to_dict()
 
@@ -25,6 +28,8 @@ def update_user(id):
     form = UpdateUserForm()
     form['csrf_token'].data = request.cookies['csrf_token']
     res = authenticate()
+    if res.get('errors'):
+        return res, 401
     if res['id'] == id:
         if form.validate_on_submit():
             user = User.query.get(id)
@@ -35,7 +40,7 @@ def update_user(id):
             db.session.commit()
             return user.to_dict()
         return {'errors': validation_errors_to_error_messages(form.errors)}, 401
-    return {'errors': ['Unauthorized']}
+    return {'errors': ['Unauthorized']}, 403
 
 # User portfolio
 
@@ -48,10 +53,12 @@ def portfolio():
     """
     res = authenticate()
     if res.get('errors'):
-        return res
+        return res, 401
     portfolio = Portfolio.query.filter(Portfolio.user_id == res['id']).first()
+    if portfolio == None:
+        return {"errors": ["Portfolio associated with this user does not exist, please make a new account"]}, 404
     portfolio_dict = fetch_portfolio_details(portfolio.id)
-    return jsonify({"portfolio": portfolio_dict})
+    return {"portfolio": portfolio_dict}
 
 # User watchlists
 
@@ -63,8 +70,10 @@ def watchlists():
     """
     res = authenticate()
     if res.get('errors'):
-        return res
+        return res, 401
     watchlists = Watchlist.query.filter(Watchlist.user_id == res['id']).all()
+    if watchlists == None:
+        return {"errors": ["User does not have any watchlists"]}, 404
     watchlist_list = [watchlist.to_dict() for watchlist in watchlists]
     for watchlist in watchlist_list:
         watchlist['stocks'] = fetch_watchlist_stocks(watchlist['id'])
