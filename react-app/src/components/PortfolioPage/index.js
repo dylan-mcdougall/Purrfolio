@@ -4,7 +4,7 @@ import GrowthButton from "../GrowthButton";
 import { useSelector, useDispatch } from "react-redux";
 import "./index.css";
 import { getPortfolio } from "../../store/portfolio";
-import { getStocks } from "../../store/stocks";
+import { getAllStocks } from "../../store/stocks";
 import BottomTabMenu from "../BottomTabMenu";
 
 function PortfolioPage() {
@@ -25,7 +25,7 @@ function PortfolioPage() {
   }, [dispatch, sessionUser.id]);
 
   useEffect(() => {
-    dispatch(getStocks(sessionUser.id));
+    dispatch(getAllStocks(sessionUser.id));
   }, [dispatch, sessionUser.id]);
 
   useEffect(() => {
