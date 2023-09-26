@@ -124,21 +124,21 @@ def portfolio_purchase(id):
             if funds < stock.price * request.json.get('quantity'):
                 return {"errors": ["Insufficient funds"]}, 400
             purchase = Transaction(
-                quantity=request.json.get('quantity'), price=stock.price, buy=True,
+                quantity=int(request.json.get('quantity')), price=stock.price, buy=True,
                 portfolio_id=portfolio.id, stock_id=stock.id
             )
             if not portfolio_stock:
                 new_portfolio_stock = PortfolioStock(
-                    quantity=request.json.get('quantity'), portfolio_id=portfolio.id, stock_id=stock.id
+                    quantity=int(request.json.get('quantity')), portfolio_id=portfolio.id, stock_id=stock.id
                 )
-                portfolio.current_funds = funds - stock.price * request.json.get('quantity')
+                portfolio.current_funds = funds - stock.price * int(request.json.get('quantity'))
                 db.session.add(purchase)
                 db.session.add(new_portfolio_stock)
                 db.session.commit()
                 return {"message": "Transaction completed successfully"}
             else:
-                portfolio_stock.quantity = request.json.get('quantity') + portfolio_stock.quantity
-                portfolio.current_funds = funds - stock.price * request.json.get('quantity')
+                portfolio_stock.quantity = int(request.json.get('quantity')) + portfolio_stock.quantity
+                portfolio.current_funds = funds - stock.price * int(request.json.get('quantity'))
                 db.session.add(purchase)
                 db.session.commit()
                 return {"message": "Transaction completed successfully"}
@@ -146,24 +146,24 @@ def portfolio_purchase(id):
             stock_quantity = [s.to_dict() for s in portfolio.stocks if s.stock_id == stock.id]
             if not stock_quantity:
                 return {"errors": ["Cannot sell more stocks than owned"]}, 400
-            if stock_quantity[0]['quantity'] < request.json.get('quantity'):
+            if stock_quantity[0]['quantity'] < int(request.json.get('quantity')):
                 return {"errors": ["Cannot sell more stocks than owned"]}, 400
-            if stock_quantity[0]['quantity'] == request.json.get('quantity'):
+            if stock_quantity[0]['quantity'] == int(request.json.get('quantity')):
                 transaction = Transaction(
-                    quantity=request.json.get('quantity'), price=stock.price, buy=False,
+                    quantity=int(request.json.get('quantity')), price=stock.price, buy=False,
                     portfolio_id=portfolio.id, stock_id=stock.id
                 )
-                portfolio.current_funds = funds + stock.price * request.json.get('quantity')
+                portfolio.current_funds = funds + stock.price * int(request.json.get('quantity'))
                 db.session.add(transaction)
                 db.session.delete(portfolio_stock)
                 db.session.commit()
                 return {"message": "Transaction completed successfully"}
             transaction = Transaction(
-                quantity=request.json.get('quantity'), price=stock.price, buy=False,
+                quantity=int(request.json.get('quantity')), price=stock.price, buy=False,
                 portfolio_id=portfolio.id, stock_id=stock.id
             )
-            portfolio.current_funds = funds + stock.price * request.json.get('quantity')
-            portfolio_stock.quantity = stock_quantity[0]['quantity'] - request.json.get('quantity')
+            portfolio.current_funds = funds + stock.price * int(request.json.get('quantity'))
+            portfolio_stock.quantity = stock_quantity[0]['quantity'] - int(request.json.get('quantity'))
             db.session.add(transaction)
             db.session.commit()
             return {"message": "Transaction completed successfully"}
