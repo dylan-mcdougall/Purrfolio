@@ -45,7 +45,7 @@ def stock_ticker(ticker):
         return {"errors": ["Stock associated with this ticker is not available on this app"]}
     return stock.to_dict()
 
-@stock_routes.route('/search')
+@stock_routes.route('/search', methods=["POST"])
 @login_required
 def stock_search():
     """
