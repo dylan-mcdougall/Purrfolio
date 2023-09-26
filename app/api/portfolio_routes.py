@@ -132,7 +132,7 @@ def portfolio_purchase(id):
                 )
                 portfolio.current_funds = funds - stock.price * form.data['quantity']
                 db.session.add(purchase)
-                db.session.add(portfolio_stock)
+                db.session.add(new_portfolio_stock)
                 db.session.commit()
                 return {"message": "Transaction completed successfully"}
             else:
