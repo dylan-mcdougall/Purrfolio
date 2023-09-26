@@ -61,7 +61,7 @@ def portfolio_funds(id):
     res = authenticate()
     if res['id'] == portfolio.user_id:
         if form.data['funds'] < 10000000 and form.data['funds'] > 0:
-            portfolio.current_funds += form.data['funds'] 
+            portfolio.current_funds += form.data['funds']
             portfolio.fund_history += form.data['funds']
             db.session.commit()
             return portfolio.to_dict()
@@ -77,13 +77,16 @@ def portfolio_purchase(id):
     and quantity of stocks purchased
     """
     # Authentication that current user is owner of portfolio
+    res = authenticate()
+    if res.get('errors'):
+        return res, 401
     form = TransactionForm()
     portfolio = Portfolio.query.options(joinedload(Portfolio.stocks)).get(id)
     if not portfolio:
-        return {"errors": "Portfolio associated with this id does not exist"}
+        return {"errors": ["Portfolio associated with this id does not exist"]}, 404
     res = authenticate()
     if res['id'] != portfolio.user_id:
-        return {"errors": ["Unauthorized"]}
+        return {"errors": ["Unauthorized"]}, 403
 
     # Grab stock for validation
     funds = portfolio.current_funds
@@ -96,7 +99,7 @@ def portfolio_purchase(id):
     if form.validate_on_submit():
         if bool(form.data['buy']) == True:
             if funds < stock.price * form.data['quantity']:
-                return {"errors": ["Insufficient funds"]}
+                return {"errors": ["Insufficient funds"]}, 400
             purchase = Transaction(
                 quantity=form.data['quantity'], price=stock.price, buy=True,
                 portfolio_id=portfolio.id, stock_id=stock.id
@@ -119,9 +122,9 @@ def portfolio_purchase(id):
         if bool(form.data['buy']) == False:
             stock_quantity = [s.to_dict() for s in portfolio.stocks if s.stock_id == stock.id]
             if not stock_quantity:
-                return {"errors": ["Cannot sell more stocks than owned"]}
+                return {"errors": ["Cannot sell more stocks than owned"]}, 400
             if stock_quantity[0]['quantity'] < form.data['quantity']:
-                return {"errors": ["Cannot sell more stocks than owned"]}
+                return {"errors": ["Cannot sell more stocks than owned"]}, 400
             if stock_quantity[0]['quantity'] == form.data['quantity']:
                 transaction = Transaction(
                     quantity=form.data['quantity'], price=stock.price, buy=False,
@@ -141,8 +144,4 @@ def portfolio_purchase(id):
             db.session.add(transaction)
             db.session.commit()
             return {"message": "Transaction completed successfully"}
-    print(form.errors)
-    return {"errors": ["Invalid form submission"]}
-
-
-    
+    return {"errors": ["Invalid form submission"]}, 400

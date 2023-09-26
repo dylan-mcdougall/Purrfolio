@@ -26,10 +26,6 @@ function PortfolioTab() {
 
   }, [sessionStocks]);
 
-  function handleClick() {
-
-  }
-
   useEffect(() => {
     setTotalValuation(sessionPortfolio.portfolio.stock_valuation);
 
