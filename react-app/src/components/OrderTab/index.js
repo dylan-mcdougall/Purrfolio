@@ -13,6 +13,7 @@ function OrderTab() {
   const [stockIsLoaded, setStockIsLoaded] = useState(false);
   const [stockInfo, setStockInfo] = useState();
   const [qtyLoaded, setQtyLoaded] = useState(false)
+  const [stockPrice, setStockPrice] = useState(0)
 
 
 
@@ -24,20 +25,38 @@ function OrderTab() {
         const ticker = id.toUpperCase();
         const res = await fetch(`/api/stocks/${ticker}`);
         const data = await res.json();
-        setStockInfo(data)
-        setStockIsLoaded(true)
+        if(data){
+          setStockInfo(data)
+          setStockPrice(data.price)
+          setStockIsLoaded(true)
+        }
     }
 
     function handleSearchSubmit(e) {
       e.preventDefault();
       fetchStockInfo(search)
       setQtyLoaded(false)
+      setUserQty(0)
+      setStockIsLoaded(false)
+      setStockInfo();
+      setOwnedShares(0)
+      setEstimatedFunds(0);
+      setEstimatedValue(0)
     }
+
+    useEffect(() => {
+  
+        fetchStockInfo(search);
+        setQtyLoaded(false);
+        setUserQty(0);
+        setStockIsLoaded(false);
+        setStockInfo();
+      
+    }, [search])
 
     useEffect(() => {
         if (stockIsLoaded) {
             let personalStock = sessionPortfolio.portfolio.stocks.filter((stock) => stock.stock_id === stockInfo.id);
-            console.log(personalStock)
             if(personalStock.length){
                 setOwnedShares(personalStock[0].quantity);
             }
