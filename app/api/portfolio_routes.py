@@ -111,67 +111,68 @@ def portfolio_purchase(id):
     res = authenticate()
     if res.get('errors'):
         return res, 401
-    form = TransactionForm()
     portfolio = Portfolio.query.options(joinedload(Portfolio.stocks)).get(id)
     if not portfolio:
         return {"errors": ["Portfolio associated with this id does not exist"]}, 404
-    res = authenticate()
     if res['id'] != portfolio.user_id:
         return {"errors": ["Unauthorized"]}, 403
 
     # Grab stock for validation
     funds = portfolio.current_funds
-    stock = Stock.query.filter(Stock.ticker == form.data['ticker']).first()
+    stock = Stock.query.filter(Stock.ticker == request.json.get('ticker')).first()
     if stock is None:
         return {"errors": ["Stock not found"]}, 404
     portfolio_stock = PortfolioStock.query.filter(PortfolioStock.stock_id == stock.id).first()
     # Split logic for buying and selling
-    form['csrf_token'].data = request.cookies['csrf_token']
-    if form.validate_on_submit():
-        if bool(form.data['buy']) == True:
-            if funds < stock.price * form.data['quantity']:
+    if request.json:
+        if not request.json.get('ticker') or request.json.get('ticker') != str.upper(request.json.get('ticker')):
+            return {"errors": ["Input data for stock ticker must be included and have all characters to Uppercase"]}
+        if not request.json.get('quantity') or int(request.json.get('quantity')) <= 0:
+            return {"errors": ["Input data for transaction quantity must be included and greater than 0"]}
+        if bool(request.json.get('buy')) == True:
+            if funds < stock.price * request.json.get('quantity'):
                 return {"errors": ["Insufficient funds"]}, 400
             purchase = Transaction(
-                quantity=form.data['quantity'], price=stock.price, buy=True,
+                quantity=request.json.get('quantity'), price=stock.price, buy=True,
                 portfolio_id=portfolio.id, stock_id=stock.id
             )
             if not portfolio_stock:
                 new_portfolio_stock = PortfolioStock(
-                    quantity=form.data['quantity'], portfolio_id=portfolio.id, stock_id=stock.id
+                    quantity=request.json.get('quantity'), portfolio_id=portfolio.id, stock_id=stock.id
                 )
-                portfolio.current_funds = funds - stock.price * form.data['quantity']
+                portfolio.current_funds = funds - stock.price * request.json.get('quantity')
                 db.session.add(purchase)
                 db.session.add(new_portfolio_stock)
                 db.session.commit()
                 return {"message": "Transaction completed successfully"}
             else:
-                portfolio_stock.quantity = form.data['quantity'] + portfolio_stock.quantity
-                portfolio.current_funds = funds - stock.price * form.data['quantity']
+                portfolio_stock.quantity = request.json.get('quantity') + portfolio_stock.quantity
+                portfolio.current_funds = funds - stock.price * request.json.get('quantity')
                 db.session.add(purchase)
                 db.session.commit()
                 return {"message": "Transaction completed successfully"}
-        if bool(form.data['buy']) == False:
+        if bool(request.json.get('buy')) == False:
             stock_quantity = [s.to_dict() for s in portfolio.stocks if s.stock_id == stock.id]
             if not stock_quantity:
                 return {"errors": ["Cannot sell more stocks than owned"]}, 400
-            if stock_quantity[0]['quantity'] < form.data['quantity']:
+            if stock_quantity[0]['quantity'] < request.json.get('quantity'):
                 return {"errors": ["Cannot sell more stocks than owned"]}, 400
-            if stock_quantity[0]['quantity'] == form.data['quantity']:
+            if stock_quantity[0]['quantity'] == request.json.get('quantity'):
                 transaction = Transaction(
-                    quantity=form.data['quantity'], price=stock.price, buy=False,
+                    quantity=request.json.get('quantity'), price=stock.price, buy=False,
                     portfolio_id=portfolio.id, stock_id=stock.id
                 )
-                portfolio.current_funds = funds - stock.price * form.data['quantity']
+                portfolio.current_funds = funds + stock.price * request.json.get('quantity')
                 db.session.add(transaction)
                 db.session.delete(portfolio_stock)
                 db.session.commit()
                 return {"message": "Transaction completed successfully"}
             transaction = Transaction(
-                quantity=form.data['quantity'], price=stock.price, buy=False,
+                quantity=request.json.get('quantity'), price=stock.price, buy=False,
                 portfolio_id=portfolio.id, stock_id=stock.id
             )
-            portfolio.current_funds = funds - stock.price * form.data['quantity']
-            portfolio_stock.quantity = stock_quantity[0]['quantity'] - form.data['quantity']
+            portfolio.current_funds = funds + stock.price * request.json.get('quantity')
+            portfolio_stock.quantity = stock_quantity[0]['quantity'] - request.json.get('quantity')
             db.session.add(transaction)
             db.session.commit()
             return {"message": "Transaction completed successfully"}
