@@ -17,7 +17,7 @@ class Portfolio(db.Model):
     last_modified = db.Column(db.DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
 
     user = db.relationship("User", back_populates="portfolio")
-    stocks = db.relationship("PortfolioStock", back_populates="portfolio", cascade="all, delete")
+    stocks = db.relationship("PortfolioStock", back_populates="portfolio")
     transactions = db.relationship("Transaction", back_populates="portfolio", cascade="all, delete")
 
     def to_dict(self):
