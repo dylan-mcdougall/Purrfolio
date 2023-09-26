@@ -32,7 +32,6 @@ function OrderTab() {
           setStockInfo(data)
           setStockPrice(data.price)
           setStockIsLoaded(true)
-          console.log(sessionPortfolio)
         }
     }
 
@@ -51,10 +50,10 @@ function OrderTab() {
     async function handleBuy() {
       const formData = {
         ticker: search.toUpperCase(),
-        type: "Shares",
+        type: "shares",
         quantity: parseInt(userQty),
         buy: true,
-        order: "Market",
+        order_type: "market",
       };
 
       console.log(JSON.stringify(formData));
@@ -68,12 +67,26 @@ function OrderTab() {
 
       const data = await res.json()
       console.log(data)
-      
+
 
     }
+    async function handleSell() {
+      let formData = {
+        ticker: search.toUpperCase(),
+        type: "Shares",
+        quantity: parseInt(userQty),
+        buy: false,
+        order_type: "Market"
+      };
 
-    function handleSell() {
 
+      const res = await fetch(`/api/portfolios/${sessionPortfolio.portfolio.id}/order`, {
+        method: 'POST',
+        body: formData
+      });
+
+      const data = await res.json()
+      console.log(data)
     }
 
     useEffect(() => {
