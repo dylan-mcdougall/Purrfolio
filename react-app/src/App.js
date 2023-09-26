@@ -24,11 +24,11 @@ function App() {
           <Route exact path='/'>
             <LandingPage />
           </Route>
-          <Route path='/stocks/:ticker'>
-            <StockDetails />
-          </Route>
           <Route path="/portfolio">
             <PortfolioPage />
+            </Route>
+          <Route path='/stocks/:ticker'>
+            <StockDetails />
           </Route>
         </Switch>
       )}
