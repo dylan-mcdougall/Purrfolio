@@ -65,7 +65,7 @@ const StockDetails = () => {
                 <div className='StockDetailBottom'>
 <div className='sdb_table'>
     <table>
-        <thread>
+        <thead>
             <tr>
                 <th scope='col'>Name</th>
                 <th scope='col'>Price</th>
@@ -77,8 +77,9 @@ const StockDetails = () => {
                 <th scope='col'>Low</th>
                 <th scope='col'>Average Volume</th>
             </tr>
-        </thread>
+        </thead>
         <tbody>
+            <tr>
             <th scope='row'>{stock.ticker}</th>
             <td>$ {stock.price}</td>
             <td>$ {`$${Math.floor((stock.price - stock.open) * 100)/100}`}</td>
@@ -88,6 +89,7 @@ const StockDetails = () => {
             <td>{data2[0].dayHigh}</td>
             <td>{data2[0].dayLow}</td>
             <td>{stock.volume}</td>
+            </tr>
         </tbody>
     </table>
 </div>

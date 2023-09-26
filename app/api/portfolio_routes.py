@@ -16,6 +16,9 @@ def portfolios():
     """
     Query for all portfolios and return them in a list
     """
+    res = authenticate()
+    if res.get('errors'):
+        return res, 401
     portfolios = Portfolio.query.all()
     return {'portfolios': [portfolio.to_dict() for portfolio in portfolios]}
 
@@ -25,8 +28,11 @@ def portfolio_details(id):
     """
     Query a portfolio by id and returns that portfolio with expanded details
     """
+    res = authenticate()
+    if res.get('errors'):
+        return res, 401
     portfolio = fetch_portfolio_details(id)
-    return jsonify({"portfolio": portfolio})
+    return {"portfolio": portfolio}
 
 @portfolio_routes.route('/<int:id>/stocks')
 @login_required
@@ -34,9 +40,14 @@ def portfolio_stocks(id):
     """
     Query for all of the stocks possessed by a given portfolio
     """
+    res = authenticate()
+    if res.get('errors'):
+        return res, 401
     portfolio = Portfolio.query.get(id)
+    if portfolio == None:
+        return {"errors": ["Portfolio associated with this id does not exist"]}, 404
     stocks = [stock.to_dict() for stock in portfolio.stocks]
-    return jsonify({"stocks": stocks})
+    return {"stocks": stocks}
 
 @portfolio_routes.route('/<int:id>/transactions')
 @login_required
@@ -44,7 +55,12 @@ def portfolio_transactions(id):
     """
     Query for all of the transactions made by a given portfolio
     """
+    res = authenticate()
+    if res.get('errors'):
+        return res, 401
     portfolio = Portfolio.query.get(id)
+    if portfolio == None:
+        return {"errors": ["Portfolio associated with this id does not exist"]}, 404
     transactions = [transaction.to_dict() for transaction in portfolio.transactions]
     return jsonify({"transactions": transactions})
 
@@ -57,6 +73,9 @@ def portfolio_funds(id):
     Update a portfolios funds and return updated funds and fund purchase history
     """
     form = UpdateFundsForm()
+    res = authenticate()
+    if res.get('errors'):
+        return res, 401
     portfolio = Portfolio.query.get(id)
     res = authenticate()
     if res['id'] == portfolio.user_id:
@@ -67,6 +86,18 @@ def portfolio_funds(id):
             return portfolio.to_dict()
         return { "errors": ["desired funds must be greater than 0 and less than 10,000,000"] }
     return {'errors': ['Unauthorized']}
+    if portfolio == None:
+        return {"errors": ["Portfolio associated with this id does not exist"]}, 404
+    if form.validate_on_submit():
+        if res['id'] == portfolio.user_id:
+            if form.data['funds'] < 10000000 and form.data['funds'] > 0:
+                portfolio.current_funds += form.data['funds']
+                portfolio.fund_history += form.data['funds']
+                db.session.commit()
+                return portfolio.to_dict()
+            return { "errors": ["desired funds must be greater than 0 and less than 10,000,000"] }
+        return {'errors': ['Unauthorized']}, 403
+    return {"errors": ["Invalid form submission"]}, 400
 
 # purchase and sell stocks
 @portfolio_routes.route('/<int:id>/order', methods=["POST"])
@@ -110,7 +141,7 @@ def portfolio_purchase(id):
                 )
                 portfolio.current_funds = funds - stock.price * form.data['quantity']
                 db.session.add(purchase)
-                db.session.add(portfolio_stock)
+                db.session.add(new_portfolio_stock)
                 db.session.commit()
                 return {"message": "Transaction completed successfully"}
             else:
@@ -144,4 +175,5 @@ def portfolio_purchase(id):
             db.session.add(transaction)
             db.session.commit()
             return {"message": "Transaction completed successfully"}
-    return {"errors": ["Invalid form submission"]}, 400
+    print(form.errors)
+    return {"errors": ["Invalid form submission"]}
