@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { login } from "../../store/session";
+import { login, demoUser } from "../../store/session";
 import { useDispatch } from "react-redux";
 import { useModal } from "../../context/Modal";
 import "./LoginForm.css";
@@ -22,6 +22,12 @@ function LoginFormModal() {
         closeModal()
     }
   };
+
+  const handleClick = async (e) => {
+		e.preventDefault();
+		dispatch(demoUser());
+		closeModal();
+	}
 
   return (
     <div className="login-form-wrapper">
@@ -61,7 +67,7 @@ function LoginFormModal() {
           />
         </label>
         <div className="button-interface">
-        <button className="demo-user" type="submit">Demo User</button>
+        <button className="demo-user" onClick={handleClick}>Demo User</button>
         <button className="submit" type="submit">Log In</button>
         </div>
       </form>
