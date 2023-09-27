@@ -1,5 +1,5 @@
 import React from 'react';
-import { NavLink, useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import './LandingPage.css';
 import OpenModalButton from '../OpenModalButton';
@@ -7,13 +7,12 @@ import SignupFormModal from '../SignupFormModal';
 import LoginFormModal from '../LoginFormModal';
 
 
+
 function LandingPage() {
     const sessionUser = useSelector(state => state.session.user);
-    const navigate = useHistory();
+    const history = useHistory();
 
-    console.log(sessionUser)
-
-    if (sessionUser) return navigate.push('/portfolio');
+    if (sessionUser) return history.push('/portfolio');
     else {
 
         return (
