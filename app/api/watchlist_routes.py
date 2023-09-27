@@ -16,7 +16,14 @@ def new_watchlist():
     res = authenticate()
     if res.get('errors'):
         return res, 401
-    new_list = Watchlist(user_id=res['id'])
+    data = request.json
+    name = data.get('name')
+    if not name:
+        new_list = Watchlist(user_id=res['id'])
+        db.session.add(new_list)
+        db.session.commit()
+        return new_list.to_dict()
+    new_list = Watchlist(user_id=res['id'], name=name)
     db.session.add(new_list)
     db.session.commit()
     return new_list.to_dict()
