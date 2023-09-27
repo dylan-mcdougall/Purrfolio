@@ -6,27 +6,27 @@ import "./index.css";
 import { getPortfolio } from "../../store/portfolio";
 import { getAllStocks } from "../../store/stocks";
 import BottomTabMenu from "../BottomTabMenu";
+import { useHistory } from 'react-router-dom';
 
 function PortfolioPage() {
-  const [portfolioValue, setPortfolioValue] = useState(0);
   const [isLoaded, setIsLoaded] = useState(false);
-  const [data, setData] = useState({
-    labels: [],
-    datasets: [],
-  });
+  const [portfolioValue, setPortfolioValue] = useState(0);
   const [stockTickers, setStockTickers] = useState([]);
+  const [emptyPortfolio, setEmptyPortfolio] = useState(true);
+  const [data, setData] = useState(null);
   const sessionUser = useSelector((state) => state.session.user);
   const sessionStocks = useSelector((state) => state.stocks.stocks);
   const sessionPortfolio = useSelector((state) => state.portfolio.portfolio);
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    dispatch(getPortfolio(sessionUser.id));
-  }, [dispatch, sessionUser.id]);
+  const history = useHistory();
 
   useEffect(() => {
-    dispatch(getAllStocks(sessionUser.id));
-  }, [dispatch, sessionUser.id]);
+    if (sessionUser && sessionUser.id && !isLoaded) {
+      dispatch(getPortfolio(sessionUser.id));
+      dispatch(getAllStocks(sessionUser.id));
+    }
+  }, [dispatch, sessionUser, isLoaded]);
 
   useEffect(() => {
     async function fetchStockTickers(stockId) {
@@ -36,7 +36,6 @@ function PortfolioPage() {
     }
 
     const uniqueTickers = [];
-
     if (sessionStocks) {
       Promise.all(
         sessionStocks.map(async (stock) => {
@@ -85,41 +84,67 @@ function PortfolioPage() {
           setStockTickers(uniqueTickers);
         }
       });
+    } else {
+      setEmptyPortfolio(true);
     }
-  }, [sessionStocks]);
+  }, [sessionStocks, sessionPortfolio]);
 
   useEffect(() => {
-    if (
-      sessionPortfolio &&
-      sessionPortfolio.portfolio &&
-      sessionPortfolio.portfolio.current_funds
-    ) {
+    if (sessionPortfolio && sessionPortfolio.portfolio) {
       setPortfolioValue(sessionPortfolio.portfolio.current_funds);
+    }
+
+    if (
+      !sessionPortfolio ||
+      !sessionPortfolio.portfolio ||
+      !sessionPortfolio.portfolio.stocks
+    ) {
+      setEmptyPortfolio(false);
     }
   }, [sessionPortfolio]);
 
+  if (!sessionUser) {
+    history.push('/');
+    return null;
+  }
+
   return (
     <div className="main-page">
-        {isLoaded ? (
-          <div>
-            <div className="chart">
-              <DoughnutChart chartData={data} total={portfolioValue} />
-            </div>
-            <div className="growth-buttons">
-              {stockTickers.map((symbol) => {
-                return <GrowthButton symbol={symbol} key={symbol} />;
-              })}
-            </div>
+      {emptyPortfolio ? (
+        <div>
+          <h1>HI!</h1>
+          <BottomTabMenu />
+        </div>
+      ) : (
+        <div>
+          {isLoaded ? (
             <div>
-              <BottomTabMenu />
+              {data ? (
+                <>
+                  <div className="chart">
+                    <DoughnutChart chartData={data} total={portfolioValue} />
+                  </div>
+                  <div className="growth-buttons">
+                    {stockTickers.map((symbol) => {
+                      return <GrowthButton symbol={symbol} key={symbol} />;
+                    })}
+                  </div>
+                  <div>
+                    <BottomTabMenu />
+                  </div>
+                </>
+              ) : (
+                <p>No data available.</p>
+              )}
             </div>
-          </div>
-        ) : (
-          <h1>Loading...</h1>
-        )}
-
+          ) : (
+            <h1>Loading...</h1>
+          )}
+        </div>
+      )}
     </div>
   );
 }
+
 
 export default PortfolioPage;

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useModal } from "../../context/Modal";
-import { signUp } from "../../store/session";
+import { signUp, demoUser } from "../../store/session";
 import "./SignupForm.css";
 import OpenModalButton from "../OpenModalButton";
 import LoginFormModal from "../LoginFormModal";
@@ -20,7 +20,7 @@ function SignupFormModal() {
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 		if (password === confirmPassword) {
-			const data = await dispatch(signUp(username, email, password));
+			const data = await dispatch(signUp(firstName, lastName, username, email, password));
 			if (data) {
 				setErrors(data);
 			} else {
@@ -32,6 +32,12 @@ function SignupFormModal() {
 			]);
 		}
 	};
+
+	const handleClick = async (e) => {
+		e.preventDefault();
+		dispatch(demoUser());
+		closeModal();
+	}
 
 	return (
 		<div className="signup-form-wrapper">
@@ -107,7 +113,7 @@ function SignupFormModal() {
 					/>
 				</label>
 				<div className="button-interface">
-					<button className="demo-user" type="submit">Demo User</button>
+					<button className="demo-user" onClick={handleClick}>Demo User</button>
 					<button className="submit" type="submit">Log In</button>
 				</div>
 			</form>

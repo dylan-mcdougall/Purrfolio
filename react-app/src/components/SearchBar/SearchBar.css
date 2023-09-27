@@ -1,0 +1,75 @@
+div.search-wrapper {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    margin-top: 1%;
+}
+
+div.search-flex-wrapper {
+    display: flex;
+    flex-direction: column;
+    width: 20%;
+    border: 1px solid grey;
+    border-radius: 10px;
+}
+
+div.search-flex-wrapper:hover {
+    border: none;
+    box-shadow: 
+    1px 2px 2px #5f5f5f,
+    2px 4px 4px #5f5f5f,
+    3px 6px 6px #5f5f5f;
+}
+
+div.input-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    width: 100%;
+    border-radius: 14px;
+}
+
+div.input-wrapper input {
+    width: 90%;
+    height: 2rem;
+    border: none;
+    border-radius: 14px;
+    outline: none;
+}
+
+div.response-wrapper {
+    display: flex;
+    width: 100%;
+}
+
+ul.response-list {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+li.response-list-item {
+    list-style-type: none;
+    padding: .5% 2%;
+}
+
+li.response-list-item > a.response-item-link {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    text-decoration: none;
+    width: 100%;
+}
+
+li.response-list-item:hover {
+    background-color: #f2f2f2;
+}
+
+a.response-item-link > div {
+    text-decoration: none;
+    color: black;
+    font-family: 'Poppins', sans-serif;
+}

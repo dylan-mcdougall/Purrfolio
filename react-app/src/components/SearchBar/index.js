@@ -1,8 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { FaSearch } from "react-icons/fa";
+import { useSelector } from "react-redux";
 import './SearchBar.css';
 
 function SearchBar() {
+    const sessionUser = useSelector(state => state.session.user);
+
+
     const [inputValue, setInputValue] = useState('');
     const [results, setResults] = useState([]);
 
@@ -23,10 +27,8 @@ function SearchBar() {
         });
         if (res.ok) {
             const stocks = await res.json()
-            console.log(stocks)
             return stocks
         } else {
-            console.log(res);
             return null;
         }
     }
@@ -48,7 +50,12 @@ function SearchBar() {
                 {results.map((result) => (
                     <li className="response-list-item" key={result.id}>
                         <a className="response-item-link" href={`/stocks/${result.ticker}`}>
-                            {result ? result.ticker: null} {result ? result.name : null}
+                        <div className="response-item-ticker-wrapper">
+                            {result ? result.ticker: null}
+                        </div>
+                        <div className="response-item-name-wrapper">
+                            {result ? result.name : null}
+                        </div>
                         </a>
                     </li>
                 ))}
@@ -56,20 +63,25 @@ function SearchBar() {
         )
     }
 
+
+    if (!sessionUser) return null;
+
     return (
         <div className="search-wrapper">
-            <div className="input-wrapper">
-                <input className="input" type="search" placeholder="Type to search..."
-                    value={inputValue} onChange={(e) => handleChange(e.target.value)
-                        .then((data) => {
-                            setResults(data ? data.results : [])
-                        }) }
-                />
-                <FaSearch id="search-icon" />
-            </div>
+            <div className="search-flex-wrapper">
+                <div className="input-wrapper">
+                    <FaSearch id="search-icon" />
+                    <input className="input" type="search" placeholder="Type to search..."
+                        value={inputValue} onChange={(e) => handleChange(e.target.value)
+                            .then((data) => {
+                                setResults(data ? data.results : [])
+                            })}
+                    />
+                </div>
                 <div className="response-wrapper">
                     {responseList ? responseList : null}
                 </div>
+            </div>
         </div>
     )
 }

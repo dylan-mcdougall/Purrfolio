@@ -1,7 +1,4 @@
-html {
-     overflow: hidden;
-}
-
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap');
 
 div.page-wrapper {
     margin: 0;
