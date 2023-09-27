@@ -21,4 +21,4 @@ function DoughnutChart({chartData, total, cash}) {
     return <Doughnut data={chartData} plugins={[textCenter]}/>
 }
 
-export default DoughnutChart
+export default DoughnutChart;

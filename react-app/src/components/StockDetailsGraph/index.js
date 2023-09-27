@@ -36,7 +36,7 @@ const StockDetailGraph = () => {
       options: {
         chart: {
           type: 'candlestick',
-          height: 600
+          // height: 600
         },
         xaxis: {
           type: 'datetime'
@@ -83,7 +83,7 @@ useEffect(() => {
             options={state.options}
             series={state.series}
             type="candlestick"
-            width="600"
+            // width="600"
           /> : <div>...loading</div>}
         </div>
       </div>
