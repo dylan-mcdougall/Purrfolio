@@ -103,27 +103,27 @@ const StockDetails = () => {
                         <div className="tableBar">
                         <table>
 
-                                <tr>
-                                    <th scope='col'>Name</th>
-                                    <th scope='col'>Price</th>
-                                    <th scope='col'>$ Change</th>
-                                    <th scope='col'>% Change</th>
-                                    <th scope='col'>Open</th>
-                                    <th scope='col'>Previous Close</th>
-                                    <th scope='col'>High</th>
-                                    <th scope='col'>Low</th>
-                                    <th scope='col' id='noBord'>Average Volume</th>
+                                <tr className="no">
+                                    <th scope='col' id='fixRad'>Name</th>
+                                    <th scope='col' id='woah'>Price</th>
+                                    <th scope='col' >$ Change</th>
+                                    <th scope='col' id='woah'>% Change</th>
+                                    <th scope='col' >Open</th>
+                                    <th scope='col' id='woah'>Previous Close</th>
+                                    <th scope='col' >High</th>
+                                    <th scope='col' id='woah'>Low</th>
+                                    <th scope='col' id='noBord'  >Average Volume</th>
                                 </tr>
 
-                                <tr>
+                                <tr className="no">
                                 <td>{stock.ticker}</td>
-                                <td>$ {stock.price}</td>
+                                <td id='woah'>$ {stock.price}</td>
                                 <td> {`$${Math.floor((stock.price - stock.open) * 100)/100}`}</td>
-                                <td> {`${Math.floor((((stock.price - stock.open)/stock.open)*100)*100)/100}%`}</td>
+                                <td id='woah'> {`${Math.floor((((stock.price - stock.open)/stock.open)*100)*100)/100}%`}</td>
                                 <td>{stock.open}</td>
-                                <td>{stock.close}</td>
+                                <td id='woah'>{stock.close}</td>
                                 <td>{data2[0].dayHigh}</td>
-                                <td>{data2[0].dayLow}</td>
+                                <td id='woah'>{data2[0].dayLow}</td>
                                 <td id='noBord'>{stock.volume}</td>
                                 </tr>
 

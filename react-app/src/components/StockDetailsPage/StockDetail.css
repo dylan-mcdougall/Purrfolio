@@ -4,7 +4,7 @@
   font-family: 'Montserrat', sans-serif;
   color: white;
   width: 70%;
-  height: 66%;
+  height: 70%;
   position: absolute;
   right: 15%;
   top: 5%;
@@ -83,6 +83,7 @@ table {
   background-color: #f2f2f2;
   border: 1px solid black;
   border-radius: 25px;
+  overflow: hidden;
   }
 
   .tableBar {
@@ -98,4 +99,7 @@ td{
 }
 td {
  border-right: 1px solid black;
+}
+#woah {
+  background-color: #f2f2f2;
 }
