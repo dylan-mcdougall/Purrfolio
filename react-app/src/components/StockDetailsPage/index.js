@@ -24,6 +24,7 @@ const StockDetails = () => {
             const result2 = await fetch(`https://financialmodelingprep.com/api/v3/quote/${ticker}?apikey=${process.env.REACT_APP_FMP_API_KEY}`)
             result2.json().then(json => {
                 setData2(json)
+                console.log(json)
             })
         }
         fetchData2()
