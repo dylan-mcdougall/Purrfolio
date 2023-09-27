@@ -85,7 +85,7 @@ def portfolio_funds(id):
             db.session.commit()
             return portfolio.to_dict()
         return { "errors": ["desired funds must be greater than 0 and less than 10,000,000"] }
-    return {'errors': ['Unauthorized']}
+    # return {'errors': ['Unauthorized']}
     if portfolio == None:
         return {"errors": ["Portfolio associated with this id does not exist"]}, 404
     if form.validate_on_submit():

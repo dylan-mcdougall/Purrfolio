@@ -8,25 +8,22 @@ import { getAllStocks } from "../../store/stocks";
 import BottomTabMenu from "../BottomTabMenu";
 
 function PortfolioPage() {
-  const [portfolioValue, setPortfolioValue] = useState(0);
   const [isLoaded, setIsLoaded] = useState(false);
-  const [data, setData] = useState({
-    labels: [],
-    datasets: [],
-  });
+  const [portfolioValue, setPortfolioValue] = useState(0);
   const [stockTickers, setStockTickers] = useState([]);
+  const [emptyPortfolio, setEmptyPortfolio] = useState(true)
+  const [data, setData] = useState(null);
   const sessionUser = useSelector((state) => state.session.user);
   const sessionStocks = useSelector((state) => state.stocks.stocks);
   const sessionPortfolio = useSelector((state) => state.portfolio.portfolio);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(getPortfolio(sessionUser.id));
-  }, [dispatch, sessionUser.id]);
-
-  useEffect(() => {
-    dispatch(getAllStocks(sessionUser.id));
-  }, [dispatch, sessionUser.id]);
+    if (sessionUser.id && !isLoaded) {
+      dispatch(getPortfolio(sessionUser.id));
+      dispatch(getAllStocks(sessionUser.id));
+    }
+  }, [dispatch, sessionUser.id, isLoaded]);
 
   useEffect(() => {
     async function fetchStockTickers(stockId) {
@@ -89,35 +86,38 @@ function PortfolioPage() {
   }, [sessionStocks]);
 
   useEffect(() => {
-    if (
-      sessionPortfolio &&
-      sessionPortfolio.portfolio &&
-      sessionPortfolio.portfolio.current_funds
-    ) {
+    if (sessionPortfolio && sessionPortfolio.portfolio) {
       setPortfolioValue(sessionPortfolio.portfolio.current_funds);
+    }
+
+    if (!sessionPortfolio || !sessionPortfolio.portfolio || !sessionPortfolio.portfolio.stocks) {
+      setEmptyPortfolio(false);
     }
   }, [sessionPortfolio]);
 
   return (
     <div className="main-page">
-        {isLoaded ? (
-          <div>
-            <div className="chart">
-              <DoughnutChart chartData={data} total={portfolioValue} />
-            </div>
-            <div className="growth-buttons">
-              {stockTickers.map((symbol) => {
-                return <GrowthButton symbol={symbol} key={symbol} />;
-              })}
-            </div>
-            <div>
-              <BottomTabMenu />
-            </div>
-          </div>
-        ) : (
-          <h1>Loading...</h1>
-        )}
-
+      {isLoaded ? (
+        <div>
+          {data && (
+            <>
+              <div className="chart">
+                <DoughnutChart chartData={data} total={portfolioValue} />
+              </div>
+              <div className="growth-buttons">
+                {stockTickers.map((symbol) => {
+                  return <GrowthButton symbol={symbol} key={symbol} />;
+                })}
+              </div>
+              <div>
+                <BottomTabMenu />
+              </div>
+            </>
+          )}
+        </div>
+      ) : (
+        <h1>Loading...</h1>
+      )}
     </div>
   );
 }

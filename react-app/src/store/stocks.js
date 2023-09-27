@@ -6,7 +6,7 @@ const singleStock = (stock) => ({
 })
 
 const setStocks = (stocks) => ({
-    type: SET_STOCKS,
+    type: SINGLESTOCK,
     payload: stocks,
 });
 

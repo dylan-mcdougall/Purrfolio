@@ -1,10 +1,13 @@
 import React, { useState, useEffect } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { getPortfolio } from "../../store/portfolio";
+import { getAllStocks } from "../../store/stocks";
 
 function OrderTab() {
   const [search, setSearch] = useState("");
   const sessionPortfolio = useSelector((state) => state.portfolio.portfolio);
   const sessionStocks = useSelector((state) => state.stocks.stocks);
+  const sessionUser = useSelector((state) => state.session.user);
   const [ownedShares, setOwnedShares] = useState(0);
   const [estimatedValue, setEstimatedValue] = useState(0);
   const [estimatedFunds, setEstimatedFunds] = useState(0);
@@ -17,6 +20,7 @@ function OrderTab() {
   const [stockGrowth, setStockGrowth] = useState(0);
   const [stockChange, setStockChange]  = useState(0);
   let searchTerm = '';
+  const dispatch = useDispatch()
 
 
 
@@ -56,7 +60,6 @@ function OrderTab() {
         order_type: "market",
       };
 
-      console.log(JSON.stringify(formData));
       const res = await fetch(`/api/portfolios/${sessionPortfolio.portfolio.id}/order`, {
         method: 'POST',
         headers: {
@@ -66,32 +69,35 @@ function OrderTab() {
       });
 
       const data = await res.json()
-      console.log(data)
-
-
+      dispatch(getAllStocks(sessionUser.id));
+      dispatch(getPortfolio(sessionUser.id));
     }
+
     async function handleSell() {
-      let formData = {
+      const formData = {
         ticker: search.toUpperCase(),
-        type: "Shares",
+        type: "shares",
         quantity: parseInt(userQty),
         buy: false,
-        order_type: "Market"
+        order_type: "market",
       };
-
 
       const res = await fetch(`/api/portfolios/${sessionPortfolio.portfolio.id}/order`, {
         method: 'POST',
-        body: formData
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData)
       });
 
       const data = await res.json()
-      console.log(data)
+      dispatch(getAllStocks(sessionUser.id));
+      dispatch(getPortfolio(sessionUser.id));
     }
 
     useEffect(() => {
         setQtyLoaded(false);
-        setUserQty(0);
+        setUserQty(1);
         setStockIsLoaded(false);
         setStockInfo();
     }, [search])
@@ -108,7 +114,7 @@ function OrderTab() {
             setStockGrowth(calculated)
             setQtyLoaded(true);
         }
-    }, [stockInfo, stockIsLoaded, ownedShares, estimatedValue]);
+    }, [stockInfo, stockIsLoaded, ownedShares, estimatedValue, sessionPortfolio]);
 
     useEffect(() => {
         if (qtyLoaded) {
@@ -118,7 +124,7 @@ function OrderTab() {
                 return totalFunds;
             });
         }
-    }, [ownedShares, qtyLoaded, estimatedValue]);
+    }, [ownedShares, qtyLoaded, estimatedValue, sessionPortfolio]);
 
   return (
     <div>

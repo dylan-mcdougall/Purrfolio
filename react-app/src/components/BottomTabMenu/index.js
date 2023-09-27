@@ -23,8 +23,8 @@ function BottomTabMenu() {
         uniqueTickers.push(id);
       }
     }
-    sessionStocks.map((stock) => {
-      fetchStockData(stock.stock_id);
+    sessionStocks?.map((stock) => {
+      return fetchStockData(stock.stock_id);
     });
 
   }, [sessionStocks]);
@@ -41,7 +41,9 @@ function BottomTabMenu() {
 
 
   useEffect(() => {
-    setTotalValuation(sessionPortfolio.portfolio.stock_valuation);
+    if(sessionPortfolio?.portfolio.stock_valuation){
+      setTotalValuation(sessionPortfolio.portfolio.stock_valuation);
+    }
 
     setIsLoaded(true);
   }, [stockData]);
