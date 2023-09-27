@@ -8,6 +8,7 @@ import Navigation from "./components/Navigation";
 import PortfolioPage from "./components/PortfolioPage";
 import LandingPage from "./components/LandingPage";
 import StockDetails from "./components/StockDetailsPage";
+import SearchBar from "./components/SearchBar";
 
 function App() {
   const dispatch = useDispatch();
@@ -18,6 +19,7 @@ function App() {
 
   return (
     <>
+      <SearchBar />
       <Navigation />
       {isLoaded && (
         <Switch>

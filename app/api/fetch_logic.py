@@ -40,6 +40,3 @@ def fetch_watchlist_stocks(id):
     stocks = Stock.query.filter(Stock.id.in_(stock_ids)).all()
     final_stocks = [stock.to_dict() for stock in stocks]
     return final_stocks
-
-def purchase_stocks(portfolio):
-    pass

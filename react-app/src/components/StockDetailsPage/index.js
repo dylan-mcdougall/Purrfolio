@@ -114,7 +114,7 @@ const StockDetails = () => {
                                     <th scope='col'>Low</th>
                                     <th scope='col' id='noBord'>Average Volume</th>
                                 </tr>
-
+                                
                                 <tr>
                                 <td>{stock.ticker}</td>
                                 <td>$ {stock.price}</td>
