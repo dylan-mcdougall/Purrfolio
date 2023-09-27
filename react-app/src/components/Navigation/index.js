@@ -14,6 +14,7 @@ function Navigation() {
 		e.preventDefault();
 		dispatch(sessionActions.logout());
 		history.push('/')
+		return null
 	};
 
 	if (!sessionUser) return null;
