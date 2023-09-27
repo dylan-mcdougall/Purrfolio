@@ -6,14 +6,14 @@ import './SearchBar.css';
 function SearchBar() {
     const sessionUser = useSelector(state => state.session.user);
 
-    
+
     const [inputValue, setInputValue] = useState('');
     const [results, setResults] = useState([]);
-    
+
     useEffect(() => {
-        
+
     }, [results])
-    
+
     const fetchData = async (value) => {
         const properForm = {
             "query": value
@@ -27,10 +27,8 @@ function SearchBar() {
         });
         if (res.ok) {
             const stocks = await res.json()
-            console.log(stocks)
             return stocks
         } else {
-            console.log(res);
             return null;
         }
     }
@@ -51,9 +49,9 @@ function SearchBar() {
             <ul className="response-list">
                 {results.map((result) => (
                     <li className="response-list-item" key={result.id}>
-                        <a className="response-item-link" href={`/stocks/${result.ticker}`}>     
+                        <a className="response-item-link" href={`/stocks/${result.ticker}`}>
                         <div className="response-item-ticker-wrapper">
-                            {result ? result.ticker: null} 
+                            {result ? result.ticker: null}
                         </div>
                         <div className="response-item-name-wrapper">
                             {result ? result.name : null}
@@ -65,9 +63,9 @@ function SearchBar() {
         )
     }
 
-    
+
     if (!sessionUser) return null;
-    
+
     return (
         <div className="search-wrapper">
             <div className="search-flex-wrapper">

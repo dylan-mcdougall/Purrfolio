@@ -5,6 +5,12 @@ const singleStock = (stock) => ({
     payload: stock,
 })
 
+const setStocks = (stocks) => ({
+    type: SINGLESTOCK,
+    payload: stocks,
+});
+
+
 export const getStock = (stockTicker) => async(dispatch) => {
     const response = await fetch(`/api/stocks/${stockTicker}`)
     if (response.ok){
@@ -13,7 +19,6 @@ export const getStock = (stockTicker) => async(dispatch) => {
         return stock
     }
     else {
-        console.log('no good')
         return null
     }
 }
@@ -34,6 +39,14 @@ export const getAllStocks = (id) => async (dispatch) => {
     return data;
 };
 
+
+export const getStocks = (id) => async (dispatch) => {
+    const response = await fetch(`/api/users/current/portfolio`);
+    let data = await response.json();
+    data = data.portfolio
+    dispatch(setStocks(data));
+    return data;
+};
 
 const initialState = {
     stock: null
