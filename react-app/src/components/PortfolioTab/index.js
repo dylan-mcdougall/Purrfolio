@@ -21,7 +21,7 @@ function PortfolioTab() {
       setStockData(data);
     }
 
-    if (sessionStocks.length > 0) {
+    if (sessionStocks?.length > 0) {
       fetchStockData();
     }
   }, [sessionStocks]);

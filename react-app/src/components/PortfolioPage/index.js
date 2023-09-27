@@ -6,24 +6,27 @@ import "./index.css";
 import { getPortfolio } from "../../store/portfolio";
 import { getAllStocks } from "../../store/stocks";
 import BottomTabMenu from "../BottomTabMenu";
+import { useHistory } from 'react-router-dom';
 
 function PortfolioPage() {
   const [isLoaded, setIsLoaded] = useState(false);
   const [portfolioValue, setPortfolioValue] = useState(0);
   const [stockTickers, setStockTickers] = useState([]);
-  const [emptyPortfolio, setEmptyPortfolio] = useState(true)
+  const [emptyPortfolio, setEmptyPortfolio] = useState(true);
   const [data, setData] = useState(null);
   const sessionUser = useSelector((state) => state.session.user);
   const sessionStocks = useSelector((state) => state.stocks.stocks);
   const sessionPortfolio = useSelector((state) => state.portfolio.portfolio);
   const dispatch = useDispatch();
 
+  const history = useHistory();
+
   useEffect(() => {
-    if (sessionUser.id && !isLoaded) {
+    if (sessionUser && sessionUser.id && !isLoaded) {
       dispatch(getPortfolio(sessionUser.id));
       dispatch(getAllStocks(sessionUser.id));
     }
-  }, [dispatch, sessionUser.id, isLoaded]);
+  }, [dispatch, sessionUser, isLoaded]);
 
   useEffect(() => {
     async function fetchStockTickers(stockId) {
@@ -33,7 +36,6 @@ function PortfolioPage() {
     }
 
     const uniqueTickers = [];
-
     if (sessionStocks) {
       Promise.all(
         sessionStocks.map(async (stock) => {
@@ -82,44 +84,67 @@ function PortfolioPage() {
           setStockTickers(uniqueTickers);
         }
       });
+    } else {
+      setEmptyPortfolio(true);
     }
-  }, [sessionStocks]);
+  }, [sessionStocks, sessionPortfolio]);
 
   useEffect(() => {
     if (sessionPortfolio && sessionPortfolio.portfolio) {
       setPortfolioValue(sessionPortfolio.portfolio.current_funds);
     }
 
-    if (!sessionPortfolio || !sessionPortfolio.portfolio || !sessionPortfolio.portfolio.stocks) {
+    if (
+      !sessionPortfolio ||
+      !sessionPortfolio.portfolio ||
+      !sessionPortfolio.portfolio.stocks
+    ) {
       setEmptyPortfolio(false);
     }
   }, [sessionPortfolio]);
 
+  if (!sessionUser) {
+    history.push('/');
+    return null;
+  }
+
   return (
     <div className="main-page">
-      {isLoaded ? (
+      {emptyPortfolio ? (
         <div>
-          {data && (
-            <>
-              <div className="chart">
-                <DoughnutChart chartData={data} total={portfolioValue} />
-              </div>
-              <div className="growth-buttons">
-                {stockTickers.map((symbol) => {
-                  return <GrowthButton symbol={symbol} key={symbol} />;
-                })}
-              </div>
-              <div>
-                <BottomTabMenu />
-              </div>
-            </>
-          )}
+          <h1>HI!</h1>
+          <BottomTabMenu />
         </div>
       ) : (
-        <h1>Loading...</h1>
+        <div>
+          {isLoaded ? (
+            <div>
+              {data ? (
+                <>
+                  <div className="chart">
+                    <DoughnutChart chartData={data} total={portfolioValue} />
+                  </div>
+                  <div className="growth-buttons">
+                    {stockTickers.map((symbol) => {
+                      return <GrowthButton symbol={symbol} key={symbol} />;
+                    })}
+                  </div>
+                  <div>
+                    <BottomTabMenu />
+                  </div>
+                </>
+              ) : (
+                <p>No data available.</p>
+              )}
+            </div>
+          ) : (
+            <h1>Loading...</h1>
+          )}
+        </div>
       )}
     </div>
   );
 }
+
 
 export default PortfolioPage;

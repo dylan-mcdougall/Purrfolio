@@ -24,7 +24,7 @@ const StockDetails = () => {
             const result2 = await fetch(`https://financialmodelingprep.com/api/v3/quote/${ticker}?apikey=${process.env.REACT_APP_FMP_API_KEY}`)
             result2.json().then(json => {
                 setData2(json)
-                console.log(json)
+
             })
         }
         fetchData2()
@@ -41,16 +41,15 @@ const StockDetails = () => {
             const pStocks = portfolio.portfolio
             let quantity = 0
 
-            console.log(pStocks.stocks)
             if(pStocks.stocks.length){
                 pStocks.stocks.forEach(el => {
                     if(el.stock_id === stock.id){
-                        console.log(el.quantity)
+
                         quantity = el.quantity
                     }
                 });
             }
-            console.log(quantity)
+
             return (
                 <>{quantity}</>
             )
@@ -115,7 +114,7 @@ const StockDetails = () => {
                                     <th scope='col'>Low</th>
                                     <th scope='col' id='noBord'>Average Volume</th>
                                 </tr>
-                                
+
                                 <tr>
                                 <td>{stock.ticker}</td>
                                 <td>$ {stock.price}</td>

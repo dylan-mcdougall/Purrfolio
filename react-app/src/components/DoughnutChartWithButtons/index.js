@@ -92,7 +92,6 @@ function DoughnutChartWithButtons() {
 
           setData(stockInfo);
           setIsLoaded(true);
-          console.log(isLoaded)
           setStockTickers(uniqueTickers);
         }
       });

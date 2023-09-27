@@ -19,7 +19,6 @@ export const getStock = (stockTicker) => async(dispatch) => {
         return stock
     }
     else {
-        console.log('no good')
         return null
     }
 }
