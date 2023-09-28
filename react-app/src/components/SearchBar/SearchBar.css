@@ -6,6 +6,7 @@ div.search-wrapper {
     justify-content: center;
     align-items: center;
     margin-top: 1%;
+    z-index: 4;
 }
 
 div.search-flex-wrapper {
@@ -43,6 +44,7 @@ div.input-wrapper input {
 div.response-wrapper {
     display: flex;
     width: 100%;
+    z-index: 4;
 }
 
 ul.response-list {
@@ -54,6 +56,8 @@ ul.response-list {
 li.response-list-item {
     list-style-type: none;
     padding: .5% 2%;
+    z-index: 4;
+    background-color: white;
 }
 
 li.response-list-item > a.response-item-link {
@@ -62,6 +66,7 @@ li.response-list-item > a.response-item-link {
     justify-content: space-between;
     text-decoration: none;
     width: 100%;
+    z-index: 4;
 }
 
 li.response-list-item:hover {
