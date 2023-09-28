@@ -11,6 +11,13 @@
     overflow-y: auto;
 }
 
+.main-page img {
+    width: 50%;
+}
+
+.empty-portfolio {
+    text-align: center;
+}
 .chart {
     width: 50%;
     margin: 50px;
