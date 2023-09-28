@@ -49,10 +49,12 @@ li.navigation-item a {
   font-size: 18px;
   padding: 6px 8px;
   border-radius: 20px;
+  z-index: 4;
 }
 
 li.navigation-item.add-funds button {
-  font-size: 18px;
+  font-size: 14px;
+  color: white;
   padding: 6px 8px;
   background-color: #1f1f1f;
   border: none;
