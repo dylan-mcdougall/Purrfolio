@@ -71,7 +71,7 @@ function PortfolioTab() {
                   })}
                 </div>
               ) : (
-                <div>HI!</div>
+                <div></div>
               )}
             </tbody>
           </table>

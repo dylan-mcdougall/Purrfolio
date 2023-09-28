@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getPortfolio } from "../../store/portfolio";
 import { getAllStocks } from "../../store/stocks";
+import "./index.css";
 
 function OrderTab() {
   const [search, setSearch] = useState("");
@@ -127,7 +128,7 @@ function OrderTab() {
     }, [ownedShares, qtyLoaded, estimatedValue, sessionPortfolio]);
 
   return (
-    <div>
+    <div className="order-tab">
       <div>
         <form onSubmit={(e) => handleSearchSubmit(e)}>
           <label htmlFor="stock-name">Stock Ticker or Name:</label>

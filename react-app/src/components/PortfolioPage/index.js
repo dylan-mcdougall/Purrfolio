@@ -3,6 +3,7 @@ import DoughnutChart from "../DoughnutChart";
 import GrowthButton from "../GrowthButton";
 import { useSelector, useDispatch } from "react-redux";
 import "./index.css";
+
 import { getPortfolio } from "../../store/portfolio";
 import { getAllStocks } from "../../store/stocks";
 import BottomTabMenu from "../BottomTabMenu";
@@ -111,9 +112,10 @@ function PortfolioPage() {
   return (
     <div className="main-page">
       {emptyPortfolio ? (
-        <div>
-          <h1>HI!</h1>
-          <BottomTabMenu />
+        <div className="empty-portfolio">
+          <img src="assets/sad_cat.png" alt="sad cat"/>
+          <h2>Please add funds and order stocks to get started.</h2>
+          <BottomTabMenu display={"order"}/>
         </div>
       ) : (
         <div>
@@ -130,7 +132,7 @@ function PortfolioPage() {
                     })}
                   </div>
                   <div>
-                    <BottomTabMenu />
+                    <BottomTabMenu display={"portfolio"}/>
                   </div>
                 </>
               ) : (
