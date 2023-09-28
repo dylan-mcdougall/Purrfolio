@@ -7,7 +7,7 @@ import "./index.css";
 import { getPortfolio } from "../../store/portfolio";
 import { getAllStocks } from "../../store/stocks";
 import BottomTabMenu from "../BottomTabMenu";
-import { useHistory } from 'react-router-dom';
+import { useHistory } from "react-router-dom";
 
 function PortfolioPage() {
   const [isLoaded, setIsLoaded] = useState(false);
@@ -25,9 +25,9 @@ function PortfolioPage() {
   useEffect(() => {
     if (sessionUser && sessionUser.id && !isLoaded) {
       async function fetchData() {
-        await dispatch(getPortfolio(sessionUser.id));
-        await dispatch(getAllStocks(sessionUser.id));
-        setIsLoaded(true); // Set isLoaded to true after fetching data.
+        dispatch(getPortfolio(sessionUser.id));
+        dispatch(getAllStocks(sessionUser.id));
+        setIsLoaded(true);
       }
 
       fetchData();
@@ -88,12 +88,13 @@ function PortfolioPage() {
           setData(stockInfo);
           setIsLoaded(true);
           setStockTickers(uniqueTickers);
+          setEmptyPortfolio(false)
         }
       });
     } else {
       setEmptyPortfolio(true);
     }
-  }, [sessionStocks, sessionPortfolio, isLoaded, data]);
+  }, [sessionPortfolio, sessionStocks]);
 
   useEffect(() => {
     if (sessionPortfolio && sessionPortfolio.portfolio) {
@@ -105,22 +106,22 @@ function PortfolioPage() {
       !sessionPortfolio.portfolio ||
       !sessionPortfolio.portfolio.stocks
     ) {
-      setEmptyPortfolio(false);
+      setEmptyPortfolio(true);
     }
   }, [sessionPortfolio]);
 
   if (!sessionUser) {
-    history.push('/');
+    history.push("/");
     return null;
   }
 
   return (
     <div className="main-page">
-      {emptyPortfolio || !data ? (
+      {emptyPortfolio ? (
         <div className="empty-portfolio">
-          <img src="assets/sad_cat.png" alt="sad cat"/>
+          <img src="assets/sad_cat.png" alt="sad cat" />
           <h2>Please add funds and order stocks to get started.</h2>
-          <BottomTabMenu display={"order"}/>
+          <BottomTabMenu display={"order"} />
         </div>
       ) : (
         <div>
@@ -137,7 +138,7 @@ function PortfolioPage() {
                     })}
                   </div>
                   <div>
-                    <BottomTabMenu display={"portfolio"}/>
+                    <BottomTabMenu display={"portfolio"} />
                   </div>
                 </>
               ) : (

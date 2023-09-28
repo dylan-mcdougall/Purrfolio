@@ -138,7 +138,7 @@ function OrderTab() {
         {
           stockIsLoaded ? (
             <div>
-            <p>${stockInfo.price}</p>
+            <p>${stockInfo.price.toFixed(2)}</p>
             <p>${stockChange}</p>
             <p>{stockGrowth}%</p>
             </div>
@@ -158,7 +158,7 @@ function OrderTab() {
         </form>
         <div>
           <p>
-            Current Buying Power: ${sessionPortfolio?.portfolio?.current_funds}
+            Current Buying Power: ${sessionPortfolio?.portfolio?.current_funds.toFixed(2)}
           </p>
           <p>Current Owned Shares: {ownedShares}</p>
         </div>

@@ -15,7 +15,7 @@ function DoughnutChart({chartData, total, cash}) {
             ctx.fillStyle = 'white';
             ctx.textAlign = 'center';
             ctx.textBaseLine = 'middle'
-            ctx.fillText(`Total Portfolio Value: $ ${total}`, chart.getDatasetMeta(0).data[0].x, chart.getDatasetMeta(0).data[0].y)
+            ctx.fillText(`Total Portfolio Value: $ ${total.toFixed(2)}`, chart.getDatasetMeta(0).data[0].x, chart.getDatasetMeta(0).data[0].y)
         }
     }
     return <Doughnut data={chartData} plugins={[textCenter]}/>

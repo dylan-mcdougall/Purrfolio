@@ -40,7 +40,7 @@ function AddFundsModal() {
                 <h3>Add Funds to your Purrfolio</h3>
             </div>
             <div>
-                <p>Current Funds: {currentFunds}</p>
+                <p>Current Funds: {currentFunds.toFixed(2)}</p>
                 <form>
                     <label htmlFor="amount">Desired Amount: </label>
                     <input type="number" name="amount" min="0" defaultValue={amount} onChange={(e) => setAmount(e.target.value)}></input>
