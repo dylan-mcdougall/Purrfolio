@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { NavLink, useHistory } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import './Navigation.css';
@@ -19,6 +19,9 @@ function Navigation() {
 		history.push('/')
 		return null
 	};
+	useEffect(() => {
+		 setCurrentFunds(sessionPortfolio?.portfolio?.current_funds)
+	}, [sessionUser, sessionPortfolio])
 
 	useEffect(() => {
 
