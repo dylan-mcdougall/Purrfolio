@@ -8,6 +8,8 @@ import AddFundsModal from '../AddFundsModal';
 
 function Navigation() {
 	const sessionUser = useSelector(state => state.session.user);
+	const sessionPortfolio = useSelector((state) => state.portfolio.portfolio.portfolio);
+	console.log(sessionPortfolio)
 
 	const dispatch = useDispatch();
 	const history = useHistory();
@@ -71,7 +73,7 @@ function Navigation() {
 					<div className='navigation-layer'>
 						<li className='navigation-item current-funds'>
 							<p className="current-funds-context">Purrfolio Funds: </p>
-							<p className='current-funds-number'>Placeholder</p>
+							<p className='current-funds-number'>$ {sessionPortfolio.current_funds}</p>
 						</li>
 					</div>
 				</div>
