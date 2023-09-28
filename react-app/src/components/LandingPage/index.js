@@ -12,7 +12,10 @@ function LandingPage() {
     const sessionUser = useSelector(state => state.session.user);
     const history = useHistory();
 
-    if (sessionUser) return history.push('/portfolio');
+    if (sessionUser) {
+        history.push('/portfolio')
+        return null
+    }
     else {
 
         return (

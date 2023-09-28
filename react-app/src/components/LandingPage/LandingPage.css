@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@600&family=Dancing+Script&family=Roboto+Slab:wght@500&display=swap');
 
 div.page-wrapper {
     margin: 0;
@@ -82,7 +83,8 @@ div.landing-content-image {
 }
 
 div.landing-content-text h2 {
-    font-size: 24px;
+    font-size: 28px;
+    font-family: 'Cinzel', sans-serif;
     margin-top: 4%;
 }
 
@@ -107,10 +109,10 @@ div.landing-signup-statement {
 }
 
 div.landing-signup-statement p {
-    font-family: cursive;
+    font-family: 'Dancing Script', sans-serif;
     margin: 0;
     padding: 0;
-    font-size: 18px;
+    font-size: 24px;
 }
 
 div.landing-signup-section button {

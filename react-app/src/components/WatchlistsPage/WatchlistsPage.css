@@ -1,0 +1,95 @@
+.WatchlistContainer {
+    background-color: white;
+    border-radius: 25px;
+    font-family: 'Montserrat', sans-serif;
+    color: black;
+    width: 70%;
+    height: fit-content;
+    position: absolute;
+    left: 23%;
+    top: 5%;
+    border: solid black 2px;
+    overflow: hidden;
+}
+
+.wlTopBar {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-top: 10px;
+    margin-left: 3px;
+    padding-top: 10px;
+    /* border: 3px red dashed; */
+    border-radius: 25px 25px 0 0;
+
+}
+.wltbTabs{
+    display: flex;
+    flex-direction: row;
+}
+.tabs{
+    border: solid black 1px;
+    background: #C9C9C9;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-bottom: 10px;
+    margin-bottom: 0px;
+    border-bottom: 1px solid transparent;
+}
+.active-tabs {
+    background-color: #f2f2f2;
+    border-bottom: 1px solid transparent;
+    margin-bottom: -7px;
+    margin-top: -2px;
+}
+.active-tabs::before{
+    content: "";
+    display: block;
+    position: absolute;
+    top: -5px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: calc(100% +2px);
+    height: 5px;
+    background-color: blue;
+}
+.wlContent {
+    height:fit-content;
+}
+.content {
+    background: rgb(13, 0, 255);
+    /* padding-top: 20%;
+    padding-bottom: ; */
+    width: 100%;
+    height: auto;
+    display: none;
+    margin: 0;
+}
+.content h2{
+    padding: 0px 0 5px 0px
+}
+
+.content hr{
+    width: 100px;
+    height: 2px;
+    margin-bottom: 5px;
+}
+.content p {
+    width: 100%;
+    height: 100%;
+}
+.active-content {
+    display: block;
+    border-top: 1px solid black;
+    border-radius: 0 0 25px 25px;
+    height: 100%;
+
+}
+
+.wlButton {
+    width: 50px;
+    height: 50px;
+}
+.addWatchlist {
+    margin-right: 10px;
+}

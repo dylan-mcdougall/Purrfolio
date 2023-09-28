@@ -1,0 +1,79 @@
+.wlContentConrainer {
+
+    width: 100%;
+    height: 100%;
+
+}
+.wlContentTitle {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    background: #f2f2f2;
+}
+
+tr > td {
+    font-size: small;
+    padding: 5px;
+}
+th:nth-child(1){
+    width:150px;
+}
+th:nth-child(10){
+    width:110px;
+}
+th {
+    font-size: medium;
+    text-align: center;
+    padding: 0%;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+th:nth-child(even) {
+    background: linear-gradient( #f2f2f2 ,#DBDBDB);
+}
+td:nth-child(even){
+    background-color: #DBDBDB;
+}
+.oui {
+    border-radius: 0;
+}
+tr.noBorders td {
+    border: 0;
+}
+tr.noBorders th {
+    border: 0;
+}
+tr:hover {
+    background-color: #FAF7DB;
+}
+tr:hover > td:nth-child(even) {
+    background-color: #E8E5CC;
+}
+.no:hover {
+    background-color: #f2f2f2;
+}
+#wlStockName {
+    font-size: small;
+}
+table {
+    border: 0;
+
+}
+
+.wlContentTitleBar {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    background: #f2f2f2
+}
+.contentTitle {
+    grid-column-start: 2;
+    grid-column-end: 3;
+    text-align: center;
+}
+.DeleteWatchlist {
+    grid-column-start: 3;
+    grid-column-end: 4;
+    display: flex;
+    justify-content: flex-end;
+    padding: 10px;
+}

@@ -9,6 +9,7 @@ import PortfolioPage from "./components/PortfolioPage";
 import LandingPage from "./components/LandingPage";
 import StockDetails from "./components/StockDetailsPage";
 import SearchBar from "./components/SearchBar";
+import WatchlistsPage from "./components/WatchlistsPage";
 
 function App() {
   const dispatch = useDispatch();
@@ -28,7 +29,10 @@ function App() {
           </Route>
           <Route path="/portfolio">
             <PortfolioPage />
-            </Route>
+          </Route>
+          <Route path="/watchlists">
+            <WatchlistsPage />
+          </Route>
           <Route path='/stocks/:ticker'>
             <StockDetails />
           </Route>
