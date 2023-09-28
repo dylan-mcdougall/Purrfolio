@@ -175,7 +175,7 @@ def removed_stock(id):
     stock_ids = [stock['stock_id'] for stock in watchlist_stocks]
     if int(data['stock_id']) not in stock_ids:
         return {"errors": ["Target stock does not exist in this watchlist"]}, 400
-    watchlist_stock_target = WatchlistStock.query.filter(WatchlistStock.stock_id == int(data['stock_id'])).first()
+    watchlist_stock_target = WatchlistStock.query.filter((WatchlistStock.watchlist_id == id) & (WatchlistStock.stock_id == int(data['stock_id']))).first()
     db.session.delete(watchlist_stock_target)
     db.session.commit()
     return {"message": "Stock successfully removed from Watchlist"}
