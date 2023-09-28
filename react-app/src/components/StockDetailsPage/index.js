@@ -6,6 +6,8 @@ import { getStock } from "../../store/stocks";
 import "./StockDetail.css"
 import StockDetailGraph from "../StockDetailsGraph";
 import { getPortfolio } from "../../store/portfolio";
+import AddStockToList from "../StockToWatchListModal";
+import OpenModalButton from "../OpenModalButton";
 
 const StockDetails = () => {
     const navigate = useHistory()
@@ -66,9 +68,10 @@ const StockDetails = () => {
                                     <p>{stock.name}</p>
                     </div>
                     <div className="sdtb_right">
-                                <button className="Add2List" onClick={() => {
-                                return(alert("Feature Coming Soon!"))
-                              }}> +Add to Watchlist </button>
+                        <OpenModalButton
+                            buttonText={'Add to Watchlist'}
+                            modalComponent={<AddStockToList stockId={stock.id} />}
+                        />
                     </div>
                 </div>
                 <div className="stockDetailMiddle">

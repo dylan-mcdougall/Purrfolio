@@ -1,10 +1,11 @@
 import React, { useState } from "react";
-import { newUserWatchlist } from "../../store/watchlists";
+import { updateWatchlist } from "../../store/watchlists";
 import { getUserWatchlists } from "../../store/watchlists";
 import { useDispatch } from "react-redux";
 import { useModal } from "../../context/Modal";
-import './NewWatchlist.css'
-const CreateNewWatchlist = () => {
+import './EWNM.css'
+
+const UpdateWatchlist = (listId) => {
     const { closeModal } = useModal()
     const dispatch = useDispatch()
     const [name, setName] = useState('')
@@ -26,12 +27,11 @@ const CreateNewWatchlist = () => {
             err.name = 'Name must be less than 20 characters'
             console.log(err.name)
         }
-
         if (Object.values(err).length > 0){
             setErrors(err)
         } else {
             console.log(name)
-            await dispatch(newUserWatchlist(name))
+            await dispatch(updateWatchlist(name, listId))
             await dispatch(getUserWatchlists())
             .then(closeModal)
         }
@@ -39,16 +39,16 @@ const CreateNewWatchlist = () => {
     }
 
     return(
-        <div className="newWatchlistContainer">
-            <div className='nwlhead'>
-                <h2>Create new Watchlist</h2>
+        <div className="editWatchlistContainer">
+            <div className='ewlhead'>
+                <h2>Change Watchlist Name</h2>
             </div>
-            <div className="nwlFormContainer">
-                <form className="nwlForm" onSubmit={handleSubmit}>
-                    <label className='nwlTxtInput'>
+            <div className="ewlFormContainer">
+                <form className="ewlForm" onSubmit={handleSubmit}>
+                    <label className='ewlTxtInput'>
                         What Would You Like to Name Your Watchlist?
                         <input
-                            className="nwlNameInput"
+                            className="ewlNameInput"
                             type="text"
                             value={name}
                             onChange={(e) => setName(e.target.value)}
@@ -56,8 +56,8 @@ const CreateNewWatchlist = () => {
                         />
                         {errors.name && <div className='nameErrDiv'>{errors.name}</div>}
                     </label>
-                    <div className="theButton">
-                        <button className="addwlButt"  type="submit">Create Watchlist</button>
+                    <div className="theEButton">
+                        <button className="ewlButt" disabled={!name.length} type="submit">Update</button>
                     </div>
                 </form>
             </div>
@@ -65,4 +65,4 @@ const CreateNewWatchlist = () => {
     )
 }
 
-export default CreateNewWatchlist
+export default UpdateWatchlist
