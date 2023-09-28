@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getPortfolio } from "../../store/portfolio";
 import { useModal } from "../../context/Modal";
+import './index.css';
 
 
 function AddFundsModal() {
@@ -39,13 +40,15 @@ function AddFundsModal() {
             <div>
                 <h3>Add Funds to your Purrfolio</h3>
             </div>
-            <div>
-                <p>Current Funds: {currentFunds.toFixed(2)}</p>
-                <form>
-                    <label htmlFor="amount">Desired Amount: </label>
-                    <input type="number" name="amount" min="0" defaultValue={amount} onChange={(e) => setAmount(e.target.value)}></input>
-                    <p>* This is paper money, no real trades will be executed.</p>
-                    <button onClick={(e) => handleClick(e)}>Confirm</button>
+
+            <div className="add-funds-content-wrapper">
+                <p>Current Funds: {currentFunds}</p>
+                <form className="add-funds-form">
+                    <label className="add-funds-label" htmlFor="amount">Desired Amount: </label>
+                    <input className="add-funds-input" type="number" name="amount" min="0" defaultValue={amount} onChange={(e) => setAmount(e.target.value)}></input>
+                    <p className="add-funds-p">* This is paper money, no real trades will be executed.</p>
+                    <button className="add-funds-submit" onClick={(e) => handleClick(e)}>Confirm</button>
+
                 </form>
             </div>
         </div>
