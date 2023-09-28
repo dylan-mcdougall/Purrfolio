@@ -15,9 +15,12 @@ function PortfolioPage() {
   const [stockTickers, setStockTickers] = useState([]);
   const [emptyPortfolio, setEmptyPortfolio] = useState(true);
   const [data, setData] = useState(null);
+  const [stockData, setStockData] = useState([]);
   const sessionUser = useSelector((state) => state.session.user);
   const sessionStocks = useSelector((state) => state.stocks.stocks);
   const sessionPortfolio = useSelector((state) => state.portfolio.portfolio);
+  const [topFour, setTopFour] = useState([])
+  const [fetchComplete, setFetchComplete] = useState(false);
   const dispatch = useDispatch();
 
   const history = useHistory();
@@ -88,13 +91,56 @@ function PortfolioPage() {
           setData(stockInfo);
           setIsLoaded(true);
           setStockTickers(uniqueTickers);
-          setEmptyPortfolio(false)
+          setEmptyPortfolio(false);
         }
       });
     } else {
       setEmptyPortfolio(true);
     }
+
+
   }, [sessionPortfolio, sessionStocks]);
+
+
+  useEffect(() => {
+    async function fetchStockData(id) {
+      const res = await fetch(`/api/stocks/${id}`);
+      const data = await res.json();
+      return data;
+    }
+
+    Promise.all(stockTickers.map(fetchStockData))
+      .then((fetchedData) => {
+
+        setStockData(fetchedData);
+        setFetchComplete(true);
+      })
+      .catch((error) => {
+        console.error("Error fetching stock data:", error);
+      });
+  }, [stockTickers]);
+
+
+  useEffect(() => {
+    if (fetchComplete) {
+      const stocksWithGrowth = stockData.map((stock) => {
+        let growth = (((stock.price - stock.open) / stock.open) * 100).toFixed(2);
+        return {
+          ...stock,
+          growthAbsolute: Math.abs(parseFloat(growth)),
+          growth: growth
+        };
+      });
+      const sortedStocks = stocksWithGrowth.sort((a, b) => b.growthAbsolute - a.growthAbsolute).slice(0, 4)
+      setTopFour(sortedStocks);
+
+    }
+  }, [fetchComplete, stockData]);
+
+
+  useEffect(() => {
+    console.log(topFour); // Log topFour whenever it changes
+  }, [topFour]);
 
   useEffect(() => {
     if (sessionPortfolio && sessionPortfolio.portfolio) {
@@ -133,8 +179,8 @@ function PortfolioPage() {
                     <DoughnutChart chartData={data} total={portfolioValue} />
                   </div>
                   <div className="growth-buttons">
-                    {stockTickers.map((symbol) => {
-                      return <GrowthButton symbol={symbol} key={symbol} />;
+                    {topFour.map((stock) => {
+                      return <GrowthButton growth={stock.growth} symbol={stock.ticker} key={stock.id} />;
                     })}
                   </div>
                   <div>

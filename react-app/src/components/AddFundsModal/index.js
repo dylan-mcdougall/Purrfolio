@@ -42,7 +42,7 @@ function AddFundsModal() {
             </div>
 
             <div className="add-funds-content-wrapper">
-                <p>Current Funds: {currentFunds}</p>
+                <p>Current Funds: ${currentFunds.toFixed(2)}</p>
                 <form className="add-funds-form">
                     <label className="add-funds-label" htmlFor="amount">Desired Amount: </label>
                     <input className="add-funds-input" type="number" name="amount" min="0" defaultValue={amount} onChange={(e) => setAmount(e.target.value)}></input>

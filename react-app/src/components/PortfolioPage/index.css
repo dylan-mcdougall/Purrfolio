@@ -27,8 +27,8 @@
     position: absolute;
     display: flex;
     float: right;
-    top: 1%;
-    right: 1px;
+    top: 5%;
+    right: -75px;
     width: 50%;
     flex-wrap: wrap;
 }
