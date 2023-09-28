@@ -78,6 +78,7 @@ function Navigation() {
 						<li className='navigation-item current-funds'>
 							<p className="current-funds-context">Purrfolio Funds: </p>
 							<p className='current-funds-number'>$ {currentFunds}</p>
+
 						</li>
 					</div>
 				</div>
