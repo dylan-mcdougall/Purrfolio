@@ -44,9 +44,9 @@ function PortfolioTab() {
                 <th>Valuation</th>
               </tr>
             </thead>
-            <tbody>
               {stockData.length > 0 ? (
-                <div>
+            <tbody>
+
                   {stockData.map((stock) => {
                     const stockName = stock.name;
                     const portfoliostock =
@@ -65,15 +65,15 @@ function PortfolioTab() {
                         <td>{stockName}</td>
                         <td>{weight}%</td>
                         <td>{stockQty}</td>
-                        <td>$ {marketValue}</td>
+                        <td>$ {marketValue.toFixed(2)}</td>
                       </tr>
                     );
                   })}
-                </div>
-              ) : (
-                <div></div>
-              )}
             </tbody>
+
+              ) : (
+                <tbody></tbody>
+              )}
           </table>
         </div>
       ) : (

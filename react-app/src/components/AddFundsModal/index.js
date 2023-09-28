@@ -40,6 +40,7 @@ function AddFundsModal() {
             <div>
                 <h3>Add Funds to your Purrfolio</h3>
             </div>
+
             <div className="add-funds-content-wrapper">
                 <p>Current Funds: {currentFunds}</p>
                 <form className="add-funds-form">
@@ -47,6 +48,7 @@ function AddFundsModal() {
                     <input className="add-funds-input" type="number" name="amount" min="0" defaultValue={amount} onChange={(e) => setAmount(e.target.value)}></input>
                     <p className="add-funds-p">* This is paper money, no real trades will be executed.</p>
                     <button className="add-funds-submit" onClick={(e) => handleClick(e)}>Confirm</button>
+
                 </form>
             </div>
         </div>
