@@ -1,38 +1,56 @@
 import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { NavLink, Route, useParams, useHistory } from "react-router-dom";
+import { useDispatch } from "react-redux";
 import './WatchlistContent.css'
 import OpenModalButton from "../OpenModalButton";
 import DeleteWatchlistModal from "../DeleteWatchlistModal";
+import UpdateWatchlist from "../EditWatchlistNameModal";
+import { removeStock } from "../../store/watchlists";
+import { getUserWatchlists } from "../../store/watchlists";
 
 const WatchlistContent = (stocks) => {
- console.log(stocks)
+ const dispatch = useDispatch()
+ console.log(stocks.stocks)
 
  const history = useHistory()
 
 
+    const removeAStock = async(listId, stockId) => {
+        await dispatch(removeStock(listId, stockId))
+        await dispatch(getUserWatchlists())
 
+    }
 
     const handleClick = (ticker) => {
         history.push(`/stocks/${ticker}`)
     }
 
     return(
-        <div className="wlContentConrainer">
+        <div className="wlContentConrainer" >
             <div className="wlContentTitleBar">
                 <div className="contentTitle">
                     <h2>{stocks.name}</h2>
+                    <p>{stocks.id}</p>
                 </div>
-                <div className="DeleteWatchlist">
-                <OpenModalButton
-                     buttonText={"Delete List"}
-                     modalComponent={<DeleteWatchlistModal listId={stocks.id}/>}
-                />
+                <div className="tbRightSide">
+                    <div className="editName">
+                        <OpenModalButton
+                            buttonText={<i class="fa-regular fa-pen-to-square"></i>}
+                            modalComponent={<UpdateWatchlist listId={stocks.id} />}
+                        />
+                    </div>
+                    <div className="DeleteWatchlist">
+                        <OpenModalButton
+                            buttonText={"Delete List"}
+                            modalComponent={<DeleteWatchlistModal listId={stocks.id}/>}
+                        />
+                    </div>
                 </div>
             </div>
             <div className='wlTable'>
                 <table className="oui">
-                    <colgroup span='10'></colgroup>
+                    <colgroup span='11'></colgroup>
                     <tr className="no" id='wlTableHeader'>
                         <th>Name</th>
                         <th>Ticker</th>
@@ -44,21 +62,23 @@ const WatchlistContent = (stocks) => {
                         <th>High</th>
                         <th>Low</th>
                         <th>Volume</th>
+                        <th></th>
                     </tr>
 
                     {stocks.stocks.length > 0 ?
                         stocks.stocks.map((el) => (
-                            <tr className="noBorders" onClick={() => {handleClick(el.ticker)}}>
-                                <th id='wlStockName'>{el.name}</th>
-                                <td>{el.ticker}</td>
-                                <td>{el.price}</td>
-                                <td>{`$${Math.floor((el.price - el.open) * 100)/100}`}</td>
-                                <td>{`${Math.floor((((el.price - el.open)/el.open)*100)*100)/100}%`}</td>
-                                <td>{el.open}</td>
-                                <td>{el.close}</td>
-                                <td>{el.high}</td>
-                                <td>{el.low}</td>
-                                <td>{el.volume}</td>
+                            <tr className="noBorders" >
+                                <th id='wlStockName' onClick={() => {handleClick(el.ticker)}}>{el.name}</th>
+                                <td onClick={() => {handleClick(el.ticker)}}>{el.ticker}</td>
+                                <td onClick={() => {handleClick(el.ticker)}}>{el.price}</td>
+                                <td onClick={() => {handleClick(el.ticker)}}>{`$${Math.floor((el.price - el.open) * 100)/100}`}</td>
+                                <td onClick={() => {handleClick(el.ticker)}}>{`${Math.floor((((el.price - el.open)/el.open)*100)*100)/100}%`}</td>
+                                <td onClick={() => {handleClick(el.ticker)}}>{el.open}</td>
+                                <td onClick={() => {handleClick(el.ticker)}}>{el.close}</td>
+                                <td onClick={() => {handleClick(el.ticker)}}>{el.high}</td>
+                                <td onClick={() => {handleClick(el.ticker)}}>{el.low}</td>
+                                <td onClick={() => {handleClick(el.ticker)}}>{el.volume}</td>
+                                <td id='delButt'><button onClick={() => {removeAStock(stocks.id, el.id)}}>x</button></td>
                             </tr>
                         ))
                     :<div>.... loading</div>

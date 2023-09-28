@@ -1,47 +1,47 @@
-.newWatchlistContainer{
+.editWatchlistContainer{
     height: 175px;
     width: 500px;
     background: #f2f2f2;
     border: 1px solid black;
     border-radius: 15px;
 }
-.nwlhead{
+.ewlhead{
     text-align: center;
     padding: 5px;
     padding-bottom: 0px;
 }
-.nwlFormContainer{
+.ewlFormContainer{
     display: flex;
     justify-content: center;
 }
-.nwlForm{
+.ewlForm{
     display: flex;
     flex-direction: column;
     align-items: center;
 }
-.nwlTxtInput{
+.ewlTxtInput{
     display: flex;
     flex-direction: column;
     align-items: center;
 
 }
-.nwlNameInput{
+.ewlNameInput{
     border-radius: 5px;
-    border: 1px black sonid;
+    border: 1px black solid;
     width: 25ch;
     margin: 2px;
 }
-.theButton{
+.theEButton{
     margin-top: 7px;
 }
-.addwlButt{
+.ewlButt{
     background:#707f8f;
     color: #f2f2f2;
     border-radius: 5px;
     font-size: medium;
     transition: all .1s ease-in-out;
 }
-.addwlButt:hover{
+.ewlButt:hover{
     color:#707f8f;
     background: #f2f2f2;
     border-radius: 5px;
