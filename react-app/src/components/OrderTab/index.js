@@ -121,7 +121,7 @@ function OrderTab() {
         if (qtyLoaded) {
             setEstimatedValue((stockInfo.price * ownedShares).toFixed(2));
             setEstimatedFunds((prevEstimatedFunds) => {
-                const totalFunds = (sessionPortfolio.portfolio.current_funds + parseFloat(estimatedValue)).toFixed(2);
+                const totalFunds = (sessionPortfolio?.portfolio?.current_funds + parseFloat(estimatedValue)).toFixed(2);
                 return totalFunds;
             });
         }
@@ -158,7 +158,7 @@ function OrderTab() {
         </form>
         <div>
           <p>
-            Current Buying Power: ${sessionPortfolio.portfolio.current_funds}
+            Current Buying Power: ${sessionPortfolio?.portfolio?.current_funds}
           </p>
           <p>Current Owned Shares: {ownedShares}</p>
         </div>

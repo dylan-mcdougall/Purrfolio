@@ -24,8 +24,13 @@ function PortfolioPage() {
 
   useEffect(() => {
     if (sessionUser && sessionUser.id && !isLoaded) {
-      dispatch(getPortfolio(sessionUser.id));
-      dispatch(getAllStocks(sessionUser.id));
+      async function fetchData() {
+        await dispatch(getPortfolio(sessionUser.id));
+        await dispatch(getAllStocks(sessionUser.id));
+        setIsLoaded(true); // Set isLoaded to true after fetching data.
+      }
+
+      fetchData();
     }
   }, [dispatch, sessionUser, isLoaded]);
 
@@ -88,7 +93,7 @@ function PortfolioPage() {
     } else {
       setEmptyPortfolio(true);
     }
-  }, [sessionStocks, sessionPortfolio]);
+  }, [sessionStocks, sessionPortfolio, isLoaded, data]);
 
   useEffect(() => {
     if (sessionPortfolio && sessionPortfolio.portfolio) {
@@ -111,7 +116,7 @@ function PortfolioPage() {
 
   return (
     <div className="main-page">
-      {emptyPortfolio ? (
+      {emptyPortfolio || !data ? (
         <div className="empty-portfolio">
           <img src="assets/sad_cat.png" alt="sad cat"/>
           <h2>Please add funds and order stocks to get started.</h2>
@@ -147,6 +152,5 @@ function PortfolioPage() {
     </div>
   );
 }
-
 
 export default PortfolioPage;

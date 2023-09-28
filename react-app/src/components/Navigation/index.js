@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { NavLink, useHistory } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import './Navigation.css';
@@ -8,8 +8,9 @@ import AddFundsModal from '../AddFundsModal';
 
 function Navigation() {
 	const sessionUser = useSelector(state => state.session.user);
-	const sessionPortfolio = useSelector((state) => state.portfolio.portfolio.portfolio);
-	console.log(sessionPortfolio)
+	const sessionPortfolio = useSelector((state) => state.portfolio.portfolio);
+	const [currentFunds, setCurrentFunds] = useState(0)
+
 
 	const dispatch = useDispatch();
 	const history = useHistory();
@@ -20,6 +21,9 @@ function Navigation() {
 		history.push('/')
 		return null
 	};
+	useEffect(() => {
+		 setCurrentFunds(sessionPortfolio?.portfolio?.current_funds)
+	}, [sessionUser, sessionPortfolio])
 
 	if (!sessionUser) return null;
 	else return (
@@ -73,7 +77,7 @@ function Navigation() {
 					<div className='navigation-layer'>
 						<li className='navigation-item current-funds'>
 							<p className="current-funds-context">Purrfolio Funds: </p>
-							<p className='current-funds-number'>$ {sessionPortfolio.current_funds}</p>
+							<p className='current-funds-number'>$ {currentFunds}</p>
 						</li>
 					</div>
 				</div>
