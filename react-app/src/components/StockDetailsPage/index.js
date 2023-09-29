@@ -8,6 +8,7 @@ import StockDetailGraph from "../StockDetailsGraph";
 import { getPortfolio } from "../../store/portfolio";
 import AddStockToList from "../StockToWatchListModal";
 import OpenModalButton from "../OpenModalButton";
+import WatchlistsBar from "../WatchlistsBar";
 
 const StockDetails = () => {
     const navigate = useHistory()
@@ -136,6 +137,7 @@ const StockDetails = () => {
                 </div>
             </div>
             )}
+
         </div>
     )}
 

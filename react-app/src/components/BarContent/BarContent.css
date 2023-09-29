@@ -1,0 +1,34 @@
+.wlBarContent {
+    /* display: grid;
+    grid-template-columns: 1fr 1fr 1fr; */
+    display: flex;
+    justify-content: space-around;
+    color: #1f1f1f ;
+}
+/* .barTicker{
+    grid-column-start: 1;
+    grid-column-end: 2;
+}
+.barChange{
+    grid-column-start: 2;
+    grid-column-end: 3;
+}
+.barPrice {
+    grid-column-start: 3;
+    grid-column-end: 4;
+} */
+.wlBarContent:nth-child(even){
+    background-color: #DBDBDB;
+}
+.wlBarContent:nth-child(odd){
+    background-color: white;
+}
+.wlBarContent:nth-last-child(-n + 1){
+    margin-bottom: 10px;
+    border-bottom: 2px solid black;
+    border-radius: 5px;
+}
+.noStockInList {
+    border-bottom: 2px solid black;
+    text-align: center;
+}

@@ -31,7 +31,6 @@ const WatchlistContent = (stocks) => {
             <div className="wlContentTitleBar">
                 <div className="contentTitle">
                     <h2>{stocks.name}</h2>
-                    <p>{stocks.id}</p>
                 </div>
                 <div className="tbRightSide">
                     <div className="editName">

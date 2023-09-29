@@ -10,6 +10,7 @@ import LandingPage from "./components/LandingPage";
 import StockDetails from "./components/StockDetailsPage";
 import SearchBar from "./components/SearchBar";
 import WatchlistsPage from "./components/WatchlistsPage";
+import WatchlistsBar from "./components/WatchlistsBar";
 
 function App() {
   const dispatch = useDispatch();
@@ -33,8 +34,12 @@ function App() {
           <Route path="/watchlists">
             <WatchlistsPage />
           </Route>
+          <Route path="/fakePage">
+            <WatchlistsBar />
+          </Route>
           <Route path='/stocks/:ticker'>
             <StockDetails />
+            <WatchlistsBar />
           </Route>
         </Switch>
       )}
