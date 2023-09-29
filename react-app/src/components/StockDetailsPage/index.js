@@ -6,6 +6,8 @@ import { getStock } from "../../store/stocks";
 import "./StockDetail.css"
 import StockDetailGraph from "../StockDetailsGraph";
 import { getPortfolio } from "../../store/portfolio";
+import BottomTabMenu from "../BottomTabMenu";
+import OrderTab from "../OrderTab";
 
 const StockDetails = () => {
     const navigate = useHistory()
@@ -133,6 +135,7 @@ const StockDetails = () => {
                 </div>
             </div>
             )}
+            <BottomTabMenu display={"order"} />
         </div>
     )}
 
