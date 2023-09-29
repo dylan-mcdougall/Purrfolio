@@ -49,8 +49,8 @@ function BottomTabMenu({ display }) {
   }, [sessionStocks]);
 
   useEffect(() => {
-    if (sessionPortfolio?.portfolio?.stock_valuation) {
-      setTotalValuation(sessionPortfolio.portfolio.stock_valuation);
+    if (sessionPortfolio?.portfolio) {
+      setTotalValuation(sessionPortfolio?.portfolio?.stock_valuation);
     }
 
     setIsLoaded(true);

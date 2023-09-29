@@ -1,4 +1,5 @@
 .bottom-tab-menu {
+    position: relative;
     background-color: white;
     color: black;
 }

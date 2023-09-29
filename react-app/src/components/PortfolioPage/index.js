@@ -59,6 +59,10 @@ function PortfolioPage() {
         if (uniqueTickers.length) {
           const stockInfo = {
             labels: uniqueTickers,
+            font: {
+              size: 14,
+              family: 'Poppins'
+            },
             datasets: [
               {
                 data: sessionStocks.map((stock) => stock.quantity),
@@ -116,12 +120,12 @@ function PortfolioPage() {
   }
 
   return (
+    <div className="main-page-wrapper">
     <div className="main-page">
       {emptyPortfolio ? (
         <div className="empty-portfolio">
           <img src="assets/sad_cat.png" alt="sad cat" />
           <h2>Please add funds and order stocks to get started.</h2>
-          <BottomTabMenu display={"order"} />
         </div>
       ) : (
         <div>
@@ -138,7 +142,7 @@ function PortfolioPage() {
                     })}
                   </div>
                   <div>
-                    <BottomTabMenu display={"portfolio"} />
+                    
                   </div>
                 </>
               ) : (
@@ -150,6 +154,8 @@ function PortfolioPage() {
           )}
         </div>
       )}
+    </div>
+    {isLoaded && sessionPortfolio ? <BottomTabMenu display={"portfolio"} /> : null}
     </div>
   );
 }

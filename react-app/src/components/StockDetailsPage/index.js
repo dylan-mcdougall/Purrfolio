@@ -22,7 +22,16 @@ const StockDetails = () => {
     const [data2, setData2] = useState(null)
     const sessionUser = useSelector((state) => state.session.user);
     const [quantity1, setQuantity1]= useState(0)
+    const [color, setColor] = useState("sdmP green");
 
+    useEffect(() => {
+        if (stock) {
+          let calculated = ((stock.price - stock.open) / stock.open) * 100;
+          calculated = calculated.toFixed(2);
+          const newColor = calculated > 0 ? "sdmP green" : "sdmP red";
+          setColor(newColor);
+        }
+      }, [stock])
 
     useEffect(() => {
         const fetchData2 = async () => {
@@ -57,7 +66,7 @@ const StockDetails = () => {
             }
 
             return (
-                <>{quantity}</>
+                <p className="position-checker">{quantity}</p>
             )
 
         }
@@ -73,7 +82,7 @@ const StockDetails = () => {
                     </div>
                     <div className="sdtb_right">
                         <OpenModalButton
-                            buttonText={'Add to Watchlist'}
+                            buttonText={'+ Add to Watchlist'}
                             modalComponent={<AddStockToList stockId={stock.id} />}
                         />
                     </div>
@@ -86,22 +95,22 @@ const StockDetails = () => {
                     </div>
                     <div className="SDMrightDiv">
                         <div className="sdmDiv top-left">
-                            <p>Shares Owned</p>
+                            <p className="sdmDiv-heading">Shares Owned</p>
                             <PostionChecker />
 
 
                         </div>
                         <div className="sdmDiv top-right">
-                            <p>Current Valuation: </p>
-                            <p>{`$${stock.price}`}</p>
+                            <p className="sdmDiv-heading">Current Valuation: </p>
+                            <p className={color}>{`$${stock.price}`}</p>
                         </div>
                         <div className="sdmDiv bottom-left">
-                            <p>% Change</p>
-                            <p>{`${Math.floor((((stock.price - stock.open)/stock.open)*100)*100)/100}%`}</p>
+                            <p className="sdmDiv-heading">% Change</p>
+                            <p className={color}>{`${Math.floor((((stock.price - stock.open)/stock.open)*100)*100)/100}%`}</p>
                         </div>
                         <div className="sdmDiv bottom-right">
-                            <p>$ Change</p>
-                            <p>{`$${Math.floor((stock.price - stock.open) * 100)/100}`}</p>
+                            <p className="sdmDiv-heading">$ Change</p>
+                            <p className={color}>{`$${Math.floor((stock.price - stock.open) * 100)/100}`}</p>
                         </div>
                     </div>
                 </div>
@@ -131,7 +140,7 @@ const StockDetails = () => {
                                 <td id='woah'>{stock.close}</td>
                                 <td>{data2[0].dayHigh}</td>
                                 <td id='woah'>{data2[0].dayLow}</td>
-                                <td id='noBord'>{stock.volume}</td>
+                                <td className="table-issue" id='noBord'>{stock.volume}</td>
                                 </tr>
 
                         </table>
