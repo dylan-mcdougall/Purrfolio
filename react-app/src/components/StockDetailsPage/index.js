@@ -131,7 +131,7 @@ const StockDetails = () => {
                                 <td id='woah'>{stock.close}</td>
                                 <td>{data2[0].dayHigh}</td>
                                 <td id='woah'>{data2[0].dayLow}</td>
-                                <td id='noBord'>{stock.volume}</td>
+                                <td className="table-issue" id='noBord'>{stock.volume}</td>
                                 </tr>
 
                         </table>

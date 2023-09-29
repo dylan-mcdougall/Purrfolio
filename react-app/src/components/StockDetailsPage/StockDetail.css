@@ -6,11 +6,11 @@ div.stock-details-page-wrapper {
 
 .stockDetailsContainer {
   background-color: black;
-  border-radius: 25px;
+  border-radius: 25px 25px 0 0;
   font-family: 'Montserrat', sans-serif;
   color: white;
   width: 75%;
-  height: 70%;
+  height: 60%;
   position: relative;
   right: 15%;
   margin-top: 4%;
@@ -102,7 +102,7 @@ border: 2px solid black;
 }
 
 div.StockDetailBottom {
-  margin: 3% 1% 0;
+  margin: 0% 1.5% 0;
 }
 
 table {
@@ -115,12 +115,8 @@ table {
   overflow: hidden;
   }
 
-  .tableBar {
-    margin: 8px;
-  }
 
-  th,
-td{
+th, td {
   padding: 20px;
   color: black;
   text-align: center;
@@ -129,6 +125,12 @@ td{
 td {
  border-right: 1px solid black;
 }
+
+td.table-issue {
+  padding: 0;
+  border-right: none;
+}
+
 #woah {
   background-color: #f2f2f2;
 }
