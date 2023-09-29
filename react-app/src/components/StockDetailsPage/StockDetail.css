@@ -1,17 +1,24 @@
+div.stock-details-page-wrapper {
+  display: flex;
+  flex-direction: column;
+  background-color: #bbd3c3dc;
+}
+
 .stockDetailsContainer {
   background-color: black;
   border-radius: 25px;
   font-family: 'Montserrat', sans-serif;
   color: white;
-  width: 70%;
+  width: 75%;
   height: 70%;
-  position: absolute;
+  position: relative;
   right: 15%;
-  top: 5%;
+  margin-top: 4%;
   overflow-y: auto;
+  margin-left: 22%;
 }
 .StockDetailsTopBar {
-  margin: 4px;
+  margin: 1% 1% 0;
   background: #f2f2f2;
   border: 3px solid black;
   border-radius: 25px;
@@ -19,6 +26,7 @@
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
+  height: 8%;
 }
 .sdtb_left {
   color: black;
@@ -41,6 +49,7 @@
   border: 1px solid black;
   border-radius: 25px;
   background: #f2f2f2;
+  margin: 2% 2%;
 }
 .SDMleftdiv {
   margin: 4px;
@@ -57,15 +66,31 @@
   grid-template-rows: 1fr 1fr;
 }
 .sdmDiv{
-  margin: auto;
   background-color: #f2f2f2;
-  height: 90px;
-  width:170px;
+  height: 60%;
+  width: 60%;
   color: black;
   border: 1px solid black;
   border-radius: 25px;
   text-align: center;
 }
+
+.sdmDiv.top-left {
+  margin: 20% 10% 15% 25%;
+}
+
+.sdmDiv.top-right {
+  margin: 20% 15% 15% 10%;
+}
+
+.sdmDiv.bottom-left {
+  margin: 10% 10% 0 25%;
+}
+
+.sdmDiv.bottom-right {
+  margin: 10% 15% 15% 10%
+}
+
 .sdmDiv > p {
   display: flex;
   justify-content: center;
@@ -74,6 +99,10 @@
 margin: auto;
 border: 2px solid black;
 
+}
+
+div.StockDetailBottom {
+  margin: 3% 1% 0;
 }
 
 table {
