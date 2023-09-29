@@ -53,7 +53,7 @@ function PortfolioTab() {
                       sessionPortfolio.portfolio.stocks.find(
                         (x) => x.stock_id === stock.id
                       );
-                    const stockQty = portfoliostock.quantity;
+                    const stockQty = portfoliostock?.quantity;
                     const marketValue = stockQty * stock.price;
                     const weight = (
                       (marketValue / totalValuation) *

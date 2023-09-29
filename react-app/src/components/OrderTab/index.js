@@ -37,6 +37,7 @@ function OrderTab() {
           setStockInfo(data)
           setStockPrice(data.price)
           setStockIsLoaded(true)
+
         }
     }
 
@@ -70,6 +71,7 @@ function OrderTab() {
       });
 
       const data = await res.json()
+
       dispatch(getAllStocks(sessionUser.id));
       dispatch(getPortfolio(sessionUser.id));
     }
@@ -92,6 +94,7 @@ function OrderTab() {
       });
 
       const data = await res.json()
+
       dispatch(getAllStocks(sessionUser.id));
       dispatch(getPortfolio(sessionUser.id));
     }
@@ -138,6 +141,7 @@ function OrderTab() {
         {
           stockIsLoaded ? (
             <div>
+            <p>{stockInfo.ticker}</p>
             <p>${stockInfo.price.toFixed(2)}</p>
             <p>${stockChange}</p>
             <p>{stockGrowth}%</p>

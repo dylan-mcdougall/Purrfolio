@@ -14,11 +14,12 @@ div.search-flex-wrapper {
     width: 20%;
     border: 1px solid grey;
     border-radius: 10px;
+    z-index:1;
 }
 
 div.search-flex-wrapper:hover {
     border: none;
-    box-shadow: 
+    box-shadow:
     1px 2px 2px #5f5f5f,
     2px 4px 4px #5f5f5f,
     3px 6px 6px #5f5f5f;

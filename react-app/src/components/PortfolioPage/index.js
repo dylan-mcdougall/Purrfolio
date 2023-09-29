@@ -137,11 +137,6 @@ function PortfolioPage() {
     }
   }, [fetchComplete, stockData]);
 
-
-  useEffect(() => {
-    console.log(topFour); // Log topFour whenever it changes
-  }, [topFour]);
-
   useEffect(() => {
     if (sessionPortfolio && sessionPortfolio.portfolio) {
       setPortfolioValue(sessionPortfolio.portfolio.current_funds);
