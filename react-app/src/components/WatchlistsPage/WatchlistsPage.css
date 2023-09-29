@@ -1,16 +1,23 @@
+div.watchlist-page-wrapper {
+    display: flex;
+    flex-direction: column;
+    background-color: #bbd3c3dc;
+}
+
 .WatchlistContainer {
     background-color: white;
     border-radius: 25px;
     font-family: 'Montserrat', sans-serif;
     color: black;
-    width: 70%;
-    height: fit-content;
-    position: absolute;
-    left: 23%;
-    top: 7%;
+    width: 85%;
+    height: 100vh;
+    margin-top: 4%;
+    margin-left: 6%;
+    position: relative;
     border: solid black 2px;
     overflow: hidden;
-
+    box-shadow: 2px 0px 2px grey, 3px 0px 3px grey, 4px 0px 4px grey,
+    -2px 0px 2px grey, -3px 0px 3px grey, -4px 0px 4px grey;
 }
 
 .wlTopBar {
@@ -58,7 +65,9 @@
 }
 .wlContent {
     height:fit-content;
+    overflow-y: auto;
 }
+
 .content {
     background: rgb(13, 0, 255);
     /* padding-top: 20%;

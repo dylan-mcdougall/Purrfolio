@@ -59,6 +59,10 @@ function PortfolioPage() {
         if (uniqueTickers.length) {
           const stockInfo = {
             labels: uniqueTickers,
+            font: {
+              size: 14,
+              family: 'Poppins'
+            },
             datasets: [
               {
                 data: sessionStocks.map((stock) => stock.quantity),

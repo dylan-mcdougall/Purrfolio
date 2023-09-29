@@ -42,9 +42,9 @@ const WatchlistsPage = () => {
 
 
     return(
-        <>
+        <div className="watchlist-page-wrapper">
         {(sessionUser && watchlists)
-        ? <div>
+        ?
 
             <div className='WatchlistContainer'>
 
@@ -75,17 +75,18 @@ const WatchlistsPage = () => {
                  watchlists.map((el) => (
                      <div
                      className={toggleState === el.id ? "content active-content" : "content"}
+                     key={el.id}
                      >
                         <WatchlistContent stocks={el.stocks} name={el.name} id={el.id}  />
                      </div>
                  ))
                 ): <div>...loading</div>}
              </div>
-         </div>
+
 
 
         </div> : <div>....loadin man</div>}
-        </>
+        </div>
 
 
 

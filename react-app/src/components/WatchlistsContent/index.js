@@ -63,7 +63,6 @@ const WatchlistContent = (stocks) => {
                         <th>Volume</th>
                         <th></th>
                     </tr>
-
                     {stocks.stocks.length > 0 ?
                         stocks.stocks.map((el) => (
                             <tr className="noBorders" >

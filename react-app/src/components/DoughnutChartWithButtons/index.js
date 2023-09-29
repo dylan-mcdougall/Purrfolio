@@ -115,7 +115,7 @@ function DoughnutChartWithButtons() {
   return (
     <div className="main-page">
       {isLoaded ? (
-        <div>
+        <div className="chart-flex">
           <div className="chart">
             <DoughnutChart chartData={data} total={portfolioValue} />
           </div>
