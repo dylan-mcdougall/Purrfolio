@@ -36,19 +36,25 @@ function AddFundsModal() {
     }
 
     return (
-        <div>
-            <div>
+        <div className="add-funds-content-wrapper">
+            <div className="add-funds-heading">
                 <h3>Add Funds to your Purrfolio</h3>
             </div>
 
-            <div className="add-funds-content-wrapper">
-                <p>Current Funds: {currentFunds}</p>
+            <div className="add-funds-content">
+                <div className="add-funds-current-marker">
+                    <p>Current Funds:</p>
+                    <p>${currentFunds}</p>
+                </div>
                 <form className="add-funds-form">
-                    <label className="add-funds-label" htmlFor="amount">Desired Amount: </label>
-                    <input className="add-funds-input" type="number" name="amount" min="0" defaultValue={amount} onChange={(e) => setAmount(e.target.value)}></input>
+                    <div className="add-funds-input-wrapper">
+                        <label className="add-funds-label" htmlFor="amount">Desired Amount: </label>
+                        <input className="add-funds-input" type="number" name="amount" min="0" defaultValue={amount} onChange={(e) => setAmount(e.target.value)}></input>
+                    </div>
                     <p className="add-funds-p">* This is paper money, no real trades will be executed.</p>
-                    <button className="add-funds-submit" onClick={(e) => handleClick(e)}>Confirm</button>
-
+                    <div className="add-funds-submit-wrapper">
+                        <button className="add-funds-submit" onClick={(e) => handleClick(e)}>Confirm</button>
+                    </div>
                 </form>
             </div>
         </div>

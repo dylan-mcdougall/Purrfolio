@@ -22,20 +22,25 @@ function Navigation() {
 		return null
 	};
 	useEffect(() => {
-		if(sessionPortfolio){
-			setCurrentFunds((sessionPortfolio?.portfolio?.current_funds).toFixed(2))
+		if(sessionPortfolio != null){
+			setCurrentFunds((sessionPortfolio?.portfolio?.current_funds || 'Loading...').toFixed(2))
 		}
-	}, [sessionPortfolio])
-
-	useEffect(() => {
-
-	}, [sessionPortfolio])
+	}, [setCurrentFunds])
 
 	if (!sessionUser) return null;
 	else return (
 		<div className='nav-wrapper'>
 			<ul className='navigation-shell'>
 				<div className='nav-top'>
+					<div className='user-greeting-wrapper'>
+						<div className='navigation-layer'>
+							<li className='navigation-item'>
+								<div className='nav-context'>
+									Hello, {sessionUser ? sessionUser.first_name : null} {sessionUser ? sessionUser.last_name : null}
+								</div>
+							</li>
+						</div>
+					</div>
 					<div className='navigation-layer'>
 						<li className='navigation-item'>
 							<NavLink to="/portfolio">
@@ -81,7 +86,7 @@ function Navigation() {
 					<div className='navigation-layer'>
 						<li className='navigation-item current-funds'>
 							<p className="current-funds-context">Purrfolio Funds: </p>
-							<p className='current-funds-number'>$ {sessionPortfolio ? sessionPortfolio.portfolio.current_funds : 'Loading...'}</p>
+							<p className='current-funds-number'>$ {sessionPortfolio ? sessionPortfolio?.portfolio?.current_funds : 'Loading...'}</p>
 						</li>
 					</div>
 				</div>
