@@ -10,6 +10,7 @@ import LandingPage from "./components/LandingPage";
 import StockDetails from "./components/StockDetailsPage";
 import SearchBar from "./components/SearchBar";
 import WatchlistsPage from "./components/WatchlistsPage";
+import AddFundsModal from "./components/AddFundsModal";
 
 function App() {
   const dispatch = useDispatch();

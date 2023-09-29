@@ -98,7 +98,7 @@ function PortfolioPage() {
 
   useEffect(() => {
     if (sessionPortfolio && sessionPortfolio.portfolio) {
-      setPortfolioValue(sessionPortfolio.portfolio.current_funds);
+      setPortfolioValue(sessionPortfolio?.portfolio?.current_funds || 'Loading...');
     }
 
     if (

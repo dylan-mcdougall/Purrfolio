@@ -1,12 +1,11 @@
 div.search-wrapper {
+    position: absolute;
     display: flex;
     flex-direction: column;
-    position: absolute;
     width: 100%;
     justify-content: center;
     align-items: center;
     margin-top: 1%;
-    z-index: 4;
 }
 
 div.search-flex-wrapper {
@@ -31,6 +30,7 @@ div.input-wrapper {
     justify-content: space-around;
     width: 100%;
     border-radius: 14px;
+    z-index: 1;
 }
 
 div.input-wrapper input {
@@ -39,24 +39,25 @@ div.input-wrapper input {
     border: none;
     border-radius: 14px;
     outline: none;
+    z-index: 1;
 }
 
 div.response-wrapper {
     display: flex;
     width: 100%;
-    z-index: 4;
+    z-index: 1;
 }
 
 ul.response-list {
     width: 100%;
     margin: 0;
     padding: 0;
+    z-index: 1;
 }
 
 li.response-list-item {
     list-style-type: none;
     padding: .5% 2%;
-    z-index: 4;
     background-color: white;
 }
 
@@ -66,7 +67,6 @@ li.response-list-item > a.response-item-link {
     justify-content: space-between;
     text-decoration: none;
     width: 100%;
-    z-index: 4;
 }
 
 li.response-list-item:hover {
