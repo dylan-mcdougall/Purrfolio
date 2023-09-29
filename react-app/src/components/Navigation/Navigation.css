@@ -11,7 +11,9 @@ html {
 }
 
 div.nav-wrapper {
+  position: relative;
   height: 100vh;
+  width: 10%;
 }
 
 ul.navigation-shell {
@@ -27,15 +29,16 @@ ul.navigation-shell {
 }
 
 div.navigation-layer {
-  margin: 10px 18px;
+  margin: 10px 0;
   border-radius: 12px;
 }
 
 li.navigation-item {
   display: flex;
   flex-direction: row;
+  align-items: center;
   justify-content: space-between;
-  color: white;
+  color: #dcdbcb;
   width: 100%;
 }
 
@@ -44,32 +47,45 @@ li.navigation-item a {
   flex-direction: row;
   justify-content: space-between;
   text-decoration: none;
-  color: white;
+  color: #dcdbcb;
   width: 100%;
   font-size: 18px;
-  padding: 6px 8px;
-  border-radius: 20px;
-  z-index: 4;
+  padding: 6px 8px 6px 8px;
+}
+
+li.navigation-item.add-funds {
+  width: 100%;
+  padding: 6px 0 6px 0;
+}
+
+li.navigation-item.add-funds:hover {
+  background-color: #373737;
 }
 
 li.navigation-item.add-funds button {
-  font-size: 14px;
-  color: white;
-  padding: 6px 8px;
-  background-color: #1f1f1f;
+  font-size: 18px;
+  color: #dcdbcb;
+  background-color: inherit;
   border: none;
-  border-radius: 20px;
+}
+
+li.navigation-item-add-funds > div.nav-content-wrapper {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  padding: 0;
 }
 
 li.navigation-item.add-funds button:hover {
   cursor: pointer;
-  background-color: slategray;
 }
 
 li.navigation-item.add-funds button div.nav-context {
   padding-left: 48px;
   padding-right: 8px;
-  color: white;
+  color: #dcdbcb;
 }
 
 li.navigation-item.current-funds p {
@@ -80,9 +96,14 @@ li.navigation-item.current-funds p {
 div.nav-content-wrapper {
   display: flex;
   flex-direction: row;
+  align-items: center;
   justify-content: space-between;
   width: 100%;
   padding: 4px;
+}
+
+li.navigation-item.add-funds div.nav-svg svg {
+  margin: 0 0 0 8px;
 }
 
 div.nav-top {
@@ -102,22 +123,26 @@ p.current-funds-number {
 }
 
 li.navigation-item a:hover {
-  background-color: slategray;
+  background-color: #373737;
 }
 
 .active {
-  background-color: slategray;
+  background-color: #373737;
 }
 
 li.navigation-item.logout > div.nav-content-wrapper {
   width: 100%;
   font-size: 18px;
   padding: 10px 14px;
-  border-radius: 40px;
 }
 
 li.navigation-item.logout div.nav-content-wrapper:hover {
   cursor: pointer;
-  background-color: slategray;
-  border-radius: 20px;
+  background-color: #373737;
+}
+
+div.user-greeting-wrapper {
+  display: flex;
+  justify-content: center;
+  border-bottom: 1px solid #dcdbcb;
 }

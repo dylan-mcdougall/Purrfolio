@@ -113,8 +113,8 @@ function SignupFormModal() {
 					/>
 				</label>
 				<div className="button-interface">
-					<button className="demo-user" onClick={handleClick}>Demo User</button>
-					<button className="submit" type="submit">Log In</button>
+					<a className="demo-user" onClick={handleClick}>Demo User</a>
+					<button className="submit" type="submit">Sign Up</button>
 				</div>
 			</form>
 		</div>
