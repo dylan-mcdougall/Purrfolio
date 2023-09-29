@@ -1,0 +1,78 @@
+.WatchlistsBarContainer {
+    background: #f2f2f2;
+    font-family: 'Montserrat', sans-serif;
+    width: 215px;
+    height: fit-content;
+    position: absolute;
+    right: 0%;
+    top: 7%;
+    border: solid black 2px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+.wlbMenuSelect{
+ width: 100%;
+}
+
+.Dtabs {
+background: #f2f2f2;
+border-bottom: 1px solid black;
+padding-left: 5px;
+height: 35px;
+display: grid;
+grid-template-columns: 1fr 1fr;
+}
+.dropName {
+    grid-column-start: 1;
+    grid-column-end: 2;
+}
+.upDown {
+    grid-column-start: 2;
+    grid-column-end: 3;
+    position: relative;
+}
+.activeDrop {
+    position: absolute;
+    right: 5%;
+    bottom: 10px;
+
+}
+.drop{
+    position: absolute;
+    right: 5%;
+    bottom: 10px;
+    display: none;
+}
+.activeUp {
+    position: absolute;
+    right: 5%;
+    bottom: 10px;
+
+}
+.up {
+    position: absolute;
+    right: 5%;
+    bottom: 10px;
+    display: none;
+}
+.Dactive-tabs{
+background: #f2f2f2;
+border-bottom: 1px solid black;
+padding-left: 5px;
+height: 35px;
+display: grid;
+grid-template-columns: 1fr 1fr;
+}
+
+.Dcontent {
+    display: none;
+}
+.Dactive-content {
+
+}
+.wlBarTitle{
+    display: flex;
+    justify-content: center;
+    padding: 25px;
+}

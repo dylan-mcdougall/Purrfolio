@@ -27,7 +27,6 @@ const WatchlistsPage = () => {
 
 
     const [toggleState, setToggleState] =useState(1)
-    const sample = [{x: 'pistachio', y: "is a nut", id: 1},{x: 'strawberry', y:"is a fruit", id: 2}]
     const toggleTab = (index) => {
         setToggleState(index)
     }
@@ -63,7 +62,7 @@ const WatchlistsPage = () => {
                 <div className="wltbAddList">
                     <div className='addWatchlist'>
                     <OpenModalButton
-                     buttonText={"+"}
+                     buttonText={<i class="fa-regular fa-square-plus"></i>}
                      modalComponent={<CreateNewWatchlist />}
                     />
                     </div>
@@ -85,7 +84,7 @@ const WatchlistsPage = () => {
          </div>
 
 
-        </div> : <div>....loadin mane</div>}
+        </div> : <div>....loadin man</div>}
         </>
 
 

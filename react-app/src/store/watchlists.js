@@ -62,7 +62,7 @@ export const addStock = (listId, stockId) => async(dispatch) => {
     }
 }
 
-export const getUserWatchlists = () => async(dispatch) => {
+export const getUserWatchlists = (page) => async(dispatch) => {
     console.log('start')
     const response = await fetch('/api/users/current/watchlists')
     if(response.ok){
@@ -70,6 +70,7 @@ export const getUserWatchlists = () => async(dispatch) => {
         const list = await response.json()
         console.log(list.watchlists)
         dispatch(userWatchlists(list.watchlists))
+        return page
     }
 }
 export const updateWatchlist = (name, listId) => async(dispatch) => {
