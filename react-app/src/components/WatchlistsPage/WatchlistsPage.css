@@ -7,9 +7,10 @@
     height: fit-content;
     position: absolute;
     left: 23%;
-    top: 5%;
+    top: 7%;
     border: solid black 2px;
     overflow: hidden;
+
 }
 
 .wlTopBar {

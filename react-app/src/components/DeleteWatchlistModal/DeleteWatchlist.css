@@ -1,0 +1,35 @@
+.deleteWLContaint {
+    background: #f2f2f2;
+    height: 200px;
+    width: 500px;
+    border-radius: 15px;
+
+}
+.dltTxt{
+    border: solid black 1px;
+    text-align: center;
+    border-radius: 15px;
+}
+.buttsContainer{
+    border: solid black 1px;
+    height: 70px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+.buttsContainer button{
+    width: 150px;
+    height: 50px;
+    border-radius: 15px;
+    border: 1px solid black;
+    transition: all .2s ease-in-out;
+}
+
+.confirmYes:hover {
+    border-radius: 25px;
+    background: red;
+}
+.confirmNo:hover{
+    border-radius: 25px;
+    background: lightyellow;
+}

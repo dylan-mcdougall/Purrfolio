@@ -15,12 +15,14 @@ const WatchlistsPage = () => {
     const dispatch = useDispatch()
     const sessionUser = useSelector((state) => state.session.user)
     const watchlists = useSelector((state) => state.watchlists.userWatchlists)
+    const fWatch = useSelector((state) => state.watchlists.userWatchlists)
 
     useEffect(() => {
         if(sessionUser)dispatch(getUserWatchlists())
     },[dispatch, sessionUser])
     console.log(sessionUser)
     console.log(watchlists)
+    console.log(fWatch)
 
 
 
