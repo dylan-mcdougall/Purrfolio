@@ -63,7 +63,7 @@ const StockDetails = () => {
         }
 
     return(
-        <div>
+        <div className="stock-details-page-wrapper">
             {portfolio && stock && data2 && (
                 <div className='stockDetailsContainer'>
                 <div className="StockDetailsTopBar">
@@ -85,21 +85,21 @@ const StockDetails = () => {
                         </div>
                     </div>
                     <div className="SDMrightDiv">
-                        <div className="sdmDiv">
+                        <div className="sdmDiv top-left">
                             <p>Shares Owned</p>
                             <PostionChecker />
 
 
                         </div>
-                        <div className="sdmDiv">
+                        <div className="sdmDiv top-right">
                             <p>Current Valuation: </p>
                             <p>{`$${stock.price}`}</p>
                         </div>
-                        <div className="sdmDiv">
+                        <div className="sdmDiv bottom-left">
                             <p>% Change</p>
                             <p>{`${Math.floor((((stock.price - stock.open)/stock.open)*100)*100)/100}%`}</p>
                         </div>
-                        <div className="sdmDiv">
+                        <div className="sdmDiv bottom-right">
                             <p>$ Change</p>
                             <p>{`$${Math.floor((stock.price - stock.open) * 100)/100}`}</p>
                         </div>

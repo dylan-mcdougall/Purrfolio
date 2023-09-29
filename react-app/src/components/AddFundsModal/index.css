@@ -74,3 +74,8 @@ button.add-funds-submit {
     background-color: #444846;
     color: #dcdbcb;
 }
+
+button.add-funds-submit:hover {
+    cursor: pointer;
+    color: white;
+}
