@@ -80,7 +80,9 @@ const WatchlistContent = (stocks) => {
                                 <td id='delButt'><button onClick={() => {removeAStock(stocks.id, el.id)}}>x</button></td>
                             </tr>
                         ))
-                    :<div>.... loading</div>
+                    :<tr className="plsAddStk">
+                        <td align="center" colSpan={"11"}>Add stocks to Watchlist</td>
+                     </tr>
                     }
                 </table>
             </div>
