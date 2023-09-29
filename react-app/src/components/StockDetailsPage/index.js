@@ -10,6 +10,7 @@ import BottomTabMenu from "../BottomTabMenu";
 import OrderTab from "../OrderTab";
 import AddStockToList from "../StockToWatchListModal";
 import OpenModalButton from "../OpenModalButton";
+import WatchlistsBar from "../WatchlistsBar";
 
 
 const StockDetails = () => {

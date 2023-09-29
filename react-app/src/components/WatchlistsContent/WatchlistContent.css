@@ -84,6 +84,7 @@ table {
     border: 0;
     color: white;
     font-size: medium;
+    cursor: pointer;
 }
 #delButt button:hover{
     background-color: #1f1f1f;
