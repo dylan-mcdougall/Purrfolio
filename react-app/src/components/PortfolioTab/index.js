@@ -27,7 +27,7 @@ function PortfolioTab() {
   }, [sessionStocks]);
 
   useEffect(() => {
-    setTotalValuation(sessionPortfolio.portfolio.stock_valuation);
+    setTotalValuation(sessionPortfolio?.portfolio?.stock_valuation);
     setIsLoaded(true);
   }, [sessionPortfolio]);
 

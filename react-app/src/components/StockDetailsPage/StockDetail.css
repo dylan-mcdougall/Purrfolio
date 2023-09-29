@@ -8,7 +8,7 @@ div.stock-details-page-wrapper {
   background-color: black;
   border-radius: 25px 25px 0 0;
   font-family: 'Montserrat', sans-serif;
-  color: white;
+  color: #dcdbcb;
   width: 75%;
   height: 60%;
   position: relative;
@@ -16,6 +16,9 @@ div.stock-details-page-wrapper {
   margin-top: 4%;
   overflow-y: auto;
   margin-left: 22%;
+  box-shadow: 
+  2px 0px 2px grey, 3px 0px 3px grey, 4px 0px 4px grey,
+  -2px 0px 2px grey, -3px 0px 3px grey, -4px 0px 4px grey;
 }
 .StockDetailsTopBar {
   margin: 1% 1% 0;
@@ -38,7 +41,18 @@ div.stock-details-page-wrapper {
   margin: 5px;
 }
 .sdtb_right {
-  margin-right: 8px;
+  margin-right: 1%;
+}
+
+.sdtb_right > button {
+  background-color: #474844;
+  color: #dcdbcb;
+  padding: 6px;
+}
+
+.sdtb_right > button:hover {
+  color: white;
+  cursor: pointer;
 }
 
 .stockDetailMiddle {
@@ -64,15 +78,36 @@ div.stock-details-page-wrapper {
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-template-rows: 1fr 1fr;
+  margin: 0 0 0 0;
 }
 .sdmDiv{
-  background-color: #f2f2f2;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background-color: #1f1f1f;
   height: 60%;
   width: 60%;
-  color: black;
+  color: #dcdbcb;
   border: 1px solid black;
   border-radius: 25px;
   text-align: center;
+}
+
+.sdmP  {
+  font-family: 'Roboto', sans-serif;
+  font-size: 22px;
+}
+
+p.position-checker {
+  font-family: 'Roboto', sans-serif;
+  font-size: 22px;
+}
+
+.sdmDiv p.sdmDiv-heading {
+  font-family: 'Poppins', sans-serif;
+  font-size: 16px;
+  margin: 0;
+  padding: 2% 0;
 }
 
 .sdmDiv.top-left {
@@ -88,7 +123,7 @@ div.stock-details-page-wrapper {
 }
 
 .sdmDiv.bottom-right {
-  margin: 10% 15% 15% 10%
+  margin: 10% 15% 0% 10%
 }
 
 .sdmDiv > p {
@@ -96,7 +131,6 @@ div.stock-details-page-wrapper {
   justify-content: center;
 }
 .rightdiv {
-margin: auto;
 border: 2px solid black;
 
 }

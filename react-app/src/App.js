@@ -31,6 +31,7 @@ function App() {
           </Route>
           <Route path="/portfolio">
             <PortfolioPage />
+            <WatchlistsBar />
           </Route>
           <Route path="/watchlists">
             <WatchlistsPage />
