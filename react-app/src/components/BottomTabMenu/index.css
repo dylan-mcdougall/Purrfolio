@@ -1,5 +1,5 @@
 .bottom-tab-wrapper {
-    width: 75%;
+    width: 60%;
     height: auto;
     position: relative;
     right: 15%;
@@ -12,8 +12,7 @@
     position: relative;
     background-color: white;
     color: black;
-    left: 7%;
-    width: 75%;
+    width: 100%;
     margin-top: 30px;
 
 }
