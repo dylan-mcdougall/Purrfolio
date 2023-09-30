@@ -136,7 +136,7 @@ def portfolio_purchase(id):
                 quantity=int(request.json.get('quantity')), price=stock.price, buy=True,
                 portfolio_id=portfolio.id, stock_id=stock.id
             )
-            if not portfolio_stock:
+            if portfolio_stock == None:
                 new_portfolio_stock = PortfolioStock(
                     quantity=int(request.json.get('quantity')), portfolio_id=portfolio.id, stock_id=stock.id
                 )

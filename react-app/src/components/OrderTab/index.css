@@ -1,3 +1,10 @@
+.order-tab-wrapper {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    position: relative;
+}
+
 .order-tab {
     text-align: left;
     background-color: black;
@@ -8,9 +15,11 @@
     padding: 10px;
     box-shadow: 2px 0px 2px grey, 3px 0px 3px grey, 4px 0px 4px grey,
     -2px 0px 2px grey, -3px 0px 3px grey, -4px 0px 4px grey;
-
 }
 
-#root {
-    width: -100%;
+
+form.stock-search {
+    width: 100%;
+    border-bottom: 1px black solid;
+    margin: 2px;
 }
