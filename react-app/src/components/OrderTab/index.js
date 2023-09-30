@@ -136,12 +136,12 @@ function OrderTab() {
     }, [ownedShares, qtyLoaded, estimatedValue, sessionPortfolio]);
 
   return (
-    <div className="order-tab">
-      <div>
-        <form onSubmit={(e) => handleSearchSubmit(e)}>
-        <OrderSearchBar onSelectResult={handleSearchResultSelect} />
-          {/* <label htmlFor="stock-name">Stock Ticker or Name:</label>
-          <input type="text" onChange={(e) => setSearch(e.target.value)} /> */}
+
+    <div className="order-tab-wrapper">
+      <div className="order-tab">
+        <form className="stock-search" onSubmit={(e) => handleSearchSubmit(e)}>
+          <label htmlFor="stock-name">Stock Ticker or Name:</label>
+          <input type="text" onChange={(e) => setSearch(e.target.value)} />
           <input type="submit" hidden />
         </form>
         {

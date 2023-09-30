@@ -1,3 +1,10 @@
+.order-tab-wrapper {
+    display: flex;
+    flex-direction: column;
+    width: 75%;
+    position: relative;;
+}
+
 .order-tab {
     text-align: left;
     background-color: black;
@@ -6,4 +13,10 @@
     border-bottom-left-radius: 25px;
     border-bottom-right-radius: 25px;
     padding: 10px;
+}
+
+form.stock-search {
+    width: 100%;
+    border-bottom: 1px black solid;
+    margin: 2px;
 }
