@@ -58,6 +58,7 @@ div.stock-details-page-wrapper {
 
 .stockDetailMiddle {
   display: grid;
+  height: 80%;
   grid-template-columns: 1fr 1fr;
   margin: 0;
 }
@@ -70,6 +71,7 @@ div.stock-details-page-wrapper {
 .SDMleftdiv {
   margin: 4px;
   color: black;
+  height: 80%;
   grid-column-start: 1;
   grid-column-end: 2;
 }
