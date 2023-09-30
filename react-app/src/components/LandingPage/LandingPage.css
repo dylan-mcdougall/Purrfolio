@@ -4,10 +4,6 @@
     display: inline-flex;
 }
 
-html {
-    overflow-y: hidden;
-}
-
 div.page-wrapper {
     margin: 0;
     padding: 0;

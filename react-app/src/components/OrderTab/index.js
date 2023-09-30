@@ -76,7 +76,7 @@ function OrderTab() {
       });
 
       const data = await res.json()
-
+      console.log('------------------- data', data)
       dispatch(getAllStocks(sessionUser.id));
       dispatch(getPortfolio(sessionUser.id));
     }
