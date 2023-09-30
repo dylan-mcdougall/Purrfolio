@@ -31,17 +31,23 @@ const WatchlistContent = (stocks) => {
             <div className="wlContentTitleBar">
                 <div className="contentTitle">
                     <h2>{stocks.name}</h2>
-                </div>
-                <div className="tbRightSide">
                     <div className="editName">
                         <OpenModalButton
                             buttonText={<i class="fa-regular fa-pen-to-square"></i>}
                             modalComponent={<UpdateWatchlist listId={stocks.id} />}
                         />
                     </div>
+                </div>
+                <div className="tbRightSide">
+                    {/* <div className="editName">
+                        <OpenModalButton
+                            buttonText={<i class="fa-regular fa-pen-to-square"></i>}
+                            modalComponent={<UpdateWatchlist listId={stocks.id} />}
+                        />
+                    </div> */}
                     <div className="DeleteWatchlist">
                         <OpenModalButton
-                            buttonText={"Delete List"}
+                            buttonText={<i class="fa-solid fa-trash" ></i>}
                             modalComponent={<DeleteWatchlistModal listId={stocks.id}/>}
                         />
                     </div>
