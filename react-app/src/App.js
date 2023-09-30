@@ -36,11 +36,9 @@ function App() {
           <Route path="/watchlists">
             <WatchlistsPage />
           </Route>
-          <Route path="/fakePage">
-            <WatchlistsBar />
-          </Route>
           <Route path='/stocks/:ticker'>
             <StockDetails />
+            <WatchlistsBar />
           </Route>
         </Switch>
       )}
