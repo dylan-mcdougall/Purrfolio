@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 import { NavLink, Route, useParams } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import Chart from "react-apexcharts";
+import "./StockDetailsGraph.css"
 
 const StockDetailGraph = () => {
   const { ticker } = useParams()

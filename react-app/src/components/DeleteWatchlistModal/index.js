@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useModal } from "../../context/Modal";
 import { getUserWatchlists, removeWatchlist } from "../../store/watchlists";
+import './DeleteWatchlist.css'
 
 const DeleteWatchlistModal = ({listId}) => {
     const dispatch=useDispatch()

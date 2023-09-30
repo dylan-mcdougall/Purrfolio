@@ -1,25 +1,38 @@
+div.main-page-wrapper {
+    display: flex;
+    flex-direction: column;
+    background-color: #bbd3c3dc;
+}
+
 .main-page {
     background-color: black;
     border-radius: 25px;
     font-family: 'Montserrat', sans-serif;
     color: white;
-    width: 70%;
-    height: 100%;
-    position: absolute;
+    width: 75%;
+    height: 60%;
+    position: relative;
     right: 15%;
     top: 10%;
+    margin: 0% 0 0 22%;
+    overflow-y: auto;
+    box-shadow: 2px 0px 2px grey, 3px 0px 3px grey, 4px 0px 4px grey,
+    -2px 0px 2px grey, -3px 0px 3px grey, -4px 0px 4px grey;
 }
 
 .main-page img {
+    margin: 0;
     width: 50%;
 }
 
 .empty-portfolio {
     text-align: center;
 }
+
 .chart {
-    width: 50%;
+    width: 32%;
     margin: 50px;
+    font-size: 14px;
 }
 
 .growth-buttons {

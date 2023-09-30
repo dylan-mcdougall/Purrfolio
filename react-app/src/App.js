@@ -10,6 +10,8 @@ import LandingPage from "./components/LandingPage";
 import StockDetails from "./components/StockDetailsPage";
 import SearchBar from "./components/SearchBar";
 import WatchlistsPage from "./components/WatchlistsPage";
+import WatchlistsBar from "./components/WatchlistsBar";
+import AddFundsModal from "./components/AddFundsModal";
 
 function App() {
   const dispatch = useDispatch();
@@ -29,12 +31,17 @@ function App() {
           </Route>
           <Route path="/portfolio">
             <PortfolioPage />
+            <WatchlistsBar />
           </Route>
           <Route path="/watchlists">
             <WatchlistsPage />
           </Route>
+          <Route path="/fakePage">
+            <WatchlistsBar />
+          </Route>
           <Route path='/stocks/:ticker'>
             <StockDetails />
+            <WatchlistsBar />
           </Route>
         </Switch>
       )}

@@ -1,1 +1,81 @@
+div.add-funds-content-wrapper {
+    display: flex;
+    flex-direction: column;
+    background-color: #F5FCFF;
+    align-items: center;
+    padding: 0 10px 8px 10px;
+    border-radius: 18px;
+    z-index: 8;
+}
 
+div.add-funds-heading {
+    font-family: 'Roboto', sans-serif;
+    border-bottom: 1px solid black;
+    background-color: #BBD3C3;
+    width: 106%;
+    text-align: center;
+    margin: 0;
+    border-radius: 18px 18px 0px 0px;
+}
+
+div.add-funds-heading h3 {
+    margin: 1rem;
+}
+
+div.add-funds-content {
+    font-family: 'Poppins', sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+div.add-funds-current-marker {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+}
+
+div.add-funds-current-marker > p {
+    margin: 1rem;
+}
+
+div.add-funds-input-wrapper {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+}
+
+label.add-funds-label {
+    margin: .5rem 1rem;
+}
+
+input.add-funds-input {
+    width: 40%;
+    margin: .5rem 1rem;
+}
+
+p.add-funds-p {
+    text-align: center;
+    font-size: 12px;
+}
+
+div.add-funds-submit-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+button.add-funds-submit {
+    margin: .25rem 1rem;
+    width: 25%;
+    padding: 6px;
+    background-color: #444846;
+    color: #dcdbcb;
+}
+
+button.add-funds-submit:hover {
+    cursor: pointer;
+    color: white;
+}

@@ -4,7 +4,8 @@ div.login-form-wrapper {
     font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     width: 400px;
     height: auto;
-    background-color: #f2f2f2;
+    background-color: #F5FCFF;
+    border-radius: 14px;
 }
 
 div.login-form-nav {
@@ -22,6 +23,7 @@ div.login-form-signup-title {
 }
 
 div.login-form-login-title {
+
     display: flex;
     align-items: center;
     justify-content: center;
@@ -29,6 +31,7 @@ div.login-form-login-title {
 }
 
 div.login-form-nav > div.login-form-signup-title > button {
+    font-family: 'Roboto', sans-serif;
     border: none;
     font-size: 20px;
     font-weight: bold;
@@ -36,11 +39,13 @@ div.login-form-nav > div.login-form-signup-title > button {
 }
 
 div.login-form-nav h2 {
+    font-family: 'Roboto', sans-serif;
     font-size: 20px;
     font-weight: bold;
 }
 
 div.login-form-wrapper form {
+    font-family: 'Poppins', sans-serif;
     display: flex;
     flex-direction: column;
 }
@@ -58,13 +63,15 @@ div.login-form-wrapper ul {
 div.login-form-wrapper label {
     display: flex;
     flex-direction: column;
-    margin: 6px 10px;
+    margin: 6px 10px 12px;
 }
 
 div.login-form-wrapper input {
-    width: 100%;
+    width: 90%;
     align-self: center;
     border-radius: 6px;
+    margin: 4px 0 0;
+    padding: 3px;
 }
 
 div.button-interface {
@@ -74,8 +81,10 @@ div.button-interface {
 }
 
 div.login-form-wrapper button.submit {
-    color: white;
+    font-family: 'Poppins', sans-serif;
+    color: #dcdbcb;
     background-color: black;
+    cursor: pointer;
     border: none;
     margin: 10px;
     width: 28%;
@@ -84,22 +93,33 @@ div.login-form-wrapper button.submit {
     border-radius: 16px;
 }
 
-div.login-form-wrapper button.demo-user {
+div.login-form-wrapper button.submit:hover {
     color: white;
-    background-color: grey;
+}
+
+div.login-form-wrapper a.demo-user {
+    color: #dcdbcb;
+    background-color: #474844;
+    cursor: pointer;
     border: none;
     margin: 10px;
     width: 28%;
     font-size: 16px;
     padding: 6px 10px;
     border-radius: 16px;
+    text-align: center;
+}
+
+div.login-form-wrapper a.demo-user:hover {
+    color: white;
 }
 
 div.login-form-signup-title {
-    background-color: #d2d2d2;
+    background-color: #BBD3C3;
+    border-radius: 12px 0 0 0;
 }
 
 div.login-form-signup-title > button {
-    color: #808080;
-    background-color: #d2d2d2;
+    color: #444846;
+    background-color: #BBD3C3;
 }

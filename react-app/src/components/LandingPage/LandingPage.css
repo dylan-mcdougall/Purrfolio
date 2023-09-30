@@ -1,5 +1,13 @@
 @import url('https://fonts.googleapis.com/css2?family=Dancing+Script&family=Poppins&family=Roboto&display=swap');
 
+#root {
+    display: flex;
+}
+
+html {
+    overflow-y: hidden;
+}
+
 div.page-wrapper {
     margin: 0;
     padding: 0;
@@ -14,7 +22,7 @@ div.landing-navigation-wrapper {
     flex-direction: row;
     align-items: flex-end;
     justify-content: space-between;
-    border-bottom: 2px solid white;
+    border-bottom: 2px solid #dcdbcb;
     height: 6%;
 }
 
@@ -41,14 +49,14 @@ div.landing-navigation-right button {
     font-family: 'Roboto', sans-serif;
     text-decoration: none;
     border: none;
-    color: white;
+    color: #dcdbcb;
     background-color: black;
     margin: 10px;
     font-size: 24px;
 }
 
 div.landing-navigation-right button:hover {
-    color: lightgrey;
+    color: white;
     cursor: pointer;
 }
 
@@ -71,7 +79,7 @@ div.landing-content-text {
     display: flex;
     flex-direction: column;
     align-items: center;
-    color: white;
+    color: #dcdbcb;
     height: 100%;
     width: 100%;
     margin: 10% 0 10% 5%;
@@ -118,6 +126,7 @@ div.landing-signup-statement p {
 }
 
 div.landing-signup-section button {
+    background-color: #dcdbcb;
     font-size: 18px;
     border-radius: 20px;
     padding: 8px 12px;

@@ -6,6 +6,12 @@ import { getStock } from "../../store/stocks";
 import "./StockDetail.css"
 import StockDetailGraph from "../StockDetailsGraph";
 import { getPortfolio } from "../../store/portfolio";
+import BottomTabMenu from "../BottomTabMenu";
+import OrderTab from "../OrderTab";
+import AddStockToList from "../StockToWatchListModal";
+import OpenModalButton from "../OpenModalButton";
+import WatchlistsBar from "../WatchlistsBar";
+
 
 const StockDetails = () => {
     const navigate = useHistory()
@@ -16,7 +22,16 @@ const StockDetails = () => {
     const [data2, setData2] = useState(null)
     const sessionUser = useSelector((state) => state.session.user);
     const [quantity1, setQuantity1]= useState(0)
+    const [color, setColor] = useState("sdmP green");
 
+    useEffect(() => {
+        if (stock) {
+          let calculated = ((stock.price - stock.open) / stock.open) * 100;
+          calculated = calculated.toFixed(2);
+          const newColor = calculated > 0 ? "sdmP green" : "sdmP red";
+          setColor(newColor);
+        }
+      }, [stock])
 
     useEffect(() => {
         const fetchData2 = async () => {
@@ -51,13 +66,13 @@ const StockDetails = () => {
             }
 
             return (
-                <>{quantity}</>
+                <p className="position-checker">{quantity}</p>
             )
 
         }
 
     return(
-        <div>
+        <div className="stock-details-page-wrapper">
             {portfolio && stock && data2 && (
                 <div className='stockDetailsContainer'>
                 <div className="StockDetailsTopBar">
@@ -66,9 +81,10 @@ const StockDetails = () => {
                                     <p>{stock.name}</p>
                     </div>
                     <div className="sdtb_right">
-                                <button className="Add2List" onClick={() => {
-                                return(alert("Feature Coming Soon!"))
-                              }}> +Add to Watchlist </button>
+                        <OpenModalButton
+                            buttonText={'+ Add to Watchlist'}
+                            modalComponent={<AddStockToList stockId={stock.id} />}
+                        />
                     </div>
                 </div>
                 <div className="stockDetailMiddle">
@@ -78,23 +94,23 @@ const StockDetails = () => {
                         </div>
                     </div>
                     <div className="SDMrightDiv">
-                        <div className="sdmDiv">
-                            <p>Shares Owned</p>
+                        <div className="sdmDiv top-left">
+                            <p className="sdmDiv-heading">Shares Owned</p>
                             <PostionChecker />
 
 
                         </div>
-                        <div className="sdmDiv">
-                            <p>Current Valuation: </p>
-                            <p>{`$${stock.price}`}</p>
+                        <div className="sdmDiv top-right">
+                            <p className="sdmDiv-heading">Current Valuation: </p>
+                            <p className={color}>{`$${stock.price}`}</p>
                         </div>
-                        <div className="sdmDiv">
-                            <p>% Change</p>
-                            <p>{`${Math.floor((((stock.price - stock.open)/stock.open)*100)*100)/100}%`}</p>
+                        <div className="sdmDiv bottom-left">
+                            <p className="sdmDiv-heading">% Change</p>
+                            <p className={color}>{`${Math.floor((((stock.price - stock.open)/stock.open)*100)*100)/100}%`}</p>
                         </div>
-                        <div className="sdmDiv">
-                            <p>$ Change</p>
-                            <p>{`$${Math.floor((stock.price - stock.open) * 100)/100}`}</p>
+                        <div className="sdmDiv bottom-right">
+                            <p className="sdmDiv-heading">$ Change</p>
+                            <p className={color}>{`$${Math.floor((stock.price - stock.open) * 100)/100}`}</p>
                         </div>
                     </div>
                 </div>
@@ -124,7 +140,7 @@ const StockDetails = () => {
                                 <td id='woah'>{stock.close}</td>
                                 <td>{data2[0].dayHigh}</td>
                                 <td id='woah'>{data2[0].dayLow}</td>
-                                <td id='noBord'>{stock.volume}</td>
+                                <td className="table-issue" id='noBord'>{stock.volume}</td>
                                 </tr>
 
                         </table>
@@ -133,6 +149,7 @@ const StockDetails = () => {
                 </div>
             </div>
             )}
+            <BottomTabMenu display={"order"} />
         </div>
     )}
 
