@@ -140,8 +140,6 @@ function OrderTab() {
       <div>
         <form onSubmit={(e) => handleSearchSubmit(e)}>
         <OrderSearchBar onSelectResult={handleSearchResultSelect} />
-          {/* <label htmlFor="stock-name">Stock Ticker or Name:</label>
-          <input type="text" onChange={(e) => setSearch(e.target.value)} /> */}
           <input type="submit" hidden />
         </form>
         {
