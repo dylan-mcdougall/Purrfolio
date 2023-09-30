@@ -2,6 +2,7 @@ div.stock-details-page-wrapper {
   display: flex;
   flex-direction: column;
   background-color: #bbd3c3dc;
+  height: fit-content;
 }
 
 .stockDetailsContainer {
@@ -16,7 +17,7 @@ div.stock-details-page-wrapper {
   margin-top: 4%;
   overflow-y: auto;
   margin-left: 22%;
-  box-shadow: 
+  box-shadow:
   2px 0px 2px grey, 3px 0px 3px grey, 4px 0px 4px grey,
   -2px 0px 2px grey, -3px 0px 3px grey, -4px 0px 4px grey;
 }

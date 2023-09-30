@@ -94,7 +94,7 @@ const AddStockToList = ({stockId}) => {
                         </div>
                     )))
 
-                    :<div>...loading</div>}
+                    :<div className="noWatchlists">No Watchlist Available</div>}
                 </div>
                 <div className="submitBuTT" >
                     <button onClick={() => {handleSub()}} disabled={!toggleState.length}>+ Add to Watchlist</button>
