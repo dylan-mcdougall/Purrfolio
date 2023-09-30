@@ -57,7 +57,7 @@ function PortfolioTab() {
                   {stockData.map((stock) => {
                     const stockName = stock.name;
                     const portfoliostock =
-                      sessionPortfolio.portfolio.stocks.find(
+                      sessionPortfolio?.portfolio?.stocks.find(
                         (x) => x.stock_id === stock.id
                       );
                     const stockQty = portfoliostock?.quantity;

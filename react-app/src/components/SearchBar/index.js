@@ -1,19 +1,16 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { FaSearch } from "react-icons/fa";
 import { useSelector } from "react-redux";
 import './SearchBar.css';
 
 function SearchBar() {
     const sessionUser = useSelector(state => state.session.user);
-
-
+    const inputRef = useRef(null);
+    const searchWrapperRef = useRef(null);
     const [inputValue, setInputValue] = useState('');
     const [results, setResults] = useState([]);
 
-    useEffect(() => {
-
-    }, [results])
-
+    
     const fetchData = async (value) => {
         const properForm = {
             "query": value
@@ -32,7 +29,7 @@ function SearchBar() {
             return null;
         }
     }
-
+    
     const handleChange = (value) => {
         if (value) {
             setInputValue(value)
@@ -43,6 +40,26 @@ function SearchBar() {
             return Promise.resolve()
         }
     }
+
+    useEffect(() => {
+        function handleClickRef(e) {
+            if (searchWrapperRef.current && !searchWrapperRef.current.contains(e.target)) {
+                setResults([]);
+            }
+            if (inputRef.current && inputRef.current.contains(e.target)) {
+                handleChange(inputValue).then((data) => {
+                    setResults(data ? data.results : []);
+                });
+            }
+        }
+
+        document.addEventListener("mousedown", handleClickRef);
+
+        return () => {
+            document.removeEventListener("mousedown", handleClickRef);
+        }
+    }, [inputValue, results]);
+
     let responseList = null;
     if (results && results.length) {
         responseList = (
@@ -71,14 +88,14 @@ function SearchBar() {
             <div className="search-flex-wrapper">
                 <div className="input-wrapper">
                     <FaSearch id="search-icon" />
-                    <input className="input" type="search" placeholder="Type to search..."
+                    <input className="input" type="search" ref={inputRef} placeholder="Type to search..."
                         value={inputValue} onChange={(e) => handleChange(e.target.value)
                             .then((data) => {
                                 setResults(data ? data.results : [])
                             })}
                     />
                 </div>
-                <div className="response-wrapper">
+                <div className="response-wrapper" ref={searchWrapperRef}>
                     {responseList ? responseList : null}
                 </div>
             </div>

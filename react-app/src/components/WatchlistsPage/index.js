@@ -43,7 +43,8 @@ const WatchlistsPage = () => {
 
     return(
         <div className="watchlist-page-wrapper">
-        {(sessionUser && watchlists)
+
+        {(sessionUser && watchlists.length)
         ?
 
             <div className='WatchlistContainer'>
@@ -85,7 +86,20 @@ const WatchlistsPage = () => {
 
 
 
-        </div> : <div>....loadin man</div>}
+        </div> : <div className="noListBack">
+
+        <div className="noListAdd">
+            <div className="noListHeader">
+                Create a Watchlist!
+            </div>
+             <div className='addWatchlist'>
+                    <OpenModalButton
+                     buttonText={<i class="fa-regular fa-square-plus"></i>}
+                     modalComponent={<CreateNewWatchlist />}
+                    />
+             </div>
+            </div>
+        </div>}
         </div>
 
 

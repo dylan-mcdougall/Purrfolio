@@ -69,12 +69,25 @@ table {
     grid-column-start: 2;
     grid-column-end: 3;
     text-align: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
 }
 .DeleteWatchlist {
 
     display: flex;
     justify-content: flex-end;
     padding: 10px;
+}
+.DeleteWatchlist button{
+    background: transparent;
+    border: 0;
+    font-size: larger;
+    color: #C22D10;
+}
+.DeleteWatchlist button:hover{
+    font-size: x-large;
 }
 #delButt button{
     background: #C22D10;
@@ -100,4 +113,15 @@ table {
 .plsAddStk td{
     font-size: large;
 }
+.editName button{
+    background: transparent;
+    border: 0;
+    font-size: medium;
+    margin-left: 5px;
+    color: gray;
 
+
+}
+.editName button:hover{
+    font-size: large;
+}

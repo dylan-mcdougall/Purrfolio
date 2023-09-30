@@ -44,8 +44,9 @@ const StockDetails = () => {
         }
         fetchData2()
     },[])
-    useEffect(() => {
-        dispatch(getStock(ticker))
+    useEffect(async() => {
+        let x = await dispatch(getStock(ticker))
+        if (x.errors) navigate.push('/')
     },[dispatch, ticker])
     useEffect(() => {
         dispatch(getPortfolio(sessionUser.id))
@@ -149,6 +150,7 @@ const StockDetails = () => {
                 </div>
             </div>
             )}
+            <WatchlistsBar />
             <BottomTabMenu display={"order"} />
         </div>
     )}
