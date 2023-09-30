@@ -1,9 +1,15 @@
+
 const SET_PORTFOLIO = "portfolio/SET_PORTFOLIO";
+const DELETE_PORTFOLIO = "portfolio/DELETE_PORTFOLIO";
 
 const setPortfolio = (portfolio) => ({
     type: SET_PORTFOLIO,
     payload: portfolio,
 });
+
+export const removePortfolio = () => ({
+    type: DELETE_PORTFOLIO
+})
 
 
 const initialState = { portfolio: null };
@@ -22,6 +28,9 @@ const portfolioReducer = (state = initialState, action) => {
             const newState = {...state,
             portfolio: action.payload};
             return newState;
+        }
+        case DELETE_PORTFOLIO: {
+            return {portfolio: null}
         }
         default:
             return state;

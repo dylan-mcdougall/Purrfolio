@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getPortfolio } from "../../store/portfolio";
 import { getAllStocks } from "../../store/stocks";
+import OrderSearchBar from "../OrderSearchBar";
 import "./index.css";
 
 function OrderTab() {
@@ -20,8 +21,12 @@ function OrderTab() {
   const [stockPrice, setStockPrice] = useState(0);
   const [stockGrowth, setStockGrowth] = useState(0);
   const [stockChange, setStockChange]  = useState(0);
-  let searchTerm = '';
   const dispatch = useDispatch()
+
+  const handleSearchResultSelect = async (ticker) => {
+    setSearch(ticker);
+    await fetchStockInfo(ticker);
+  }
 
 
 
@@ -37,6 +42,7 @@ function OrderTab() {
           setStockInfo(data)
           setStockPrice(data.price)
           setStockIsLoaded(true)
+
         }
     }
 
@@ -70,6 +76,7 @@ function OrderTab() {
       });
 
       const data = await res.json()
+
       dispatch(getAllStocks(sessionUser.id));
       dispatch(getPortfolio(sessionUser.id));
     }
@@ -92,6 +99,7 @@ function OrderTab() {
       });
 
       const data = await res.json()
+
       dispatch(getAllStocks(sessionUser.id));
       dispatch(getPortfolio(sessionUser.id));
     }
@@ -128,6 +136,7 @@ function OrderTab() {
     }, [ownedShares, qtyLoaded, estimatedValue, sessionPortfolio]);
 
   return (
+
     <div className="order-tab-wrapper">
       <div className="order-tab">
         <form className="stock-search" onSubmit={(e) => handleSearchSubmit(e)}>
@@ -138,6 +147,7 @@ function OrderTab() {
         {
           stockIsLoaded ? (
             <div>
+            <p>{stockInfo.name}</p>
             <p>${stockInfo.price.toFixed(2)}</p>
             <p>${stockChange}</p>
             <p>{stockGrowth}%</p>

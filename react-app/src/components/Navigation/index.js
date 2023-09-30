@@ -9,11 +9,10 @@ import AddFundsModal from '../AddFundsModal';
 function Navigation() {
 	const sessionUser = useSelector(state => state.session.user);
 	const sessionPortfolio = useSelector((state) => state.portfolio.portfolio);
+	const [currentFunds, setCurrentFunds] = useState(0);
 
 	const dispatch = useDispatch();
 	const history = useHistory();
-
-	const [currentFunds, setCurrentFunds] = useState('');
 
 	const logout = (e) => {
 		e.preventDefault();

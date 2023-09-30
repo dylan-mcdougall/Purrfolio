@@ -1,4 +1,7 @@
+
 const SINGLESTOCK = 'stocks/singleStock'
+
+
 
 const singleStock = (stock) => ({
     type: SINGLESTOCK,
@@ -29,6 +32,13 @@ const setAllStocks = (stocks) => ({
     type: SET_ALL_STOCKS,
     payload: stocks,
 });
+
+const REMOVE_STOCKS = 'stocks/REMOVE_STOCKS';
+
+export const removeStocks = () => ({
+    type: REMOVE_STOCKS,
+})
+
 
 
 export const getAllStocks = (id) => async (dispatch) => {
@@ -63,6 +73,10 @@ const stocksReducer = (state = initialState, action) => {
             const newState = {...state, ...action.payload};
             return newState;
             }
+
+        case REMOVE_STOCKS: {
+            return {stocks: null}
+        }
         default: return state
     }
 }
