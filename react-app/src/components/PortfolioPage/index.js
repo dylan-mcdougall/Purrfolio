@@ -188,7 +188,7 @@ function PortfolioPage() {
                 {data ? (
                   <>
                     <div className="chart">
-                      <DoughnutChart chartData={data} total={portfolioValue} />
+                      <DoughnutChart chartData={data} total={sessionPortfolio?.portfolio?.total_valuation} />
                     </div>
                     <div className="growth-buttons">
                       {topFour.map((stock) => {

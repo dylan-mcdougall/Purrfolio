@@ -12,7 +12,10 @@
     position: relative;
     background-color: white;
     color: black;
-    width: 100%;
+    left: 7%;
+    width: 75%;
+    margin-top: 30px;
+
 }
 .bottom-tab-menu th {
     background-color: white;
