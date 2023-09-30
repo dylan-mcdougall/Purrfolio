@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getPortfolio } from "../../store/portfolio";
 import { getAllStocks } from "../../store/stocks";
+import OrderSearchBar from "../OrderSearchBar";
 import "./index.css";
 
 function OrderTab() {
@@ -20,8 +21,12 @@ function OrderTab() {
   const [stockPrice, setStockPrice] = useState(0);
   const [stockGrowth, setStockGrowth] = useState(0);
   const [stockChange, setStockChange]  = useState(0);
-  let searchTerm = '';
   const dispatch = useDispatch()
+
+  const handleSearchResultSelect = async (ticker) => {
+    setSearch(ticker);
+    await fetchStockInfo(ticker);
+  }
 
 
 
@@ -134,14 +139,15 @@ function OrderTab() {
     <div className="order-tab">
       <div>
         <form onSubmit={(e) => handleSearchSubmit(e)}>
-          <label htmlFor="stock-name">Stock Ticker or Name:</label>
-          <input type="text" onChange={(e) => setSearch(e.target.value)} />
+        <OrderSearchBar onSelectResult={handleSearchResultSelect} />
+          {/* <label htmlFor="stock-name">Stock Ticker or Name:</label>
+          <input type="text" onChange={(e) => setSearch(e.target.value)} /> */}
           <input type="submit" hidden />
         </form>
         {
           stockIsLoaded ? (
             <div>
-            <p>{stockInfo.ticker}</p>
+            <p>{stockInfo.name}</p>
             <p>${stockInfo.price.toFixed(2)}</p>
             <p>${stockChange}</p>
             <p>{stockGrowth}%</p>
