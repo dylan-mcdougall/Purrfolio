@@ -1,14 +1,20 @@
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script&family=Poppins&family=Roboto&display=swap');
 .editWatchlistContainer{
     height: 175px;
     width: 500px;
     background: #f2f2f2;
     border: 1px solid black;
     border-radius: 15px;
+    font-family: 'Poppins', sans-serif;
 }
 .ewlhead{
     text-align: center;
     padding: 5px;
     padding-bottom: 0px;
+    font-family: 'Roboto', sans-serif;
+    border-bottom: 1px solid black;
+    border-radius: 15px 15px 0 0;
+    background-color: #BBD3C3;
 }
 .ewlFormContainer{
     display: flex;
