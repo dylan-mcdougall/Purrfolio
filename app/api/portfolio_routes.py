@@ -119,8 +119,8 @@ def portfolio_purchase(id):
 
     # Grab stock for validation
     funds = portfolio.current_funds
-    stock = Stock.query.filter(Stock.ticker == request.json.get('ticker')).first()
-    if stock is None:
+    stock = Stock.query.filter(Stock.ticker == str.upper(request.json.get('ticker'))).first()
+    if stock == None:
         return {"errors": ["Stock not found"]}, 404
     portfolio_stock = PortfolioStock.query.filter(PortfolioStock.stock_id == stock.id).first()
     # Split logic for buying and selling
