@@ -1,14 +1,25 @@
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script&family=Poppins&family=Roboto&display=swap');
 .deleteWLContaint {
     background: #f2f2f2;
     height: 200px;
     width: 500px;
     border-radius: 15px;
     border: solid black 1px;
+    font-family: 'Poppins', sans-serif;
 
 }
 .dltTxt{
     text-align: center;
     border-radius: 15px;
+}
+.dltTxt h2{
+    font-family: 'Roboto', sans-serif;
+    border-bottom: 1px solid black;
+    border-radius: 15px 15px 0 0;
+    background-color: #BBD3C3;
+    margin-top: -2%;
+    padding-top: 3%;
+    padding-bottom: 3%;
 }
 .buttsContainer{
     height: 70px;
