@@ -57,7 +57,7 @@ function BottomTabMenu({ display }) {
   }, [stockData, sessionPortfolio]);
 
   return (
-    <div>
+    <div className="bottom-tab-wrapper">
       {isLoaded ? (
         <div className="bottom-tab-menu">
           <button onClick={() => handleClick('portfolio')}>Portfolio</button>

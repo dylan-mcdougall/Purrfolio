@@ -1,3 +1,16 @@
+.order-tab-wrapper {
+    display: flex;
+    flex-direction: column;
+    width: 75%;
+    position: relative;;
+}
+
 .order-tab {
     text-align: left;
+}
+
+form.stock-search {
+    width: 100%;
+    border-bottom: 1px black solid;
+    margin: 2px;
 }

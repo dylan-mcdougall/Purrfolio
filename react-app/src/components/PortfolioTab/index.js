@@ -35,7 +35,7 @@ function PortfolioTab() {
     <div>
       {isLoaded ? (
         <div className="portfolio-tab">
-          <table>
+          <table className="portfolio-table">
             <thead>
               <tr>
                 <th>Asset Name</th>

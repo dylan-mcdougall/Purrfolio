@@ -1,7 +1,18 @@
+.bottom-tab-wrapper {
+    width: 75%;
+    height: auto;
+    position: relative;
+    right: 15%;
+    margin: 0 0 0 22%;
+    box-shadow: 2px 0px 2px grey, 3px 0px 3px grey, 4px 0px 4px grey,
+    -2px 0px 2px grey, -3px 0px 3px grey, -4px 0px 4px grey;
+}
+
 .bottom-tab-menu {
     position: relative;
     background-color: white;
     color: black;
+    width: 100%;
 }
 .bottom-tab-menu th {
     background-color: white;
