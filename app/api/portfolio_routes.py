@@ -123,7 +123,6 @@ def portfolio_purchase(id):
     if stock == None:
         return {"errors": ["Stock not found"]}, 404
     portfolio_stock = PortfolioStock.query.filter(PortfolioStock.stock_id == stock.id).first()
-    print('----------------- portfolio_s', portfolio_stock)
     # Split logic for buying and selling
     if request.json:
         if not request.json.get('ticker') or request.json.get('ticker') != str.upper(request.json.get('ticker')):
@@ -137,12 +136,10 @@ def portfolio_purchase(id):
                 quantity=int(request.json.get('quantity')), price=stock.price, buy=True,
                 portfolio_id=portfolio.id, stock_id=stock.id
             )
-            print('---------------------- purchase', purchase)
             if portfolio_stock == None:
                 new_portfolio_stock = PortfolioStock(
                     quantity=int(request.json.get('quantity')), portfolio_id=portfolio.id, stock_id=stock.id
                 )
-                print('-------------- new_portfolio_s', new_portfolio_stock)
                 portfolio.current_funds = funds - stock.price * int(request.json.get('quantity'))
                 db.session.add(purchase)
                 db.session.add(new_portfolio_stock)
