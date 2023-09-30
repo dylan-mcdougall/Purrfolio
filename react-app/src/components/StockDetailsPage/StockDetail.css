@@ -59,6 +59,7 @@ div.stock-details-page-wrapper {
 .stockDetailMiddle {
   display: grid;
   grid-template-columns: 1fr 1fr;
+  margin: 0;
 }
 .graph4Stock {
   border: 1px solid black;

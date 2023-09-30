@@ -38,7 +38,6 @@ function App() {
           </Route>
           <Route path='/stocks/:ticker'>
             <StockDetails />
-            <WatchlistsBar />
           </Route>
         </Switch>
       )}
