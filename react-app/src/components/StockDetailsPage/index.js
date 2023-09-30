@@ -150,6 +150,7 @@ const StockDetails = () => {
                 </div>
             </div>
             )}
+            <WatchlistsBar />
             <BottomTabMenu display={"order"} />
         </div>
     )}
