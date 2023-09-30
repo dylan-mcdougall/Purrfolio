@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getPortfolio } from "../../store/portfolio";
+import { buyStock, getPortfolio } from "../../store/portfolio";
 import { getAllStocks } from "../../store/stocks";
 import OrderSearchBar from "../OrderSearchBar";
 import "./index.css";
@@ -59,49 +59,11 @@ function OrderTab() {
     }
 
     async function handleBuy() {
-      const formData = {
-        ticker: search.toUpperCase(),
-        type: "shares",
-        quantity: parseInt(userQty),
-        buy: true,
-        order_type: "market",
-      };
-
-      const res = await fetch(`/api/portfolios/${sessionPortfolio.portfolio.id}/order`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formData)
-      });
-
-      const data = await res.json()
-
-      dispatch(getAllStocks(sessionUser.id));
-      dispatch(getPortfolio(sessionUser.id));
+      dispatch(buyStock(sessionPortfolio.portfolio.id, search.toUpperCase(), parseInt(userQty), true))
     }
 
     async function handleSell() {
-      const formData = {
-        ticker: search.toUpperCase(),
-        type: "shares",
-        quantity: parseInt(userQty),
-        buy: false,
-        order_type: "market",
-      };
-
-      const res = await fetch(`/api/portfolios/${sessionPortfolio.portfolio.id}/order`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formData)
-      });
-
-      const data = await res.json()
-
-      dispatch(getAllStocks(sessionUser.id));
-      dispatch(getPortfolio(sessionUser.id));
+      dispatch(buyStock(sessionPortfolio.portfolio.id, search.toUpperCase(), parseInt(userQty), false))
     }
 
     useEffect(() => {
@@ -123,7 +85,7 @@ function OrderTab() {
             setStockGrowth(calculated)
             setQtyLoaded(true);
         }
-    }, [stockInfo, stockIsLoaded, ownedShares, estimatedValue, sessionPortfolio]);
+    }, [stockInfo, stockIsLoaded, ownedShares, estimatedValue, sessionPortfolio, dispatch]);
 
     useEffect(() => {
         if (qtyLoaded) {
@@ -133,7 +95,7 @@ function OrderTab() {
                 return totalFunds;
             });
         }
-    }, [ownedShares, qtyLoaded, estimatedValue, sessionPortfolio]);
+    }, [ownedShares, qtyLoaded, estimatedValue, sessionPortfolio, dispatch]);
 
   return (
     <div className="order-tab">

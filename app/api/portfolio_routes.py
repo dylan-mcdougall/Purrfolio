@@ -130,7 +130,7 @@ def portfolio_purchase(id):
         if not request.json.get('quantity') or int(request.json.get('quantity')) <= 0:
             return {"errors": ["Input data for transaction quantity must be included and greater than 0"]}
         if bool(request.json.get('buy')) == True:
-            if funds < stock.price * request.json.get('quantity'):
+            if funds < stock.price * int(request.json.get('quantity')):
                 return {"errors": ["Insufficient funds"]}, 400
             purchase = Transaction(
                 quantity=int(request.json.get('quantity')), price=stock.price, buy=True,
