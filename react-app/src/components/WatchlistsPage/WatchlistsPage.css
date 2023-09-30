@@ -2,6 +2,7 @@ div.watchlist-page-wrapper {
     display: flex;
     flex-direction: column;
     background-color: #bbd3c3dc;
+    width: 90%;
 }
 
 .WatchlistContainer {
@@ -11,8 +12,8 @@ div.watchlist-page-wrapper {
     color: black;
     width: 85%;
     height: 100vh;
-    margin-top: 4%;
-    margin-left: 6%;
+    margin-top: 5%;
+    margin-left: 7%;
     position: relative;
     border: solid black 2px;
     overflow: hidden;

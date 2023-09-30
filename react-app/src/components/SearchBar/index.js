@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { FaSearch } from "react-icons/fa";
 import { useSelector } from "react-redux";
+import { useModal } from '../../context/Modal';
 import './SearchBar.css';
 
 function SearchBar() {
