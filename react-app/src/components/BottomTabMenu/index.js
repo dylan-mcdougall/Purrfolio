@@ -62,7 +62,7 @@ function BottomTabMenu({ display }) {
         <div className="bottom-tab-menu">
           <button onClick={() => handleClick('portfolio')}>Portfolio</button>
           <button onClick={() => handleClick('order')}>Order</button>
-          <button>Transactions</button>
+          <button onClick={() => alert('Feature is coming soon')}>Transactions</button>
           {displayPortfolio && <PortfolioTab />}
           {displayOrder && <OrderTab />}
         </div>

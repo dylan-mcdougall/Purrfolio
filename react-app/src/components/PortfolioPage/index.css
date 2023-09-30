@@ -39,8 +39,9 @@ div.main-page-wrapper {
     position: absolute;
     display: flex;
     float: right;
-    top: 1%;
-    right: 1px;
+    top: 5%;
+    align-items: center;
+    left: 55%;
     width: 50%;
     flex-wrap: wrap;
 }

@@ -15,24 +15,45 @@ function PortfolioPage() {
   const [stockTickers, setStockTickers] = useState([]);
   const [emptyPortfolio, setEmptyPortfolio] = useState(true);
   const [data, setData] = useState(null);
+  const [stockData, setStockData] = useState([]);
   const sessionUser = useSelector((state) => state.session.user);
   const sessionStocks = useSelector((state) => state.stocks.stocks);
   const sessionPortfolio = useSelector((state) => state.portfolio.portfolio);
+  const [topFour, setTopFour] = useState([]);
+  const [fetchComplete, setFetchComplete] = useState(false);
   const dispatch = useDispatch();
 
   const history = useHistory();
 
   useEffect(() => {
-    if (sessionUser && sessionUser.id && !isLoaded) {
-      async function fetchData() {
-        dispatch(getPortfolio(sessionUser.id));
-        dispatch(getAllStocks(sessionUser.id));
-        setIsLoaded(true);
-      }
-
-      fetchData();
+    if (!sessionUser) {
+      history.push("/");
+      return;
     }
-  }, [dispatch, sessionUser, isLoaded]);
+
+    async function fetchData() {
+      try {
+        await dispatch(getPortfolio(sessionUser.id));
+        await dispatch(getAllStocks(sessionUser.id));
+        setIsLoaded(true);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    }
+
+    fetchData();
+
+    return () => {
+      setData(null);
+      setEmptyPortfolio(true);
+      setIsLoaded(false);
+      setStockTickers([]);
+      setPortfolioValue(0);
+      setStockData([]);
+      setTopFour([]);
+      setFetchComplete(false);
+    };
+  }, [dispatch, sessionUser, history]);
 
   useEffect(() => {
     async function fetchStockTickers(stockId) {
@@ -61,7 +82,7 @@ function PortfolioPage() {
             labels: uniqueTickers,
             font: {
               size: 14,
-              family: 'Poppins'
+              family: "Poppins",
             },
             datasets: [
               {
@@ -92,17 +113,55 @@ function PortfolioPage() {
           setData(stockInfo);
           setIsLoaded(true);
           setStockTickers(uniqueTickers);
-          setEmptyPortfolio(false)
+          setEmptyPortfolio(false);
         }
       });
     } else {
       setEmptyPortfolio(true);
     }
-  }, [sessionPortfolio, sessionStocks]);
+  }, [sessionPortfolio, sessionStocks, sessionUser]);
+
+  useEffect(() => {
+    async function fetchStockData(id) {
+      const res = await fetch(`/api/stocks/${id}`);
+      const data = await res.json();
+      return data;
+    }
+
+    Promise.all(stockTickers.map(fetchStockData))
+      .then((fetchedData) => {
+        setStockData(fetchedData);
+        setFetchComplete(true);
+      })
+      .catch((error) => {
+        console.error("Error fetching stock data:", error);
+      });
+  }, [stockTickers]);
+
+  useEffect(() => {
+    if (fetchComplete) {
+      const stocksWithGrowth = stockData.map((stock) => {
+        let growth = (((stock.price - stock.open) / stock.open) * 100).toFixed(
+          2
+        );
+        return {
+          ...stock,
+          growthAbsolute: Math.abs(parseFloat(growth)),
+          growth: growth,
+        };
+      });
+      const sortedStocks = stocksWithGrowth
+        .sort((a, b) => b.growthAbsolute - a.growthAbsolute)
+        .slice(0, 4);
+      setTopFour(sortedStocks);
+    }
+  }, [fetchComplete, stockData]);
 
   useEffect(() => {
     if (sessionPortfolio && sessionPortfolio.portfolio) {
-      setPortfolioValue(sessionPortfolio?.portfolio?.current_funds || 'Loading...');
+      setPortfolioValue(
+        sessionPortfolio?.portfolio?.current_funds || "Loading..."
+      );
     }
 
     if (
@@ -114,48 +173,51 @@ function PortfolioPage() {
     }
   }, [sessionPortfolio]);
 
-  if (!sessionUser) {
-    history.push("/");
-    return null;
-  }
-
   return (
     <div className="main-page-wrapper">
-    <div className="main-page">
-      {emptyPortfolio ? (
-        <div className="empty-portfolio">
-          <img src="assets/sad_cat.png" alt="sad cat" />
-          <h2>Please add funds and order stocks to get started.</h2>
-        </div>
+      <div className="main-page">
+        {emptyPortfolio ? (
+          <div className="empty-portfolio">
+            <img src="assets/sad_cat.png" alt="sad cat" />
+            <h2>Please add funds and order stocks to get started.</h2>
+          </div>
+        ) : (
+          <div>
+            {isLoaded ? (
+              <div>
+                {data ? (
+                  <>
+                    <div className="chart">
+                      <DoughnutChart chartData={data} total={portfolioValue} />
+                    </div>
+                    <div className="growth-buttons">
+                      {topFour.map((stock) => {
+                        return (
+                          <GrowthButton
+                            growth={stock.growth}
+                            symbol={stock.ticker}
+                            key={stock.id}
+                          />
+                        );
+                      })}
+                    </div>
+                    <div></div>
+                  </>
+                ) : (
+                  <p>No data available.</p>
+                )}
+              </div>
+            ) : (
+              <h1>Loading...</h1>
+            )}
+          </div>
+        )}
+      </div>
+      {isLoaded && sessionPortfolio ? (
+        <BottomTabMenu display={"portfolio"} />
       ) : (
-        <div>
-          {isLoaded ? (
-            <div>
-              {data ? (
-                <>
-                  <div className="chart">
-                    <DoughnutChart chartData={data} total={portfolioValue} />
-                  </div>
-                  <div className="growth-buttons">
-                    {stockTickers.map((symbol) => {
-                      return <GrowthButton symbol={symbol} key={symbol} />;
-                    })}
-                  </div>
-                  <div>
-                    
-                  </div>
-                </>
-              ) : (
-                <p>No data available.</p>
-              )}
-            </div>
-          ) : (
-            <h1>Loading...</h1>
-          )}
-        </div>
+        <BottomTabMenu display={"order"} />
       )}
-    </div>
-    {isLoaded && sessionPortfolio ? <BottomTabMenu display={"portfolio"} /> : null}
     </div>
   );
 }

@@ -6,7 +6,9 @@
     margin: 45px 5px 45px 45px;
     padding: 20px;
     color: white;
-
+    text-align: center;
+    display: flex;
+    align-items: center;
 }
 
 .green {

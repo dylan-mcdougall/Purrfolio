@@ -5,6 +5,7 @@ import "./index.css";
 function PortfolioTab() {
   const sessionStocks = useSelector((state) => state.stocks.stocks);
   const sessionPortfolio = useSelector((state) => state.portfolio.portfolio);
+  const sessionUser = useSelector((state) => state.session.user);
   const [isLoaded, setIsLoaded] = useState(false);
   const [stockData, setStockData] = useState([]);
   const [totalValuation, setTotalValuation] = useState(0);
@@ -30,6 +31,12 @@ function PortfolioTab() {
     setTotalValuation(sessionPortfolio?.portfolio?.stock_valuation);
     setIsLoaded(true);
   }, [sessionPortfolio]);
+
+  useEffect(() => {
+    return () => {
+      setStockData([])
+    }
+  }, [sessionUser])
 
   return (
     <div>
