@@ -19,6 +19,7 @@ function DoughnutChart({chartData, total, cash}) {
             ctx.fillText(`$ ${total.toFixed(2)}`, chart.getDatasetMeta(0).data[0].x, chart.getDatasetMeta(0).data[0].y + 30)
         }
     }
+    console.log(chartData)
     return <Doughnut data={chartData} plugins={[textCenter]}/>
 }
 

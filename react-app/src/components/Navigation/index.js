@@ -14,8 +14,6 @@ function Navigation() {
 	const dispatch = useDispatch();
 	const history = useHistory();
 
-	const [currentFunds, setCurrentFunds] = useState('');
-
 	const logout = (e) => {
 		e.preventDefault();
 		dispatch(sessionActions.logout());
