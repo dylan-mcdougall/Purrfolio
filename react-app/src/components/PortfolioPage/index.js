@@ -119,7 +119,7 @@ function PortfolioPage() {
     } else {
       setEmptyPortfolio(true);
     }
-  }, [sessionPortfolio, sessionStocks, sessionUser]);
+  }, [sessionPortfolio, sessionStocks, sessionUser, dispatch]);
 
   useEffect(() => {
     async function fetchStockData(id) {

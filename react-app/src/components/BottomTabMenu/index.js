@@ -10,9 +10,12 @@ function BottomTabMenu({ display }) {
   const [isLoaded, setIsLoaded] = useState(false);
   const [stockData, setStockData] = useState([]);
   const [totalValuation, setTotalValuation] = useState(0);
+  const [portfolioActive, setPortfolioActive] = useState("");
+const [orderActive, setOrderActive] = useState("");
   const [displayPortfolio, setDisplayPortfolio] = useState(false);
   const [displayOrder, setDisplayOrder] = useState(false);
   const uniqueTickers = [];
+
 
   function handleClick(component) {
     if (component === "portfolio") {
@@ -33,6 +36,22 @@ function BottomTabMenu({ display }) {
       setDisplayPortfolio(false);
     }
   }, [display]);
+
+  useEffect(() => {
+    if (displayPortfolio) {
+      setPortfolioActive("portfolio-active");
+      console.log('portfolio tab active');
+    } else {
+      setPortfolioActive("");
+    }
+
+    if (displayOrder) {
+      setOrderActive("order-active");
+      console.log('order tab active');
+    } else {
+      setOrderActive("");
+    }
+  }, [displayPortfolio, displayOrder]);
 
   useEffect(() => {
     async function fetchStockData(id) {
@@ -60,9 +79,13 @@ function BottomTabMenu({ display }) {
     <div className="bottom-tab-wrapper">
       {isLoaded ? (
         <div className="bottom-tab-menu">
-          <button onClick={() => handleClick('portfolio')}>Portfolio</button>
-          <button onClick={() => handleClick('order')}>Order</button>
-          <button onClick={() => alert('Feature is coming soon')}>Transactions</button>
+          <button id={portfolioActive} onClick={() => handleClick("portfolio")}>Portfolio</button>
+
+          <button id={orderActive} onClick={() => handleClick("order")}>Order</button>
+
+          <button onClick={() => alert("Feature is coming soon")}>
+            Transactions
+          </button>
           {displayPortfolio && <PortfolioTab />}
           {displayOrder && <OrderTab />}
         </div>

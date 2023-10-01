@@ -48,8 +48,11 @@ function OrderSearchBar({ onSelectResult }) {
   }
 
   return (
-    <div className="search-wrapper">
-      <div className="input-wrapper">
+    <div className="order-search-wrapper">
+      <div className="order-input-wrapper">
+        <div className="order-input-label">
+        <p>Stock Ticker or Name: </p>
+        </div>
         <FaSearch id="search-icon" />
         <input
           className="input"
