@@ -1,6 +1,7 @@
 .order-tab-wrapper {
     display: flex;
     flex-direction: column;
+    height: 100%;
     width: 100%;
     position: relative;
 }
@@ -15,7 +16,6 @@
     padding: 10px;
     box-shadow: 2px 0px 2px grey, 3px 0px 3px grey, 4px 0px 4px grey,
     -2px 0px 2px grey, -3px 0px 3px grey, -4px 0px 4px grey;
-
 }
 
 

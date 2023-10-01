@@ -1,13 +1,13 @@
 .bottom-tab-wrapper {
-    width: 60%;
-    height: auto;
+    width: 100%;
+    height: 50%;
     position: relative;
-    right: 15%;
-    margin: 0 0 0 22%;
     border: none;
+    margin: 0;
     box-shadow: 2px 0px 2px grey, 3px 0px 3px grey, 4px 0px 4px grey,
     -2px 0px 2px grey, -3px 0px 3px grey, -4px 0px 4px grey;
     font-family: 'Montserrat', sans-serif;
+    border-radius: 0 0 25px 25px;
 }
 
 .bottom-tab-menu {
@@ -15,7 +15,7 @@
     background-color: white;
     color: black;
     width: 100%;
-
+    border-radius: 0 0 25px 25px;
 }
 .bottom-tab-menu th {
     background-color: white;
@@ -30,7 +30,7 @@
 .bottom-tab-menu button {
     color: black;
     border: none;
-    width: 12%;
+    width: fit-content;
     height: 100%;
     cursor: pointer;
     background-color: #e2dfdf;

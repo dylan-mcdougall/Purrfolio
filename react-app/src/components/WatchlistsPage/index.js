@@ -14,6 +14,7 @@ import CreateNewWatchlist from "../NewWatchlistModal";
 const WatchlistsPage = () => {
     const dispatch = useDispatch()
     const sessionUser = useSelector((state) => state.session.user)
+    const sessionPortfolio = useSelector((state) => state.portfolio.portfolio)
     const watchlists = useSelector((state) => state.watchlists.userWatchlists)
     const fWatch = useSelector((state) => state.watchlists.userWatchlists)
 
@@ -42,7 +43,7 @@ const WatchlistsPage = () => {
 
 
     return(
-        <div className="watchlist-page-wrapper">
+        <div className="body-wrapper">
 
         {(sessionUser && watchlists.length)
         ?

@@ -1,1 +1,42 @@
+.portfolio-tab-wrapper {
+    display: flex;
+    position: relative;
+    height: 100%;
+    width: 100%;
+    border-radius: 25px;
+}
 
+.portfolio-tab {
+    background-color: whitesmoke;
+    color: black;
+    font-family: 'Montserrat', sans-serif;
+    border-bottom-left-radius: 25px;
+    border-bottom-right-radius: 25px;
+    height: 400px;
+    box-shadow: 2px 0px 2px grey, 3px 0px 3px grey, 4px 0px 4px grey,
+    -2px 0px 2px grey, -3px 0px 3px grey, -4px 0px 4px grey;
+}
+
+.portfolio-table {
+    border-radius: 0;
+}
+
+.portfolio-table-row {
+    border-radius: none;
+    width: 100%;
+}
+
+.portfolio-table-row > td {
+    border: none;
+    padding: 10px;
+}
+
+.empty-table-tbody {
+    height: 400px;
+    overflow-y: auto;
+}
+
+.empty-table-td {
+    font-family: 'Poppins', sans-serif;
+    border: none;
+}
