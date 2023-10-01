@@ -28,8 +28,8 @@ div.stock-details-page-wrapper {
   height: 100%;
   position: relative;
   box-shadow:
-  2px 0px 2px grey, 3px 0px 3px grey, 4px 0px 4px grey,
-  -2px 0px 2px grey, -3px 0px 3px grey, -4px 0px 4px grey;
+  2px 0px 2px grey, 3px 0px 3px grey, 4px 0px 4px lightgray,
+    -2px 0px 2px grey, -3px 0px 3px grey, -4px 0px 4px grey;
 }
 .StockDetailsTopBar {
   margin: 1% 1% 0;
