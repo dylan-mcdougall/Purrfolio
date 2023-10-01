@@ -11,7 +11,7 @@ function DoughnutChart({chartData, total, cash}) {
             const {ctx, data} = chart;
 
             ctx.save();
-            ctx.font = 'bolder 16px Poppins';
+            ctx.font = 'bolder 14px Poppins';
             ctx.fillStyle = 'white';
             ctx.textAlign = 'center';
             ctx.textBaseLine = 'middle'

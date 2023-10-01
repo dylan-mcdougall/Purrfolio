@@ -13,8 +13,8 @@
     border-bottom-left-radius: 25px;
     border-bottom-right-radius: 25px;
     height: 400px;
-    box-shadow: 2px 0px 2px grey, 3px 0px 3px grey, 4px 0px 4px grey,
-    -2px 0px 2px grey, -3px 0px 3px grey, -4px 0px 4px grey;
+    box-shadow: 1px 2px 2px grey, 2px 4px 4px grey,
+    -1px 2px 2px grey, -2px 4px 4px grey;
 }
 
 .portfolio-table {
@@ -26,8 +26,12 @@
     width: 100%;
 }
 
+.portfolio-table-row:hover {
+    cursor: pointer;
+}
+
 .portfolio-table-row > td {
-    border: none;
+    border: 0;
     padding: 10px;
 }
 

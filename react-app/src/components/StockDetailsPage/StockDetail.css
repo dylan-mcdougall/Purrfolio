@@ -17,7 +17,7 @@ div.stock-details-page-wrapper {
   padding: 0;
   height: 100%;
   width: 60%;
-  margin: 5% 0 0 0%; 
+  margin: 5% 0 2% 0%; 
 }
 
 .stockDetailsContainer {
@@ -28,7 +28,7 @@ div.stock-details-page-wrapper {
   height: 100%;
   position: relative;
   box-shadow:
-  2px 0px 2px grey, 3px 0px 3px grey, 4px 0px 4px grey,
+  2px 0px 2px grey, 3px 0px 3px grey, 4px 0px 4px lightgray,
   -2px 0px 2px grey, -3px 0px 3px grey, -4px 0px 4px grey;
 }
 .StockDetailsTopBar {

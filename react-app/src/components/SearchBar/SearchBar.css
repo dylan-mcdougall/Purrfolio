@@ -6,7 +6,7 @@ div.search-wrapper {
     justify-content: center;
     align-items: center;
     margin-top: 1%;
-    z-index: 1;
+    z-index: 2;
 }
 
 div.search-flex-wrapper {
@@ -16,7 +16,7 @@ div.search-flex-wrapper {
     width: 20%;
     border: 1px solid grey;
     border-radius: 10px;
-    z-index:1;
+    z-index:2;
 }
 
 div.search-flex-wrapper:hover {
@@ -33,7 +33,7 @@ div.input-wrapper {
     justify-content: space-around;
     width: 100%;
     border-radius: 14px;
-    z-index: 1;
+    z-index: 2;
 }
 
 div.input-wrapper input {
@@ -42,13 +42,13 @@ div.input-wrapper input {
     border: none;
     border-radius: 14px;
     outline: none;
-    z-index: 1;
+    z-index: 2;
 }
 
 div.response-wrapper {
     display: flex;
     width: 100%;
-    z-index: 1;
+    z-index: 2;
 }
 
 ul.response-list {
@@ -56,7 +56,7 @@ ul.response-list {
     margin: 0;
     padding: 0;
     border-radius: 0 0 14px 14px;
-    z-index: 1;
+    z-index: 2;
 }
 
 li.response-list-item {

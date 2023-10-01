@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
+import { useHistory } from "react-router-dom";
 import "./index.css";
 
 function PortfolioTab() {
@@ -9,6 +10,7 @@ function PortfolioTab() {
   const [isLoaded, setIsLoaded] = useState(false);
   const [stockData, setStockData] = useState([]);
   const [totalValuation, setTotalValuation] = useState(0);
+  const history = useHistory();
 
   useEffect(() => {
     async function fetchStockData() {
@@ -56,6 +58,7 @@ function PortfolioTab() {
 
                   {stockData.map((stock) => {
                     const stockName = stock.name;
+                    const stockTicker = stock.ticker;
                     const portfoliostock =
                       sessionPortfolio?.portfolio?.stocks.find(
                         (x) => x.stock_id === stock.id
@@ -67,8 +70,11 @@ function PortfolioTab() {
                       100
                     ).toFixed(2);
 
-                    return (
-                      <tr className="portfolio-table-row" key={stock.id}>
+                    return (  
+                      <tr onClick={function() {
+                        history.push(`/stocks/${stockTicker}`)
+                        return null
+                      }} className="portfolio-table-row" key={stock.id}>
                         <td>{stockName}</td>
                         <td>{weight}%</td>
                         <td>{stockQty}</td>
