@@ -15,6 +15,7 @@
     padding: 10px;
     box-shadow: 2px 0px 2px grey, 3px 0px 3px grey, 4px 0px 4px grey,
     -2px 0px 2px grey, -3px 0px 3px grey, -4px 0px 4px grey;
+
 }
 
 
@@ -69,4 +70,15 @@ form.stock-search {
 
 .stock-positive {
     color: green;
+}
+
+.stock-info {
+    display: inline-block;
+    padding: 20px;
+}
+
+.search-info {
+    display: inline-block;
+    vertical-align: top;
+    margin-left: 10px;
 }

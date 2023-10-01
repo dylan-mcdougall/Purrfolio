@@ -1,5 +1,8 @@
 .order-input-wrapper {
     display: inline-block;
+    display: inline-block;
+    vertical-align: top; 
+    margin-left: 10px;
 }
 
 .input {

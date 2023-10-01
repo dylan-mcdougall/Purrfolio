@@ -160,7 +160,7 @@ function OrderTab() {
           <input type="submit" hidden />
         </form>
         {stockIsLoaded ? (
-          <div>
+          <div className="stock-info-wrapper">
             <div className="stock-info">
               <p>{stockInfo.name}</p>
             </div>
