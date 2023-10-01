@@ -68,9 +68,7 @@ grid-template-columns: 1fr 1fr;
 .Dcontent {
     display: none;
 }
-.Dactive-content {
 
-}
 .wlBarTitle{
     display: flex;
     justify-content: center;
