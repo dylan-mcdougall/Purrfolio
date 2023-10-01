@@ -1,22 +1,15 @@
-div.watchlist-page-wrapper {
-    display: flex;
-    flex-direction: column;
-    background-color: #bbd3c3dc;
-    width: 90%;
-}
-
 .WatchlistContainer {
     background-color: white;
     border-radius: 25px;
     font-family: 'Montserrat', sans-serif;
     color: black;
-    width: 85%;
+    width: 70%;
     height: 100vh;
-    margin-top: 5%;
+    margin: 5% 0 2% 0;
     margin-left: 7%;
     position: relative;
     border: solid black 2px;
-    overflow: hidden;
+    overflow: auto;
     box-shadow: 2px 0px 2px grey, 3px 0px 3px grey, 4px 0px 4px grey,
     -2px 0px 2px grey, -3px 0px 3px grey, -4px 0px 4px grey;
 }

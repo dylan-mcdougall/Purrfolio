@@ -39,7 +39,7 @@ function PortfolioTab() {
   }, [sessionUser])
 
   return (
-    <div>
+    <div className="portfolio-tab-wrapper">
       {isLoaded ? (
         <div className="portfolio-tab">
           <table className="portfolio-table">
@@ -52,7 +52,7 @@ function PortfolioTab() {
               </tr>
             </thead>
               {stockData.length > 0 ? (
-            <tbody>
+            <tbody className="portfolio-table-tbody">
 
                   {stockData.map((stock) => {
                     const stockName = stock.name;
@@ -68,7 +68,7 @@ function PortfolioTab() {
                     ).toFixed(2);
 
                     return (
-                      <tr key={stock.id}>
+                      <tr className="portfolio-table-row" key={stock.id}>
                         <td>{stockName}</td>
                         <td>{weight}%</td>
                         <td>{stockQty}</td>
@@ -79,7 +79,14 @@ function PortfolioTab() {
             </tbody>
 
               ) : (
-                <tbody></tbody>
+                <tbody className="empty-table-tbody">
+                  <tr className="empty-table-tr">
+                    <td className="empty-table-td"></td>
+                    <td className="empty-table-td">Please purchase stocks first.</td>
+                    <td className="empty-table-td">Your stocks will show here after your purchase.</td>
+                    <td className="empty-table-td"></td>
+                  </tr>
+                </tbody>
               )}
           </table>
         </div>

@@ -1,7 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Dancing+Script&family=Poppins&family=Roboto&display=swap');
 
-#root {
-    display: inline-flex;
+html {
+    overflow-x: hidden;
+    overflow-y: auto;
 }
 
 div.page-wrapper {

@@ -8,6 +8,7 @@ import { getPortfolio } from "../../store/portfolio";
 import { getAllStocks } from "../../store/stocks";
 import BottomTabMenu from "../BottomTabMenu";
 import { useHistory } from "react-router-dom";
+import WatchlistsBar from "../WatchlistsBar";
 
 function PortfolioPage() {
   const [isLoaded, setIsLoaded] = useState(false);
@@ -174,50 +175,53 @@ function PortfolioPage() {
   }, [sessionPortfolio]);
 
   return (
-    <div className="main-page-wrapper">
-      <div className="main-page">
-        {emptyPortfolio ? (
-          <div className="empty-portfolio">
-            <img src="assets/sad_cat.png" alt="sad cat" />
-            <h2>Please add funds and order stocks to get started.</h2>
-          </div>
+    <div className="body-wrapper">
+      <div className="main-page-wrapper">
+        <div className="main-page">
+          {emptyPortfolio ? (
+            <div className="empty-portfolio">
+              <img src="assets/sad_cat.png" alt="sad cat" />
+              <h2>Please add funds and order stocks to get started.</h2>
+            </div>
+          ) : (
+            <div>
+              {isLoaded ? (
+                <div>
+                  {data ? (
+                    <>
+                      <div className="chart">
+                        <DoughnutChart chartData={data} total={sessionPortfolio?.portfolio?.total_valuation} />
+                      </div>
+                      <div className="growth-buttons">
+                        {topFour.map((stock) => {
+                          return (
+                            <GrowthButton
+                              growth={stock.growth}
+                              symbol={stock.ticker}
+                              key={stock.id}
+                            />
+                          );
+                        })}
+                      </div>
+                      <div></div>
+                    </>
+                  ) : (
+                    <p>No data available.</p>
+                  )}
+                </div>
+              ) : (
+                <h1>Loading...</h1>
+              )}
+            </div>
+          )}
+        </div>
+        <WatchlistsBar />
+        {isLoaded && sessionPortfolio ? (
+          <BottomTabMenu display={"portfolio"} />
         ) : (
-          <div>
-            {isLoaded ? (
-              <div>
-                {data ? (
-                  <>
-                    <div className="chart">
-                      <DoughnutChart chartData={data} total={sessionPortfolio?.portfolio?.total_valuation} />
-                    </div>
-                    <div className="growth-buttons">
-                      {topFour.map((stock) => {
-                        return (
-                          <GrowthButton
-                            growth={stock.growth}
-                            symbol={stock.ticker}
-                            key={stock.id}
-                          />
-                        );
-                      })}
-                    </div>
-                    <div></div>
-                  </>
-                ) : (
-                  <p>No data available.</p>
-                )}
-              </div>
-            ) : (
-              <h1>Loading...</h1>
-            )}
-          </div>
+          <BottomTabMenu display={"order"} />
         )}
       </div>
-      {isLoaded && sessionPortfolio ? (
-        <BottomTabMenu display={"portfolio"} />
-      ) : (
-        <BottomTabMenu display={"order"} />
-      )}
     </div>
   );
 }
