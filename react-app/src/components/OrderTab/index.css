@@ -7,8 +7,8 @@
 
 .order-tab {
     text-align: left;
-    background-color: black;
-    color: white;
+    background-color: white;
+    color: black;
     font-family: 'Montserrat', sans-serif;
     border-bottom-left-radius: 25px;
     border-bottom-right-radius: 25px;
@@ -22,4 +22,51 @@ form.stock-search {
     width: 100%;
     border-bottom: 1px black solid;
     margin: 2px;
+}
+
+#buy-button {
+    background-color: rgb(44, 173, 44);
+    color: white;
+    border: 1px solid black;
+}
+
+#sell-button {
+    background-color: rgb(219, 14, 14);
+    color:white;
+    border: 1px solid black;
+}
+
+#buy-button:disabled {
+    background-color: gray;
+}
+
+#sell-button:disabled {
+    background-color: gray;
+}
+
+.transaction-info {
+    display: block;
+    top: 30%;
+    width: 75%;
+    align-items: center;
+    padding: 20px;
+    box-shadow: 2px 0px 2px grey, 3px 0px 3px grey, 4px 0px 4px grey,
+    -2px 0px 2px grey, -3px 0px 3px grey, -4px 0px 4px grey;
+}
+
+.stock-info {
+    display: inline-block;
+    padding: 20px;
+
+}
+.search-info {
+    display: inline-block;
+}
+
+.stock-negative {
+    color: red
+}
+
+.stock-positive {
+    color: green;
 }

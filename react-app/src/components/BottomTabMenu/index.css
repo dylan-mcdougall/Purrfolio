@@ -4,8 +4,10 @@
     position: relative;
     right: 15%;
     margin: 0 0 0 22%;
+    border: none;
     box-shadow: 2px 0px 2px grey, 3px 0px 3px grey, 4px 0px 4px grey,
     -2px 0px 2px grey, -3px 0px 3px grey, -4px 0px 4px grey;
+    font-family: 'Montserrat', sans-serif;
 }
 
 .bottom-tab-menu {
@@ -13,7 +15,6 @@
     background-color: white;
     color: black;
     width: 100%;
-    margin-top: 30px;
 
 }
 .bottom-tab-menu th {
@@ -24,4 +25,24 @@
 .bottom-portfolio-menu{
     background-color: white;
     color: black;
+}
+
+.bottom-tab-menu button {
+    color: black;
+    border: none;
+    width: 12%;
+    height: 100%;
+    cursor: pointer;
+    background-color: #e2dfdf;
+    font-size: 16px;
+    padding: 10px 15px;
+    font-weight: 700;
+}
+
+#portfolio-active {
+    background-color: white;
+}
+
+#order-active {
+    background-color: white;
 }
