@@ -68,10 +68,11 @@ function OrderTab() {
         true
       )
     );
+    dispatch(getPortfolio(sessionUser.id))
+    dispatch(getAllStocks(sessionUser.id))
   }
 
   async function handleSell() {
-    console.log(userQty);
     dispatch(
       buyStock(
         sessionPortfolio.portfolio.id,
@@ -80,6 +81,8 @@ function OrderTab() {
         false
       )
     );
+    dispatch(getPortfolio(sessionUser.id));
+    dispatch(getAllStocks(sessionUser.id))
   }
 
   useEffect(() => {
@@ -191,7 +194,7 @@ function OrderTab() {
         <form>
           <div className="transaction-details">
             <label className="transaction-form" htmlFor="transaction-type">Transaction Type: </label>
-          
+
           <select name="transaction-type" onClick={() => handleClick()}>
             <option value="shares">Shares</option>
           </select>
@@ -209,14 +212,14 @@ function OrderTab() {
         </form>
         <div className="transaction-details">
           <p>
-            Current Buying Power: 
+            Current Buying Power:
           </p>
           <p>
             $ {sessionPortfolio?.portfolio?.current_funds.toFixed(2)}
           </p>
         </div>
         <div className="transaction-details">
-          <p>Current Owned Shares: </p> 
+          <p>Current Owned Shares: </p>
           <p>{ownedShares}</p>
         </div>
         <div className="transaction-details">
