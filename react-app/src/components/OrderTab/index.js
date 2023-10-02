@@ -185,12 +185,18 @@ function OrderTab() {
           <p></p>
         )}
       </div>
+      <div className="order-tab-detail-flex">
+      <div className="order-tab-left">
       <div className="transaction-info">
         <form>
-          <label htmlFor="transaction-type">Transaction Type: </label>
+          <div className="transaction-details">
+            <label className="transaction-form" htmlFor="transaction-type">Transaction Type: </label>
+          
           <select name="transaction-type" onClick={() => handleClick()}>
             <option value="shares">Shares</option>
           </select>
+          </div>
+          <div className="transaction-details">
           <label htmlFor="quantity">Quantity:</label>
           <input
             type="number"
@@ -199,21 +205,36 @@ function OrderTab() {
             defaultValue={userQty}
             onChange={(e) => setUserQty(e.target.value)}
           ></input>
+          </div>
         </form>
-        <div>
+        <div className="transaction-details">
           <p>
-            Current Buying Power: $
-            {sessionPortfolio?.portfolio?.current_funds.toFixed(2)}
+            Current Buying Power: 
           </p>
-          <p>Current Owned Shares: {ownedShares}</p>
+          <p>
+            $ {sessionPortfolio?.portfolio?.current_funds.toFixed(2)}
+          </p>
         </div>
-        <div>
-          <p>Estimated Value: ${estimatedValue}</p>
-          <p>Estimated Funds: ${estimatedFunds}</p>
-          <p>Total Shares: {totalShares}</p>
+        <div className="transaction-details">
+          <p>Current Owned Shares: </p> 
+          <p>{ownedShares}</p>
+        </div>
+        <div className="transaction-details">
+          <p>Estimated Value: </p>
+          <p>${estimatedValue}</p>
+        </div>
+        <div className="transaction-details">
+          <p>Estimated Funds: </p>
+          <p>${estimatedFunds}</p>
+        </div>
+        <div className="transaction-details">
+          <p>Total Shares: </p>
+          <p>{totalShares}</p>
         </div>
       </div>
+      </div>
       <div className="right-info">
+        <div className="order-tab-button-container">
         <button
           id="buy-button"
           disabled={buyDisabled}
@@ -228,12 +249,16 @@ function OrderTab() {
         >
           Sell
         </button>
+        </div>
+        <div className="order-type-flex">
         <form>
           <label htmlFor="order-type">Order Type:</label>
           <select name="order-type" onClick={() => handleClick()}>
             <option value="market">Market</option>
           </select>
         </form>
+        </div>
+        </div>
       </div>
     </div>
   );
