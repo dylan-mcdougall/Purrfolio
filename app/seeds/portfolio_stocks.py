@@ -8,9 +8,25 @@ def seed_portfolio_stocks():
     second = PortfolioStock(
         portfolio_id=2, stock_id=99, quantity=31
     )
+    third = PortfolioStock(
+        portfolio_id=1, stock_id=100, quantity=20
+    )
+    fourth = PortfolioStock(
+        portfolio_id=1, stock_id=1, quantity=10
+    )
+    fifth = PortfolioStock(
+        portfolio_id=1, stock_id=5, quantity=13
+    )
+    sixth = PortfolioStock(
+        portfolio_id=1, stock_id=27, quantity=3
+    )
 
     db.session.add(first)
     db.session.add(second)
+    db.session.add(third)
+    db.session.add(fourth)
+    db.session.add(fifth)
+    db.session.add(sixth)
     db.session.commit()
 
 def undo_portfolio_stocks():
