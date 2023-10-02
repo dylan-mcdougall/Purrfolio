@@ -33,7 +33,7 @@ function OrderSearchBar({ onSelectResult }) {
     if (value) {
       setInputValue(value)
       fetchData(value).then((data) => {
-        setResults(data ? data.results : [])
+        setResults(data ? data?.results?.slice(0, 2) : [])
       })
     } else {
       setInputValue(value)
@@ -62,11 +62,11 @@ function OrderSearchBar({ onSelectResult }) {
           onChange={(e) => handleChange(e.target.value)}
         />
       </div>
-      {results.length > 0 && (
-        <ul className="response-list">
+      {results && results.length > 0 && (
+        <ul className="response-list order-list">
           {results.map((result) => (
             <li
-              className="response-list-item"
+              className="response-list-item order-list"
               key={result.id}
               onClick={() => handleResultClick(result.ticker)}
             >

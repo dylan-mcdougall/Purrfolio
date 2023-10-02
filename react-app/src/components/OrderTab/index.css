@@ -1,21 +1,22 @@
 .order-tab-wrapper {
     display: flex;
     flex-direction: column;
-    height: 100%;
     width: 100%;
     position: relative;
 }
 
 .order-tab {
+    display: flex;
+    flex-direction: column;
     text-align: left;
-    background-color: white;
+    background-color: #f1efef;
     color: black;
     font-family: 'Montserrat', sans-serif;
     border-bottom-left-radius: 25px;
     border-bottom-right-radius: 25px;
     padding: 10px;
-    box-shadow: 1px 2px 2px grey, 2px 4px 4px grey,
-    -1px 2px 2px grey, -2px 4px 4px grey;
+    box-shadow: 2px 0px 2px grey, 3px 0px 3px grey, 4px 0px 4px grey,
+    -2px 0px 2px grey, -3px 0px 3px grey, -4px 0px 4px grey;
 }
 
 
@@ -25,14 +26,20 @@ form.stock-search {
     margin: 2px;
 }
 
+.order-tab-detail-flex {
+    display: flex;
+}
+
 #buy-button {
     background-color: rgb(44, 173, 44);
+    padding: 12px 24px;
     color: white;
     border: 1px solid black;
 }
 
 #sell-button {
     background-color: rgb(219, 14, 14);
+    padding: 12px 24px;
     color:white;
     border: 1px solid black;
 }
@@ -45,14 +52,47 @@ form.stock-search {
     background-color: gray;
 }
 
-.transaction-info {
+.order-tab-left {
     display: block;
+    width: 70%;
+}
+
+.transaction-info {
+    display: flex;
+    flex-direction: column;
+    background-color: white;
     top: 30%;
-    width: 75%;
-    align-items: center;
-    padding: 20px;
-    box-shadow: 2px 0px 2px grey, 3px 0px 3px grey, 4px 0px 4px grey,
-    -2px 0px 2px grey, -3px 0px 3px grey, -4px 0px 4px grey;
+    width: 90%;
+    padding: 8px 14px;
+    margin: 0 0 12px 15px;
+    box-shadow: 2px 4px 4px #2f2f2f, 1px 2px 2px #2f2f2f,
+    -2px 4px 4px #2f2f2f, -1px 2px 2px #2f2f2f;
+}
+
+.transaction-form {
+    display: flex;
+    flex-direction: row;
+}
+
+div.transaction-details label{
+    margin: 1em 0;
+}
+
+div.transaction-details select {
+    margin: 8px 0;
+    padding: 0;
+}
+
+div.transaction-details input {
+    margin: 8px 0;
+    padding: 0;
+}
+
+.transaction-details {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: space-between;
 }
 
 .stock-info {
@@ -81,4 +121,48 @@ form.stock-search {
     display: inline-block;
     vertical-align: top;
     margin-left: 10px;
+}
+
+.right-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    height: 100%;
+    width: 30%;
+    right: 0%;
+}
+
+.order-tab-button-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    width: 100%;
+}
+
+.order-type-flex {
+    display: flex;
+    margin: 48px;
+    align-items: center;
+}
+
+.order-type-flex form {
+    font-family: 'Roboto', sans-serif;
+    font-size: 24px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.order-type-flex label {
+    text-align: center;
+    width: 100%;
+    padding: 0 0 18px 0;
+    border-bottom: 1px solid black;
+}
+
+.order-type-flex select {
+    font-size: 14px;
+    margin: 36px;
 }
