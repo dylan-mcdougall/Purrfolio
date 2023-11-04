@@ -5,7 +5,9 @@ def stocks_fetch():
     KEY = os.environ.get("KEY")
     SECRET = os.environ.get("SECRET")
 
-    seed_data = [
+    seed_data = "NIO%2CTSLA%2CVALE%2CAMZN%2CINTC%2CAAPL%2CAVGR%2CAMD%2CF%2CPLTR%2CNVDA%2CBAC%2CBTE%2CRIVN%2CPINS%2CT%2CPFE%2CPBR%2CLCID%2CTLRY%2CAAL%2CMARA%2CCCL%2CAMC%2CVZ%2CGRAB%2CDIS%2CKVUE%2CGOOGL%2CSNAP%2CSWN%2CUBER%2CRIOT%2CSOFI%2CRXT%2CSQ%2CRKLB%2CMSFT%2CAUR%2CRIG%2CEOSE%2CMETA%2CCMCSA%2CNOK%2CAFRM%2CJBLU%2CGOOG%2CPCG%2CWFC%2CCSX%2CGOLD%2CXPEV%2CRBLX%2CITUB%2CKMI%2CUEC%2CCLF%2CSHOP%2CCVNA%2CRVNC%2CFTCH%2CFCX%2CM%2CSPCE%2CPTON%2CEQX%2CXOM%2CABEV%2CNU%2CFTI%2CX%2CPLUG%2CKO%2CNCLH%2CCRH%2COPEN%2CPYPL%2CRTX%2CU%2CCLSK%2CCPNG%2CC%2CMPW%2CUSB%2CCSCO%2CCHPT%2CWBD%2CTFC%2CWBA%2CNVAX%2CNEM%2CHBAN%2CBMY%2CMU%2CMRO%2CSIRI%2CVTRS%2CKEY%2CBHC%2CBCS"
+
+    seed_data_list = [
         'NIO', 'TSLA', 'VALE', 'AMZN', 'INTC', 'AAPL', 'AVGR', 'AMD', 'F',
         'PLTR', 'NVDA', 'BAC', 'BTE', 'RIVN', 'PINS', 'T', 'PFE', 'PBR', 'LCID',
         'TLRY', 'AAL', 'MARA', 'CCL', 'AMC', 'VZ', 'GRAB', 'DIS', 'KVUE', 'GOOGL',
@@ -30,24 +32,29 @@ def stocks_fetch():
         'Coupang Inc.', 'Citigroup Inc.', 'Medical Properties Trust Inc.', 'U.S. Bancorp', 'Cisco Systems Inc.', 'ChargePoint Holdings Inc.', 'Warner Bros Discovery Inc', 'Truist Financial Corp.', 'Walgreens Boots Alliance Inc.', 'Novavax Inc.', 'Newmont Corp.',
         'Huntington Bancshares Inc.', 'Bristol-Myers Squibb Co.', 'Micron Technology Inc.', 'Marathon Oil Corp.', 'Sirius XM Holdings Inc.', 'Viatris Inc.', 'KeyCorp', 'Bausch Health Companies Inc.', 'Barclays PLC'
     ]
-    robust_seed_data = []
+
+    combined_list = [[seed_data_list[i], stock_names[i]] for i in range(len(seed_data_list))]
+    combined_list = sorted(combined_list, key=lambda stock: stock[0])
+
+    # Iterate through combined_list
+    # When an item matches, modify the output as desired and push into final response
+
     final_seed_data = []
-    for i in seed_data:
-        url = f"https://data.alpaca.markets/v2/stocks/snapshots?symbols={i}&feed=iex"
-        headers = {
+
+    url = f"https://data.alpaca.markets/v2/stocks/snapshots?symbols={seed_data}&feed=iex"
+    headers = {
         "accept": "application/json",
         "APCA-API-KEY-ID": KEY,
         "APCA-API-SECRET-KEY": SECRET
-        }
-        r = requests.get(url, headers=headers)
-        data = r.json()
-        robust_seed_data.append(data)
+    }
+    r = requests.get(url, headers=headers)
+    data = r.json()
 
-    for i, ticker in enumerate(seed_data):
+
+    for i, (ticker, name) in enumerate(combined_list):
         x = {}
-        data = robust_seed_data[i]
 
-        x['name'] = stock_names[i]
+        x['name'] = name
         x['ticker'] = ticker
         x['price'] = data.get(ticker, {}).get('latestTrade', {}).get('p', None)
         x['open'] = data.get(ticker, {}).get('dailyBar', {}).get('o', None)
