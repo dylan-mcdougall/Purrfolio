@@ -5,6 +5,7 @@ import './LandingPage.css';
 import OpenModalButton from '../OpenModalButton';
 import SignupFormModal from '../SignupFormModal';
 import LoginFormModal from '../LoginFormModal';
+import Footer from '../Footer';
 
 
 
@@ -68,10 +69,8 @@ function LandingPage() {
                      />
                 </div>
             </div>
-            <div>
-                <p>
-                    Placeholder footer component
-                </p>
+            <div className='footer-wrapper'>
+                <Footer />
             </div>
         </div>
     )
