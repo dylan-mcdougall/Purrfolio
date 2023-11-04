@@ -34,6 +34,11 @@ function LandingPage() {
                      modalComponent={<LoginFormModal />}
                     />
                 </div>
+                <div className='navigation-right-hamburger'>
+                    <button className='placeholder'>
+                        Placeholder
+                    </button>
+                </div>
             </div>
             <div className='landing-content-wrapper'>
                 <div className='landing-content'>
@@ -62,6 +67,11 @@ function LandingPage() {
                      modalComponent={<SignupFormModal />}
                      />
                 </div>
+            </div>
+            <div>
+                <p>
+                    Placeholder footer component
+                </p>
             </div>
         </div>
     )
