@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Dancing+Script&family=Poppins&family=Roboto&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins&family=Roboto&display=swap');
 
 body,
 h1,
@@ -22,6 +22,19 @@ button {
     margin-block-end: 0;
 }
 
+* {
+    font-family: 'Poppins', sans-serif;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: 'Roboto', sans-serif;
+}
+
 .page-wrapper,
 .landing-navigation-wrapper,
 .landing-content-wrapper,
@@ -35,6 +48,8 @@ img {
 
 .page-wrapper {
     background-color: black;
+    min-height: 100vh;
+    height: 100%;
 }
 
 .landing-navigation-wrapper {
@@ -138,6 +153,7 @@ img {
 @media screen and (max-width: 600px) {
     .page-wrapper {
         width: 100%;
+        height: 100%;
     }
 
     .landing-navigation-wrapper {
@@ -171,8 +187,8 @@ img {
     }
 
     .landing-content-image {
-        width: 100%;
-        align-items: center;
+        width: 90%;
+        align-self: center;
     }
 
     .landing-content-image img {
@@ -184,6 +200,7 @@ img {
 @media screen and (min-width: 600px) {
     .page-wrapper {
         width: 100%;
+        height: 100%;
     }
 
     .landing-navigation-wrapper {
@@ -217,8 +234,8 @@ img {
     }
 
     .landing-content-image {
-        width: 100%;
-        align-items: center;
+        width: 90%;
+        align-self: center;
     }
 
     .landing-content-image img {
@@ -254,12 +271,13 @@ img {
     }
 
     .landing-content {
-        flex-direction: row;
+        flex-direction: column;
     }
 
     .landing-content-text {
-        width: 40%;
-        align-items: flex-start;
+        width: 50%;
+        align-items: center;
+        align-self: center;
     }
 
     .landing-content-text h2 {
@@ -268,9 +286,8 @@ img {
 
     .landing-content-image {
         display: flex;
-        align-items: center;
-        justify-content: center;
-        width: 50%;
+        align-self: center;
+        width: 70%;
         margin: 1.5rem 1.5rem;
     }
 }
@@ -303,6 +320,7 @@ img {
 
     .landing-content {
         flex-direction: row;
+        margin-top: 4rem;
     }
 
     .landing-content-text {
@@ -322,14 +340,26 @@ img {
         width: 50%;
         margin: 1.5rem 1.5rem;
     }
+
+    .landing-signup-section {
+        margin-top: 5rem;
+    }
 }
 
 @media screen and (min-width: 992px) {
+    .landing-content {
+        margin-top: 1rem;
+    }
+
     .landing-content-text {
         width: 37%;
     }
 
     .landing-content-image {
         width: 63%;
+    }
+
+    .landing-signup-section {
+        margin-top: 1rem;
     }
 }
