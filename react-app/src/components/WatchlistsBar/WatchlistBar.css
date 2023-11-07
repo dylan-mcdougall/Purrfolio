@@ -74,3 +74,34 @@ grid-template-columns: 1fr 1fr;
     justify-content: center;
     padding: 25px;
 }
+
+@media screen and (max-width: 600px) {
+    .WatchlistsBarContainer {
+        display: none;
+    }
+}
+
+@media screen and (min-width: 600px) {
+    .WatchlistsBarContainer {
+        display: none;
+    }
+}
+
+@media screen and (min-width: 768px) {
+    .WatchlistsBarContainer {
+        display: flex;
+        width: 10rem;
+    }
+}
+
+@media screen and (min-width: 992px) {
+    .WatchlistsBarContainer {
+        min-width: 12rem;
+    }
+}
+
+@media screen and (min-width: 1100px) {
+    .WatchlistsBarContainer {
+        width: 14rem;
+    }
+}
