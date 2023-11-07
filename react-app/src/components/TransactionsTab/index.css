@@ -1,0 +1,7 @@
+.transaction-table {
+  height: 20rem;
+  overflow: scroll;
+  overflow-x: hidden;
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+}
