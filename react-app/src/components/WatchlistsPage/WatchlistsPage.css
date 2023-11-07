@@ -152,3 +152,10 @@
     height: 100vh;
     width: 100vw;
 }
+
+@media screen and (max-width: 600px) {
+    .WatchlistContainer {
+        margin: 3rem 0 0 4rem;
+        width: 25rem;
+    }
+}

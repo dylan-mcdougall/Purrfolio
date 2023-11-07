@@ -125,3 +125,62 @@ table {
 .editName button:hover{
     font-size: large;
 }
+
+@media screen and (max-width: 600px) {
+    tr > td {
+        font-size: .75rem;
+    }
+
+    #th-whole-change {
+        display: none;
+    }
+
+    #th-open {
+        display: none;
+    }
+
+    #th-close {
+        display: none;
+    }
+
+    #th-high {
+        display: none;
+    }
+
+    #th-low {
+        display: none;
+    }
+
+    #th-volume {
+        display: none;
+    }
+
+    #td-whole-change {
+        display: none;
+    }
+
+    #td-open {
+        display: none;
+    }
+
+    #td-close {
+        display: none;
+    }
+
+    #td-high {
+        display: none;
+    }
+
+    #td-low {
+        display: none
+    }
+
+    #td-volume {
+        display: none;
+    }
+
+    th {
+        font-size: .75rem;
+        width: 100%;
+    }
+}
