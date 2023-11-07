@@ -159,3 +159,22 @@
         width: 25rem;
     }
 }
+
+@media screen and (min-width: 600px) {
+    .WatchlistContainer {
+        margin: 3rem 0 0 4rem;
+        width: 80%;
+    }
+}
+
+@media screen and (min-width: 830px) {
+    .WatchlistContainer {
+        margin: 3rem 0 0 10rem;
+    }
+}
+
+@media screen and (min-width: 992px) {
+    .WatchlistContainer {
+        margin: 4rem 0 0 12rem;
+    }
+} 
