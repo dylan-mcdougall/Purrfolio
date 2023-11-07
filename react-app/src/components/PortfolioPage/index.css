@@ -68,7 +68,7 @@ div.main-page-wrapper {
     }
 
     .chart {
-        width: 80%;
+        width: 90%;
     }
 
     .growth-buttons {
@@ -78,6 +78,7 @@ div.main-page-wrapper {
         width: 100%;
         left: 0;
         flex-wrap: wrap;
+        display: none;
     }
 
     .growth-button {
@@ -109,7 +110,7 @@ div.main-page-wrapper {
     }
 
     .chart {
-        width: 80%;
+        width: 90%;
     }
 
     .growth-buttons {
@@ -119,12 +120,19 @@ div.main-page-wrapper {
         width: 100%;
         left: 0;
         flex-wrap: wrap;
+        display: none;
     }
 
     .growth-button {
         margin: 2rem;
         padding: 1.25rem;
         height: 8rem;
+    }
+}
+
+@media screen and (min-width: 768px) {
+    .chart {
+        width: 80%;
     }
 }
 
@@ -154,6 +162,7 @@ div.main-page-wrapper {
     }
 
     .growth-buttons {
+        display: flex;
         flex-direction: row;
         width: 50%;
         margin: 0;
