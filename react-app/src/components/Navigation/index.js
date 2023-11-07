@@ -76,7 +76,7 @@ function Navigation() {
 					</div>
 					<div className='navigation-layer'>
 						<li className='navigation-item current-funds'>
-							<p className="current-funds-context"><p className='purrfolio-p'>Purrfolio</p> <p className='funds-p'> Funds: </p></p>
+							<div className="current-funds-context"><p className='purrfolio-p'>Purrfolio</p> <p className='funds-p'> Funds: </p></div>
 							<p className='current-funds-number'>$ {sessionPortfolio ? sessionPortfolio?.portfolio?.current_funds.toFixed(0) : 'Loading...'}</p>
 							<span className='nav-tooltip'>
 								Current Funds

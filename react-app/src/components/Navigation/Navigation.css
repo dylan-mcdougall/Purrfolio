@@ -118,7 +118,7 @@ html {
 }
 
 .navigation-item.current-funds {
-  padding: 1rem .5rem;
+  padding: 1rem .5rem 0;
   margin: 0;
   align-items: flex-start;
 }
@@ -182,6 +182,16 @@ html {
     left: 95%
   }
 
+  .navigation-item {
+    align-items: center;
+    justify-content: center;
+  }
+
+  .nav-content-wrapper {
+    align-items: center;
+    justify-content: center;
+  }
+
   .navigation-item:hover .nav-tooltip {
     visibility: visible;
   }
@@ -191,7 +201,7 @@ html {
   }
 
   .navigation-shell {
-    max-width: 3rem;
+    max-width: 4rem;
   }
 
   .nav-context {
@@ -204,6 +214,7 @@ html {
 
   .navigation-item.current-funds {
     flex-direction: column;
+    align-items: center;
     padding-top: 0;
   }
 
@@ -211,7 +222,7 @@ html {
     display: none;
   }
   
-  li.navigation-item.current-funds p.current-funds-context {
+  li.navigation-item.current-funds div.current-funds-context {
     font-size: .5rem;
     padding-bottom: 0;
     padding-top: 0;
@@ -224,5 +235,209 @@ html {
   li.navigation-item.current-funds p.current-funds-number {
     font-size: .5rem;
     padding-top: 0;
+  }
+}
+
+@media screen and (min-width: 600px) {
+  .nav-tooltip {
+    left: 115%
+  }
+
+  .navigation-item:hover .nav-tooltip {
+    visibility: visible;
+  }
+
+  .navigation-shell {
+    max-width: 5rem;
+  }
+
+  .navigation-item {
+    align-items: center;
+    justify-content: center;
+  }
+
+  .nav-content-wrapper {
+    align-items: center;
+    justify-content: center;
+  }
+
+  .user-greeting-wrapper {
+    display: none;
+  }
+
+  .nav-context {
+    display: none;
+  }
+
+  .navigation-layer {
+    margin-bottom: 0;
+  }
+
+  .navigation-item.current-funds {
+    flex-direction: column;
+    align-items: center;
+    padding-top: 0;
+  }
+
+  .purrfolio-p {
+    display: none;
+  }
+  
+  li.navigation-item.current-funds div.current-funds-context {
+    font-size: .75rem;
+    padding-bottom: 0;
+    padding-top: 0;
+  }
+  
+  li.navigation-item.current-funds p.funds-p {
+      padding-top: 0;
+  }
+
+  li.navigation-item.current-funds p.current-funds-number {
+    font-size: .75rem;
+    padding-top: 0;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .nav-tooltip {
+    left: 100%
+  }
+
+  .navigation-item:hover .nav-tooltip {
+    visibility: visible;
+  }
+
+  .navigation-shell {
+    max-width: 5rem;
+  }
+
+  .navigation-item {
+    align-items: center;
+    justify-content: center;
+  }
+
+  .nav-content-wrapper {
+    align-items: center;
+    justify-content: center;
+  }
+
+  .user-greeting-wrapper {
+    display: none;
+  }
+
+  .nav-context {
+    display: none;
+  }
+
+  .navigation-layer {
+    margin-bottom: 0;
+  }
+
+  .navigation-item.current-funds {
+    flex-direction: column;
+    align-items: center;
+    padding-top: 0;
+  }
+
+  .purrfolio-p {
+    display: none;
+  }
+  
+  li.navigation-item.current-funds div.current-funds-context {
+    font-size: .75rem;
+    padding-bottom: 0;
+    padding-top: 0;
+  }
+  
+  li.navigation-item.current-funds p.funds-p {
+      padding-top: 0;
+  }
+
+  li.navigation-item.current-funds p.current-funds-number {
+    font-size: .75rem;
+    padding-top: 0;
+  }
+}
+
+@media screen and (min-width: 830px) {
+  .navigation-shell {
+    max-width: 10rem;
+  }
+
+  .navigation-item:hover .nav-tooltip {
+    visibility: hidden;
+  }
+
+  .navigation-item {
+    align-items: center;
+    justify-content: center;
+  }
+
+  .nav-content-wrapper {
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .user-greeting-wrapper {
+    display: flex;
+  }
+
+  .nav-context {
+    display: flex;
+    font-size: .85rem;
+  }
+
+  .navigation-layer {
+    margin-bottom: 0;
+  }
+
+  .navigation-item.current-funds {
+    flex-direction: row;
+    align-items: center;
+    padding-top: .5rem;
+  }
+
+  .purrfolio-p {
+    display: inline-block;
+    margin-right: .25rem;
+  }
+  
+  li.navigation-item.current-funds div.current-funds-context {
+    font-size: .65rem;
+    padding-bottom: 0;
+    padding-top: 0;
+  }
+  
+  li.navigation-item.current-funds p.funds-p {
+      padding-top: 0;
+  }
+
+  li.navigation-item.current-funds p.current-funds-number {
+    font-size: .65rem;
+    padding-top: 0;
+  }
+
+  li.navigation-item.add-funds .nav-context button {
+    font-size: .75rem;
+    margin: 0 .5rem;
+  }
+}
+
+@media screen and (min-width: 992px) {
+  .navigation-shell {
+    max-width: 12rem;
+  }
+
+  .nav-context {
+    font-size: 1rem;
+  }
+
+  li.navigation-item.add-funds .nav-context button {
+    font-size: 1rem;
+  }
+
+  .navigation-layer {
+    margin-top: 1.25rem;
   }
 }
