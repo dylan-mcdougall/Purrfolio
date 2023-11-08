@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
-import { useHistory } from "react-router-dom";
+
 import './index.css'
 import Transaction from "../Transaction";
 
@@ -42,6 +42,8 @@ function TransactionTab() {
 
    }, []);
 
+
+
   useEffect(() => {
    console.log(transactionsWithStockData)
   }, [transactionsWithStockData])
@@ -50,8 +52,10 @@ function TransactionTab() {
 
       <div className="transaction-table">
           {isLoaded ? (
+            <>
+          <div className="table-head">
           <table>
-            <thead className="sticky-header">
+            <thead className="sticky-table">
                 <tr>
                     <th>Transaction Type</th>
                     <th>Shares</th>
@@ -60,12 +64,16 @@ function TransactionTab() {
                     <th>Cost</th>
                 </tr>
             </thead>
+            </table>
+            </div>
+            <table>
             <tbody>
                 {transactionsWithStockData.map((transaction) => {
                     return <Transaction transaction={transaction} />
                 })}
             </tbody>
           </table>
+          </>
           ) : (
           <>
           <p>Loading...</p>

@@ -1,7 +1,15 @@
 .transaction-table {
   height: 20rem;
-  overflow: scroll;
-  overflow-x: hidden;
+  overflow-y: auto;
   border-bottom-left-radius: 20px;
   border-bottom-right-radius: 20px;
-}
+  table-layout: fixed;
+  border-collapse: collapse;
+ }
+
+ .table-head {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background-color: white;
+ }
