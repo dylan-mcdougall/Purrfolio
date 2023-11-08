@@ -185,3 +185,9 @@ td.table-issue {
 #woah {
   background-color: #f2f2f2;
 }
+
+@media screen and (max-width: 600px) {
+  .sdmDiv {
+    display: none;
+  }
+}
