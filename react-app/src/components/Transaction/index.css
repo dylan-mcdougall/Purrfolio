@@ -1,0 +1,11 @@
+.transaction-buy {
+    color: red;
+}
+
+.transaction-sell {
+    color: green;
+}
+
+.transaction-row {
+    height: 5rem;
+}
