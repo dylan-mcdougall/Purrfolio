@@ -5,6 +5,7 @@ import './LandingPage.css';
 import OpenModalButton from '../OpenModalButton';
 import SignupFormModal from '../SignupFormModal';
 import LoginFormModal from '../LoginFormModal';
+import Footer from '../Footer';
 
 
 
@@ -33,6 +34,11 @@ function LandingPage() {
                      buttonText={"Log In"}
                      modalComponent={<LoginFormModal />}
                     />
+                </div>
+                <div className='navigation-right-hamburger'>
+                    <button className='placeholder'>
+                        Placeholder
+                    </button>
                 </div>
             </div>
             <div className='landing-content-wrapper'>

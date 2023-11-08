@@ -186,7 +186,7 @@ function PortfolioPage() {
           ) : (
             <div>
               {isLoaded ? (
-                <div>
+                <div className="chart-wrapper">
                   {data ? (
                     <>
                       <div className="chart">

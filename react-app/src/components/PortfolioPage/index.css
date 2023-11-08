@@ -38,11 +38,191 @@ div.main-page-wrapper {
 .growth-buttons {
     position: absolute;
     display: flex;
-    float: right;
-    top: 5%;
-    align-items: center;
-    left: 55%;
-    width: 50%;
     flex-wrap: wrap;
-    margin-right: 10%;
+    width: 100%;
+}
+
+.growth-button {
+    width: 35%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+@media screen and (max-width: 600px) {
+    div.body-wrapper {
+        width: 80%;
+    }
+
+    div.main-page-wrapper {
+        width: 85%;
+        margin-left: 4rem;
+        margin-top: 3rem;
+    }
+
+    .chart-wrapper {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .chart {
+        width: 90%;
+    }
+
+    .growth-buttons {
+        position: relative;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        left: 0;
+        flex-wrap: wrap;
+        display: none;
+    }
+
+    .growth-button {
+        font-size: .8rem;
+        width: 32%;
+        margin: 2rem;
+        padding: .85rem;
+        height: 8rem;
+    }
+}
+
+
+@media screen and (min-width: 600px) {
+    div.body-wrapper {
+        width: 80%;
+    }
+
+    div.main-page-wrapper {
+        width: 85%;
+        margin-left: 5rem;
+        margin-top: 3rem;
+    }
+
+    .chart-wrapper {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .chart {
+        width: 90%;
+    }
+
+    .growth-buttons {
+        position: relative;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        left: 0;
+        flex-wrap: wrap;
+        display: none;
+    }
+
+    .growth-button {
+        margin: 2rem;
+        padding: 1.25rem;
+        height: 8rem;
+    }
+}
+
+@media screen and (min-width: 768px) {
+    .chart {
+        width: 80%;
+    }
+}
+
+@media screen and (min-width: 830px) {
+    div.body-wrapper {
+        width: 60%;
+    }
+
+    div.main-page-wrapper {
+        margin-left: .75rem;
+        width: 60%;
+    }
+
+    div.main-page {
+        height: 19rem;
+    }
+
+    .chart-wrapper {
+        flex-direction: row;
+        justify-content: space-between;
+        width: 100%;
+    }
+
+    .chart {
+        width: 50%;
+        margin: 0;
+    }
+
+    .growth-buttons {
+        display: flex;
+        flex-direction: row;
+        width: 50%;
+        margin: 0;
+    }
+
+    .growth-button {
+        font-size: .5rem;
+        width: 35%;
+        height: 5rem;
+        margin: 1rem;
+        padding: 0 2rem;
+    }
+}
+
+@media screen and (min-width: 992px) {
+    div.main-page {
+        height: 21rem;
+        margin-top: 1rem;
+    }
+
+    .growth-button {
+        font-size: .7rem;
+        height: 7rem;
+    }
+}
+
+@media screen and (min-width: 1075px) {
+    div.main-page {
+        height: 23rem;
+    }
+
+    .growth-button {
+        height: 8rem;
+    }
+}
+
+@media screen and (min-width: 1200px) {
+    div.main-page {
+        height: 25rem;
+    }
+
+    .growth-button {
+        height: 9rem;
+    }
+}
+
+@media screen and (min-width: 1300px) {
+    div.main-page {
+        height: 27rem;
+        margin-top: 2rem;
+    }
+
+    .growth-button {
+        font-size: .9rem;
+        height: 10rem;
+    }
+}
+
+@media screen and (min-width: 1450px) {
+    div.main-page {
+        height: 30rem;
+    }
 }
