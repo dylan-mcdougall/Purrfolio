@@ -80,3 +80,8 @@ button.add-funds-submit:hover {
     cursor: pointer;
     color: white;
 }
+
+.errors {
+    margin: .5rem;
+    color: red;
+}
