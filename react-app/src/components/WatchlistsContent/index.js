@@ -57,31 +57,31 @@ const WatchlistContent = (stocks) => {
                 <table className="oui">
                     <colgroup span='11'></colgroup>
                     <tr className="no" id='wlTableHeader'>
-                        <th>Name</th>
-                        <th>Ticker</th>
-                        <th>Price</th>
-                        <th>$ Change</th>
-                        <th>% Change</th>
-                        <th>Open</th>
-                        <th>Close</th>
-                        <th>High</th>
-                        <th>Low</th>
-                        <th>Volume</th>
-                        <th></th>
+                        <th id="th-name">Name</th>
+                        <th id="th-ticker">Ticker</th>
+                        <th id="th-price">Price</th>
+                        <th id="th-whole-change">$ Change</th>
+                        <th id="th-percent-change">% Change</th>
+                        <th id="th-open">Open</th>
+                        <th id="th-close">Close</th>
+                        <th id="th-high">High</th>
+                        <th id="th-low">Low</th>
+                        <th id="th-volume">Volume</th>
+                        <th ></th>
                     </tr>
                     {stocks.stocks.length > 0 ?
                         stocks.stocks.map((el) => (
                             <tr className="noBorders" >
                                 <th id='wlStockName' onClick={() => {handleClick(el.ticker)}}>{el.name}</th>
-                                <td onClick={() => {handleClick(el.ticker)}}>{el.ticker}</td>
-                                <td onClick={() => {handleClick(el.ticker)}}>{el.price}</td>
-                                <td onClick={() => {handleClick(el.ticker)}}>{`$${Math.floor((el.price - el.open) * 100)/100}`}</td>
-                                <td onClick={() => {handleClick(el.ticker)}}>{`${Math.floor((((el.price - el.open)/el.open)*100)*100)/100}%`}</td>
-                                <td onClick={() => {handleClick(el.ticker)}}>{el.open}</td>
-                                <td onClick={() => {handleClick(el.ticker)}}>{el.close}</td>
-                                <td onClick={() => {handleClick(el.ticker)}}>{el.high}</td>
-                                <td onClick={() => {handleClick(el.ticker)}}>{el.low}</td>
-                                <td onClick={() => {handleClick(el.ticker)}}>{el.volume}</td>
+                                <td id="td-ticker" onClick={() => {handleClick(el.ticker)}}>{el.ticker}</td>
+                                <td id='td-price' onClick={() => {handleClick(el.ticker)}}>{el.price}</td>
+                                <td id='td-whole-change' onClick={() => {handleClick(el.ticker)}}>{`$${Math.floor((el.price - el.open) * 100)/100}`}</td>
+                                <td id='td-percent-change' onClick={() => {handleClick(el.ticker)}}>{`${Math.floor((((el.price - el.open)/el.open)*100)*100)/100}%`}</td>
+                                <td id='td-open' onClick={() => {handleClick(el.ticker)}}>{el.open}</td>
+                                <td id='td-close' onClick={() => {handleClick(el.ticker)}}>{el.close}</td>
+                                <td id='td-high' onClick={() => {handleClick(el.ticker)}}>{el.high}</td>
+                                <td id='td-low' onClick={() => {handleClick(el.ticker)}}>{el.low}</td>
+                                <td id='td-volume' onClick={() => {handleClick(el.ticker)}}>{el.volume}</td>
                                 <td id='delButt'><button onClick={() => {removeAStock(stocks.id, el.id)}}>x</button></td>
                             </tr>
                         ))

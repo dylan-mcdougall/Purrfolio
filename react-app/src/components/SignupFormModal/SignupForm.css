@@ -20,6 +20,7 @@ div.signup-form-signup-title {
     align-items: center;
     justify-content: center;
     width: 100%;
+    padding: .75rem;
 }
 
 div.signup-form-login-title {
@@ -27,6 +28,7 @@ div.signup-form-login-title {
     align-items: center;
     justify-content: center;
     width: 100%;
+    padding: .75rem;
 }
 
 div.signup-form-nav > div.signup-form-login-title > button {

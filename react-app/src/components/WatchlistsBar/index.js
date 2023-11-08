@@ -92,17 +92,6 @@ const WatchlistsBar = () => {
                         ))
                     ): <div>...loading</div>}
                 </div>
-                {/* <div className="wlBarContent">
-                    {watchlists ? (
-                        watchlists.map((el) => (
-                            <div className={checker(el.id) ? "Dactive-content" : "Dcontent"}>
-                                <BarContent stocks={el.stocks}/>
-                            </div>
-                        ))
-                    ): <div>....loading</div>}
-                </div> */}
-
-
             </div>
 
         : <div>...loading</div>}

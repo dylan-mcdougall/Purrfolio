@@ -52,20 +52,9 @@ function Navigation() {
 									</div>
 								</div>
 							</NavLink>
-						</li>
-					</div>
-					<div className='navigation-layer'>
-						<li className='navigation-item add-funds'>
-							<div className='nav-content-wrapper'>
-								<div className='nav-svg'>
-									<svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512"><path fill='#FFFFFF' d="M64 32C28.7 32 0 60.7 0 96V416c0 35.3 28.7 64 64 64H448c35.3 0 64-28.7 64-64V192c0-35.3-28.7-64-64-64H80c-8.8 0-16-7.2-16-16s7.2-16 16-16H448c17.7 0 32-14.3 32-32s-14.3-32-32-32H64zM416 272a32 32 0 1 1 0 64 32 32 0 1 1 0-64z" /></svg>
-								</div>
-								<div className='nav-context'>
-									<OpenModalButton
-									     buttonText={"Add Funds"}
-										 modalComponent={< AddFundsModal />} />
-								</div>
-							</div>
+							<span className='nav-tooltip'>
+								My Purrfolio
+							</span>
 						</li>
 					</div>
 					<div className='navigation-layer'>
@@ -80,26 +69,54 @@ function Navigation() {
 									</div>
 								</div>
 							</NavLink>
+							<span className='nav-tooltip'>
+								My Watchlists
+							</span>
 						</li>
 					</div>
 					<div className='navigation-layer'>
 						<li className='navigation-item current-funds'>
-							<p className="current-funds-context">Purrfolio Funds: </p>
-							<p className='current-funds-number'>$ {sessionPortfolio ? sessionPortfolio?.portfolio?.current_funds.toFixed(2) : 'Loading...'}</p>
+							<div className="current-funds-context"><p className='purrfolio-p'>Purrfolio</p> <p className='funds-p'> Funds: </p></div>
+							<p className='current-funds-number'>$ {sessionPortfolio ? sessionPortfolio?.portfolio?.current_funds.toFixed(0) : 'Loading...'}</p>
+							<span className='nav-tooltip'>
+								Current Funds
+							</span>
+						</li>
+					</div>
+					<div className='navigation-layer'>
+						<li className='navigation-item add-funds'>
+							<div className='nav-content-wrapper'>
+								<div className='nav-svg'>
+									<OpenModalButton
+									buttonText={<svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512"><path fill='#FFFFFF' d="M64 32C28.7 32 0 60.7 0 96V416c0 35.3 28.7 64 64 64H448c35.3 0 64-28.7 64-64V192c0-35.3-28.7-64-64-64H80c-8.8 0-16-7.2-16-16s7.2-16 16-16H448c17.7 0 32-14.3 32-32s-14.3-32-32-32H64zM416 272a32 32 0 1 1 0 64 32 32 0 1 1 0-64z" /></svg>}
+									modalComponent={<AddFundsModal />} />
+								</div>
+								<div className='nav-context'>
+									<OpenModalButton
+									     buttonText={"Add Funds"}
+										 modalComponent={< AddFundsModal />} />
+								</div>
+							</div>
+							<span className='nav-tooltip'>
+								Add Funds
+							</span>
 						</li>
 					</div>
 				</div>
 				<div className='nav-bottom'>
 					<div className='navigation-layer'>
 						<li className='navigation-item logout'>
-								<div className='nav-content-wrapper' onClick={logout}>
-									<div className='nav-svg'>
-										<svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512"><path fill='#FFFFFF' d="M377.9 105.9L500.7 228.7c7.2 7.2 11.3 17.1 11.3 27.3s-4.1 20.1-11.3 27.3L377.9 406.1c-6.4 6.4-15 9.9-24 9.9c-18.7 0-33.9-15.2-33.9-33.9l0-62.1-128 0c-17.7 0-32-14.3-32-32l0-64c0-17.7 14.3-32 32-32l128 0 0-62.1c0-18.7 15.2-33.9 33.9-33.9c9 0 17.6 3.6 24 9.9zM160 96L96 96c-17.7 0-32 14.3-32 32l0 256c0 17.7 14.3 32 32 32l64 0c17.7 0 32 14.3 32 32s-14.3 32-32 32l-64 0c-53 0-96-43-96-96L0 128C0 75 43 32 96 32l64 0c17.7 0 32 14.3 32 32s-14.3 32-32 32z" /></svg>
-									</div>
-									<div className='nav-context'>
-										Log Out
-									</div>
+							<div className='nav-content-wrapper' onClick={logout}>
+								<div className='nav-svg'>
+									<svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512"><path fill='#FFFFFF' d="M377.9 105.9L500.7 228.7c7.2 7.2 11.3 17.1 11.3 27.3s-4.1 20.1-11.3 27.3L377.9 406.1c-6.4 6.4-15 9.9-24 9.9c-18.7 0-33.9-15.2-33.9-33.9l0-62.1-128 0c-17.7 0-32-14.3-32-32l0-64c0-17.7 14.3-32 32-32l128 0 0-62.1c0-18.7 15.2-33.9 33.9-33.9c9 0 17.6 3.6 24 9.9zM160 96L96 96c-17.7 0-32 14.3-32 32l0 256c0 17.7 14.3 32 32 32l64 0c17.7 0 32 14.3 32 32s-14.3 32-32 32l-64 0c-53 0-96-43-96-96L0 128C0 75 43 32 96 32l64 0c17.7 0 32 14.3 32 32s-14.3 32-32 32z" /></svg>
 								</div>
+								<div className='nav-context'>
+									Log Out
+								</div>
+								<span className='nav-tooltip'>
+									Logout
+								</span>
+							</div>
 						</li>
 					</div>
 				</div>
