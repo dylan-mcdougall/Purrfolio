@@ -37,6 +37,9 @@ td:nth-child(even){
 .oui {
     border-radius: 0;
 }
+tr.noBorders:hover {
+    cursor: pointer;
+}
 tr.noBorders td {
     border: 0;
 }
@@ -88,6 +91,7 @@ table {
 }
 .DeleteWatchlist button:hover{
     font-size: x-large;
+    cursor: pointer;
 }
 #delButt button{
     background: #C22D10;
@@ -113,6 +117,7 @@ table {
 .plsAddStk td{
     font-size: large;
 }
+
 .editName button{
     background: transparent;
     border: 0;
@@ -124,6 +129,7 @@ table {
 }
 .editName button:hover{
     font-size: large;
+    cursor: pointer;
 }
 
 @media screen and (max-width: 600px) {
