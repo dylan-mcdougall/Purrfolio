@@ -3,13 +3,13 @@
   overflow-y: auto;
   border-bottom-left-radius: 20px;
   border-bottom-right-radius: 20px;
-  table-layout: fixed;
-  border-collapse: collapse;
+  position: static;
  }
 
  .table-head {
-  position: fixed;
-  top: 0;
-  width: 100%;
-  background-color: white;
+   position: -webkit-sticky;
+   position: sticky;
+   top: 0;
+   background-color: white;
+   margin-left: 4.65rem;
  }

@@ -54,7 +54,7 @@ function TransactionTab() {
           {isLoaded ? (
             <>
           <div className="table-head">
-          <table>
+          <table className="table-header">
             <thead className="sticky-table">
                 <tr>
                     <th>Transaction Type</th>
