@@ -28,6 +28,7 @@ div.stock-details-page-wrapper {
   width: 100%;
   height: 100%;
   position: relative;
+  border-radius: 25px 25px 0 0;
   box-shadow:
   2px 0px 2px grey, 3px 0px 3px grey, 4px 0px 4px lightgray,
   -2px 0px 2px grey, -3px 0px 3px grey, -4px 0px 4px grey;
@@ -55,6 +56,10 @@ div.stock-details-page-wrapper {
 }
 .sdtb_right {
   margin-right: 1%;
+}
+
+.stdb_right.small-screen {
+  display: none;
 }
 
 .sdtb_right > button {
@@ -187,7 +192,35 @@ td.table-issue {
 }
 
 @media screen and (max-width: 600px) {
+  div.stock-details-page-wrapper {
+    width: 85%;
+    margin-left: 4rem;
+  }
+
+  .stockDetailsContainer {
+    margin-top: 2rem;
+    width: 100%;
+  }
+
   .sdmDiv {
     display: none;
+  }
+
+  .StockDetailsTopBar {
+    font-size: .65rem;
+  }
+
+  .StockDetailsTopBar .sdtb_right.normal {
+    display: none;
+  }
+
+  .StockDetailsTopBar .stdb_right.small-screen {
+    display: flex;
+  }
+
+  div.small-screen > button {
+    font-size: .75rem;
+    margin-right: .5rem;
+    padding: .25rem;
   }
 }

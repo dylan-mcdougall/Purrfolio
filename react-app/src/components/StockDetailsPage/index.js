@@ -82,9 +82,15 @@ const StockDetails = () => {
                                 <p>{stock.ticker}</p>
                                 <p>{stock.name}</p>
                             </div>
-                            <div className="sdtb_right">
+                            <div className="sdtb_right normal">
                                 <OpenModalButton
                                     buttonText={'+ Add to Watchlist'}
+                                    modalComponent={<AddStockToList stockId={stock.id} />}
+                                />
+                            </div>
+                            <div className="sdtb_right small-screen">
+                                <OpenModalButton
+                                    buttonText={'+ Add'}
                                     modalComponent={<AddStockToList stockId={stock.id} />}
                                 />
                             </div>

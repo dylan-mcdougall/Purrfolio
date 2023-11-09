@@ -82,6 +82,7 @@ button.add-funds-submit:hover {
 }
 
 .errors {
+    list-style: none;
     margin: .5rem;
     color: red;
 }

@@ -22,6 +22,14 @@ function SignupFormModal() {
 		if (password === confirmPassword) {
 			const data = await dispatch(signUp(firstName, lastName, username, email, password));
 			if (data) {
+				for (let i = 0; i < data.length; i++) {
+					if (data[i].includes('first_name')) {
+						data[i] = 'first_name : First name is required.'
+					}
+					if (data[i].includes('last_name')) {
+						data[i] = 'last_name : Last name is required.'
+					}
+				}
 				setErrors(data);
 			} else {
 				closeModal();
@@ -53,18 +61,16 @@ function SignupFormModal() {
 				</div>
 			</div>
 			<form onSubmit={handleSubmit}>
-				<ul>
-					{errors.map((error, idx) => (
-						<li key={idx}>{error}</li>
-					))}
-				</ul>
+				{errors.map((error, idx) => (
+					<li className="errors" key={idx}>{error.split(' : ')[1]}</li>
+				))}
 				<label>
 					First Name
 					<input
-					type="text"
-					value={firstName}
-					onChange={(e) => setFirstName(e.target.value)}
-					required
+						type="text"
+						value={firstName}
+						onChange={(e) => setFirstName(e.target.value)}
+						required
 					/>
 				</label>
 				<label>
