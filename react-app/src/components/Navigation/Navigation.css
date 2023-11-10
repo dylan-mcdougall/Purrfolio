@@ -171,6 +171,14 @@ html {
   background-color: #373737;
 }
 
+.logout.hidden {
+  display: none;
+}
+
+li.logout:hover div.nav-context {
+  color: red;
+}
+
 .user-greeting-wrapper {
   display: flex;
   justify-content: center;
