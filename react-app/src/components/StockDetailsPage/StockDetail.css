@@ -23,6 +23,8 @@ div.stock-details-page-wrapper {
 
 .stockDetailsContainer {
   background-color: black;
+  display: flex;
+  flex-direction: column;
   font-family: 'Montserrat', sans-serif;
   color: #dcdbcb;
   width: 100%;
@@ -45,6 +47,11 @@ div.stock-details-page-wrapper {
   height: 8%;
   padding: .5%;
 }
+
+div.small-screen {
+  display: none;
+}
+
 .sdtb_left {
   color: black;
   display: flex;
@@ -218,9 +225,175 @@ td.table-issue {
     display: flex;
   }
 
+  div.small-screen {
+    display: flex;
+  }
+
   div.small-screen > button {
     font-size: .75rem;
     margin-right: .5rem;
     padding: .25rem;
+  }
+
+  .tableBar {
+    margin-bottom: 1rem;
+  }
+
+  tr.no > th {
+    padding: 0;
+  }
+
+  tr.no > td {
+    padding: 0;
+  }
+
+  #fixRad {
+    width: 100%;
+  }
+
+  #noBord {
+    display: none;
+  }
+
+  #open {
+    display: none;
+  }
+
+  .close {
+    display: none;
+  }
+
+  .mixed-chart {
+    width: 24rem;
+    margin-right: 1rem;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  div.stock-details-page-wrapper {
+    width: 85%;
+    margin-left: 5rem;
+  }
+
+  .stockDetailsContainer {
+    margin-top: 2rem;
+    width: 100%;
+  }
+
+  div.normal button {
+    margin-right: .5rem;
+  }
+
+  div.SDMrightDiv div p.sdmDiv-heading {
+    font-size: .85rem;
+  }
+
+  div.SDMrightDiv div p {
+    font-size: .85rem;
+  }
+
+  div.SDMrightDiv > div {
+    padding: .5rem;
+  }
+
+  .graph4Stock {
+    margin: 2rem 0;
+  }
+
+  tr.no > th {
+    padding: 0;
+  }
+
+  tr.no > td {
+    padding: 0;
+  }
+
+  #noBord {
+    display: none;
+  }
+
+  #fixRad {
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 830px) {
+  div.stock-details-page-wrapper {
+    width: 85%;
+    margin-top: 3rem;
+    margin-left: 4rem;
+  }
+  
+  .graph4Stock {
+    margin: 2rem 0;
+  }
+
+  div.normal button {
+    margin-right: .5rem;
+  }
+
+  div.SDMrightDiv div p.sdmDiv-heading {
+    font-size: .85rem;
+  }
+
+  div.SDMrightDiv div p {
+    font-size: .90rem;
+  }
+
+  div.SDMrightDiv > div {
+    padding: .5rem;
+  }
+
+  .no > th {
+    font-size: .65rem;
+  }
+
+  #noBord {
+    display: none;
+  }
+
+  #fixRad {
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 950px) {
+  div.stock-details-page-wrapper {
+    margin-top: 3rem;
+    margin-left: 1rem;
+  }
+
+  div.normal button {
+    margin-right: .5rem;
+  }
+
+  .graph4Stock {
+    margin: 2rem 0;
+  }
+
+  .no > th {
+    font-size: .65rem;
+  }
+
+  #fixRad {
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 1025px) {
+  .graph4Stock {
+    margin: 2rem 0;
+  }
+
+  .no > th {
+    font-size: .75rem;
+  }
+
+  tr.no > td {
+  font-size: .75rem;
+  }
+
+  #fixRad {
+    width: 100%;
   }
 }
