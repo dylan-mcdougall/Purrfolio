@@ -27,6 +27,8 @@ function OrderTab() {
   const [sellDisabled, setSellDisabled] = useState(true);
   const [stockNegative, setStockNegative] = useState(false);
   const [userAmount, setUserAmount] = useState(0);
+  const [buyToggle, setBuyToggle] = useState(false);
+  const [sellToggle, setSellToggle] = useState(false);
 
   const dispatch = useDispatch();
 
@@ -37,6 +39,20 @@ function OrderTab() {
 
   function handleClick() {
     alert("Feature coming soon!");
+  }
+
+  function handleBuyClick() {
+    if (sellToggle) {
+      setSellToggle(false)
+    }
+    setBuyToggle(true)
+  }
+
+  function handleSellClick() {
+    if (buyToggle) {
+      setBuyToggle(false)
+    }
+    setSellToggle(true)
   }
 
   function handleChange(e) {
@@ -64,6 +80,16 @@ function OrderTab() {
     setOwnedShares(0);
     setEstimatedFunds(0);
     setEstimatedValue(0);
+  }
+
+  function handleOrderSubmit(e) {
+    e.preventDefault()
+    if (buyToggle) {
+      handleBuy()
+    }
+    else if (sellToggle) {
+      handleSell()
+    }
   }
 
   async function handleBuy() {
@@ -168,6 +194,9 @@ function OrderTab() {
   if (type === 'shares') dollarClass = dollarClass + " hidden"
   else if (type === 'dollar') shareClass = shareClass + " hidden"
 
+  const buyClass = "buy" + (buyToggle ? " on" : "")
+  const sellClass = "sell" + (sellToggle ? " on" : "")
+
   return (
     <div className="order-tab">
       <div className="search-info">
@@ -268,16 +297,16 @@ function OrderTab() {
       <div className="right-info">
         <div className="order-tab-button-container">
         <button
+         className={buyClass}
           id="buy-button"
-          disabled={buyDisabled}
-          onClick={() => handleBuy()}
+          onClick={() => handleBuyClick()}
         >
           Buy
         </button>
         <button
+          className={sellClass}
           id="sell-button"
-          disabled={sellDisabled}
-          onClick={() => handleSell()}
+          onClick={() => handleSellClick()}
         >
           Sell
         </button>
@@ -288,6 +317,9 @@ function OrderTab() {
           <select name="order-type" onClick={() => handleClick()}>
             <option value="market">Market</option>
           </select>
+          <button className="submit" onClick={(e) => handleOrderSubmit(e)}>
+            Submit
+          </button>
         </form>
         </div>
         </div>

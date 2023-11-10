@@ -30,15 +30,15 @@ form.stock-search {
     display: flex;
 }
 
-#buy-button {
-    background-color: rgb(44, 173, 44);
+button.buy {
+    background-color: gray;
     padding: 12px 24px;
     color: white;
     border: 1px solid black;
 }
 
-#sell-button {
-    background-color: rgb(219, 14, 14);
+button.sell {
+    background-color: gray;
     padding: 12px 24px;
     color:white;
     border: 1px solid black;
@@ -186,6 +186,20 @@ div.transaction-details input {
 
 .share.hidden {
     display: none;
+}
+
+.buy.on {
+    background-color: rgb(44, 173, 44);
+    padding: 12px 24px;
+    color: white;
+    border: 1px solid black;
+}
+
+.sell.on {
+    background-color: rgb(219, 14, 14);
+    padding: 12px 24px;
+    color: white;
+    border: 1px solid black;
 }
 
 @media screen and (max-width:600px) {
