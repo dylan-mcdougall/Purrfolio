@@ -93,6 +93,7 @@ export const signUp = (firstName, lastName, username, email, password) => async 
 		return null;
 	} else if (response.status < 500) {
 		const data = await response.json();
+		console.log(`hello from store`, data)
 		if (data.errors) {
 			return data.errors;
 		}

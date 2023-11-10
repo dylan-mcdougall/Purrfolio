@@ -79,9 +79,9 @@ def portfolio_funds(id):
     portfolio = Portfolio.query.get(id)
     res = authenticate()
     if res['id'] == portfolio.user_id:
-        if form.data['funds'] < 10000000 and form.data['funds'] > 0:
-            portfolio.current_funds += form.data['funds']
-            portfolio.fund_history += form.data['funds']
+        if float(form.data['funds']) < 10000000 and float(form.data['funds']) > 0:
+            portfolio.current_funds += float(form.data['funds'])
+            portfolio.fund_history += float(form.data['funds'])
             db.session.commit()
             return portfolio.to_dict()
         return { "errors": ["desired funds must be greater than 0 and less than 10,000,000"] }
@@ -90,9 +90,9 @@ def portfolio_funds(id):
         return {"errors": ["Portfolio associated with this id does not exist"]}, 404
     if form.validate_on_submit():
         if res['id'] == portfolio.user_id:
-            if form.data['funds'] < 10000000 and form.data['funds'] > 0:
-                portfolio.current_funds += form.data['funds']
-                portfolio.fund_history += form.data['funds']
+            if float(form.data['funds']) < 10000000 and float(form.data['funds']) > 0:
+                portfolio.current_funds += float(form.data['funds'])
+                portfolio.fund_history += float(form.data['funds'])
                 db.session.commit()
                 return portfolio.to_dict()
             return { "errors": ["desired funds must be greater than 0 and less than 10,000,000"] }

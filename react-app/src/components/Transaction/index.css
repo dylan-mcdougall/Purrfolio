@@ -9,3 +9,7 @@
 .transaction-row {
     height: 5rem;
 }
+
+.transaction-row td {
+    width: 20%;
+}

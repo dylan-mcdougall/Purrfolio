@@ -29,7 +29,7 @@ function AddFundsModal() {
         }
         const portfolioId = sessionPortfolio.portfolio.id
         const formData = {
-            funds: amount
+            funds: parseFloat(amount)
         }
         await fetch(`/api/portfolios/${portfolioId}/add-funds`, {
             method: 'PATCH',
@@ -56,7 +56,7 @@ function AddFundsModal() {
                 <form className="add-funds-form">
                     <div className="add-funds-input-wrapper">
                         <label className="add-funds-label" htmlFor="amount">Desired Amount: </label>
-                        <input className="add-funds-input" type="number" name="amount" min="0" defaultValue={amount} onChange={(e) => setAmount(e.target.value)}></input>
+                        <input className="add-funds-input" type="number" name="amount" min="0" step="0.01" defaultValue={amount} onChange={(e) => setAmount(e.target.value)}></input>
                     </div>
                     <div className="errors">
                         {errors && <p className="error">{errors.amount}</p>}

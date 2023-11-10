@@ -11,5 +11,9 @@
    position: sticky;
    top: 0;
    background-color: white;
-   margin-left: 4.65rem;
+ }
+
+ .sticky-table th.sticky-th {
+  margin: 0;
+  width: 2rem;
  }

@@ -202,6 +202,7 @@ function OrderTab() {
           <div className="transaction-details">
           <label htmlFor="quantity">Quantity:</label>
           <input
+            className="order-input"
             type="number"
             name="quantity"
             min="0"
@@ -215,7 +216,7 @@ function OrderTab() {
             Current Buying Power:
           </p>
           <p>
-            $ {sessionPortfolio?.portfolio?.current_funds.toFixed(2)}
+            ${sessionPortfolio?.portfolio?.current_funds.toFixed(2)}
           </p>
         </div>
         <div className="transaction-details">
