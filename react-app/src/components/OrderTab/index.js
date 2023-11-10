@@ -176,7 +176,7 @@ function OrderTab() {
         }
       });
     }
-  }, [ownedShares, qtyLoaded, userQty, estimatedValue, sessionPortfolio, dispatch]);
+  }, [ownedShares, qtyLoaded, userQty, buyToggle, estimatedValue, sessionPortfolio, dispatch]);
 
   useEffect(() => {
     if (stockIsLoaded) {
