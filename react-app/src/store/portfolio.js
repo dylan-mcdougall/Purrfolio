@@ -45,6 +45,8 @@ export const buyStock = (id, ticker, quantity, buy) => async (dispatch) => {
 }
 
 
+
+
 const portfolioReducer = (state = initialState, action) => {
     switch(action.type){
         case SET_PORTFOLIO: {

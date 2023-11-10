@@ -57,6 +57,12 @@ function PortfolioPage() {
   }, [dispatch, sessionUser, history]);
 
   useEffect(() => {
+    if (!sessionStocks.length) {
+      setData(null);
+      setStockData([]);
+      setFetchComplete(false);
+      return;
+    }
     async function fetchStockTickers(stockId) {
       const res = await fetch(`/api/stocks/${stockId}`);
       const data = await res.json();
@@ -137,9 +143,14 @@ function PortfolioPage() {
       .catch((error) => {
         console.error("Error fetching stock data:", error);
       });
-  }, [stockTickers]);
+   }, [stockTickers, sessionStocks]);
 
   useEffect(() => {
+    if (!sessionStocks.length) {
+      setTopFour([]);
+      setEmptyPortfolio(true)
+      return;
+    }
     if (fetchComplete) {
       const stocksWithGrowth = stockData.map((stock) => {
         let growth = (((stock.price - stock.open) / stock.open) * 100).toFixed(
@@ -156,7 +167,7 @@ function PortfolioPage() {
         .slice(0, 4);
       setTopFour(sortedStocks);
     }
-  }, [fetchComplete, stockData]);
+   }, [fetchComplete, stockData, sessionStocks]);
 
   useEffect(() => {
     if (sessionPortfolio && sessionPortfolio.portfolio) {
@@ -172,7 +183,20 @@ function PortfolioPage() {
     ) {
       setEmptyPortfolio(true);
     }
-  }, [sessionPortfolio]);
+  }, [sessionPortfolio, sessionStocks]);
+
+  useEffect(() => {
+    if(!sessionStocks){
+      setEmptyPortfolio(true);
+      setIsLoaded(false);
+      setStockTickers([]);
+      setPortfolioValue(0);
+      setStockData([]);
+      setTopFour([]);
+      setFetchComplete(false);
+    }
+  }, [sessionStocks, sessionPortfolio, sessionUser, dispatch])
+
 
   return (
     <div className="body-wrapper">

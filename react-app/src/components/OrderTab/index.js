@@ -14,7 +14,7 @@ function OrderTab() {
   const [estimatedValue, setEstimatedValue] = useState(0);
   const [estimatedFunds, setEstimatedFunds] = useState(0);
   const [userQty, setUserQty] = useState(0);
-  const totalShares = parseFloat(userQty) + ownedShares;
+  const totalShares = (parseFloat(userQty) + ownedShares) || 0;
   const [stockIsLoaded, setStockIsLoaded] = useState(false);
   const [stockInfo, setStockInfo] = useState();
   const [qtyLoaded, setQtyLoaded] = useState(false);
@@ -81,16 +81,21 @@ function OrderTab() {
         false
       )
     );
+
     dispatch(getPortfolio(sessionUser.id));
     dispatch(getAllStocks(sessionUser.id))
   }
 
   useEffect(() => {
     setQtyLoaded(false);
-    setUserQty(1);
+    setUserQty(0);
     setStockIsLoaded(false);
     setStockInfo();
   }, [search]);
+
+  useEffect(() => {
+    setOwnedShares(0)
+  }, [sessionStocks, sessionPortfolio])
 
   useEffect(() => {
     if (stockIsLoaded) {
@@ -152,6 +157,10 @@ function OrderTab() {
       } else {
         setSellDisabled(true);
       }
+      if (userQty <= 0) {
+        setSellDisabled(true)
+        setBuyDisabled(true)
+      }
     }
   }, [stockIsLoaded, ownedShares, userQty, stockInfo]);
 
@@ -204,7 +213,7 @@ function OrderTab() {
           <input
             type="number"
             name="quantity"
-            min="0"
+            min="1"
             defaultValue={userQty}
             onChange={(e) => setUserQty(e.target.value)}
           ></input>
