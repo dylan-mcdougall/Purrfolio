@@ -125,3 +125,8 @@ div.login-form-signup-title > button {
     color: #444846;
     background-color: #BBD3C3;
 }
+
+
+div.login-form-wrapper form input {
+    padding-left: .5rem;
+}

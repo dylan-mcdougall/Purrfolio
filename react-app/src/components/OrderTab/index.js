@@ -13,6 +13,7 @@ function OrderTab() {
   const [ownedShares, setOwnedShares] = useState(0);
   const [estimatedValue, setEstimatedValue] = useState(0);
   const [estimatedFunds, setEstimatedFunds] = useState(0);
+  const [estimatedAmount, setEstimatedAmount] = useState(0);
   const [userQty, setUserQty] = useState(0);
   const totalShares = parseFloat(userQty) + ownedShares;
   const [stockIsLoaded, setStockIsLoaded] = useState(false);
@@ -21,9 +22,11 @@ function OrderTab() {
   const [stockPrice, setStockPrice] = useState(0);
   const [stockGrowth, setStockGrowth] = useState(0);
   const [stockChange, setStockChange] = useState(0);
+  const [type, setType] = useState('shares')
   const [buyDisabled, setBuyDisabled] = useState(true);
   const [sellDisabled, setSellDisabled] = useState(true);
   const [stockNegative, setStockNegative] = useState(false);
+  const [userAmount, setUserAmount] = useState(0);
 
   const dispatch = useDispatch();
 
@@ -33,7 +36,11 @@ function OrderTab() {
   };
 
   function handleClick() {
-    alert("Feature coming soon");
+    alert("Feature coming soon!");
+  }
+
+  function handleChange(e) {
+    setType(e.target.value);
   }
 
   async function fetchStockInfo(id) {
@@ -87,7 +94,7 @@ function OrderTab() {
 
   useEffect(() => {
     setQtyLoaded(false);
-    setUserQty(1);
+    setUserQty(0);
     setStockIsLoaded(false);
     setStockInfo();
   }, [search]);
@@ -126,7 +133,7 @@ function OrderTab() {
 
   useEffect(() => {
     if (qtyLoaded) {
-      setEstimatedValue((stockInfo.price * ownedShares).toFixed(2));
+      setEstimatedValue((stockInfo.price * userQty).toFixed(2));
       setEstimatedFunds((prevEstimatedFunds) => {
         const totalFunds = (
           sessionPortfolio?.portfolio?.current_funds +
@@ -135,7 +142,7 @@ function OrderTab() {
         return totalFunds;
       });
     }
-  }, [ownedShares, qtyLoaded, estimatedValue, sessionPortfolio, dispatch]);
+  }, [ownedShares, qtyLoaded, userQty, estimatedValue, sessionPortfolio, dispatch]);
 
   useEffect(() => {
     if (stockIsLoaded) {
@@ -154,6 +161,12 @@ function OrderTab() {
       }
     }
   }, [stockIsLoaded, ownedShares, userQty, stockInfo]);
+
+  let shareClass = "share"
+  let dollarClass = "dollar"
+
+  if (type === 'shares') dollarClass = dollarClass + " hidden"
+  else if (type === 'dollar') shareClass = shareClass + " hidden"
 
   return (
     <div className="order-tab">
@@ -195,20 +208,31 @@ function OrderTab() {
           <div className="transaction-details">
             <label className="transaction-form" htmlFor="transaction-type">Transaction Type: </label>
 
-          <select name="transaction-type" onClick={() => handleClick()}>
+          <select name="transaction-type" value={type} onChange={handleChange}>
             <option value="shares">Shares</option>
+            <option value="dollar">Dollar</option>
           </select>
           </div>
           <div className="transaction-details">
-          <label htmlFor="quantity">Quantity:</label>
+          <label className={shareClass} htmlFor="quantity">Quantity:</label>
           <input
-            className="order-input"
+            className={shareClass + ` order-input`}
             type="number"
             name="quantity"
             min="0"
             defaultValue={userQty}
             onChange={(e) => setUserQty(e.target.value)}
           ></input>
+          <label className={dollarClass} htmlFor="amount">Amount:</label>
+          <input
+            className={dollarClass + ` order-input`}
+            type="number"
+            name="amount"
+            min="0"
+            step="0.01"
+            defaultValue={userAmount}
+            onChange={(e) => setUserAmount(e.target.value)}
+            ></input>
           </div>
         </form>
         <div className="transaction-details">
@@ -223,9 +247,13 @@ function OrderTab() {
           <p>Current Owned Shares: </p>
           <p>{ownedShares}</p>
         </div>
-        <div className="transaction-details">
+        <div className={shareClass + ` transaction-details`}>
           <p>Estimated Value: </p>
           <p>${estimatedValue}</p>
+        </div>
+        <div className={dollarClass + ` transaction-details`}>
+          <p>Estimated Shares: </p>
+          <p>{estimatedAmount}</p>
         </div>
         <div className="transaction-details">
           <p>Estimated Funds: </p>

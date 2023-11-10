@@ -180,6 +180,14 @@ div.transaction-details input {
     border-radius: 10px;
 }
 
+.dollar.hidden {
+    display: none;
+}
+
+.share.hidden {
+    display: none;
+}
+
 @media screen and (max-width:600px) {
     .order-tab form {
         font-size: .85rem;
