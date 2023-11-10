@@ -161,11 +161,19 @@ function OrderTab() {
     if (qtyLoaded) {
       setEstimatedValue((stockInfo.price * userQty).toFixed(2));
       setEstimatedFunds((prevEstimatedFunds) => {
+        if (sellToggle) {
         const totalFunds = (
           sessionPortfolio?.portfolio?.current_funds +
           parseFloat(estimatedValue)
         ).toFixed(2);
         return totalFunds;
+        } else if (buyToggle) {
+          const totalFunds = (
+            sessionPortfolio?.portfolio?.current_funds -
+            parseFloat(estimatedValue)
+          ).toFixed(2);
+          return totalFunds;
+        }
       });
     }
   }, [ownedShares, qtyLoaded, userQty, estimatedValue, sessionPortfolio, dispatch]);
