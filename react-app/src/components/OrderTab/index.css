@@ -166,3 +166,44 @@ div.transaction-details input {
     font-size: 14px;
     margin: 36px;
 }
+
+.order-input {
+    width: 5rem;
+    text-align: right;
+}
+
+#buy-button {
+    border-radius: 10px;
+}
+
+#sell-button {
+    border-radius: 10px;
+}
+
+@media screen and (max-width:600px) {
+    .order-tab form {
+        font-size: .85rem;
+    }
+
+    .order-tab p {
+        font-size: .75rem;
+    }
+
+    .order-tab-detail-flex {
+        margin: 2rem 0 0 -.75rem;
+    }
+
+    .right-info {
+        margin-left: 1rem;
+    }
+
+    #buy-button {
+        font-size: .75rem;
+        padding: .5rem .75rem;
+    }
+
+    #sell-button {
+        font-size: .75rem;
+        padding: .5rem .75rem;
+    }
+}

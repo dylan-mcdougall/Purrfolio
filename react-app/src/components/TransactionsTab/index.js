@@ -57,11 +57,11 @@ function TransactionTab() {
           <table className="table-header">
             <thead className="sticky-table">
                 <tr>
-                    <th>Transaction Type</th>
-                    <th>Shares</th>
-                    <th>Ticker</th>
-                    <th>Date</th>
-                    <th>Cost</th>
+                    <th className="sticky-th">Transaction Type</th>
+                    <th className="sticky-th">Shares</th>
+                    <th className="sticky-th">Ticker</th>
+                    <th className="sticky-th">Date</th>
+                    <th className="sticky-th">Cost</th>
                 </tr>
             </thead>
             </table>
