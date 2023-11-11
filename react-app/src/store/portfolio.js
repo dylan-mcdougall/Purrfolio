@@ -23,16 +23,17 @@ export const getPortfolio = (id) => async (dispatch) => {
 };
 
 export const buyStock = (id, ticker, quantity, buy) => async (dispatch) => {
+    console.log('entering store action')
     const formData = {
         id,
         ticker,
-        type: "Shares",
+        type: "Share",
         quantity,
         buy,
         order_type: "Market"
     }
 
-    const response = await fetch(`/api/portfolios/${id}/order/shares`, {
+    const response = await fetch(`/api/portfolios/${id}/order/share`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -41,7 +42,31 @@ export const buyStock = (id, ticker, quantity, buy) => async (dispatch) => {
     })
 
     const data = await response.json()
-    return dispatch(getPortfolio(id))
+    console.log('stock transaction data', data)
+    dispatch(getPortfolio(id))
+}
+
+export const buyDollar = (id, ticker, quantity, buy) => async (dispatch) => {
+    const formData = {
+        id,
+        ticker,
+        type: "Dollar",
+        quantity,
+        buy,
+        order_type: "Market"
+    }
+
+    const response = await fetch(`/api/portfolios/${id}/order/dollar`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData)
+    })
+
+    const data = await response.json()
+    dispatch(getPortfolio(id))
+    console.log(data)
 }
 
 

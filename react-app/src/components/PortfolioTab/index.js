@@ -77,7 +77,7 @@ function PortfolioTab() {
                       }} className="portfolio-table-row" key={stock.id}>
                         <td>{stockName}</td>
                         <td>{weight}%</td>
-                        <td>{stockQty}</td>
+                        <td>{stockQty.toFixed(2)}</td>
                         <td>$ {marketValue.toFixed(2)}</td>
                       </tr>
                     );

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { buyStock, getPortfolio } from "../../store/portfolio";
+import { buyDollar, buyStock, getPortfolio } from "../../store/portfolio";
 import { getAllStocks } from "../../store/stocks";
 import OrderSearchBar from "../OrderSearchBar";
 import "./index.css";
@@ -103,26 +103,44 @@ function OrderTab() {
           parseInt(userQty),
           true
         )
-      );
+        );
     } else if (type === 'dollar') {
-      return
+      dispatch(
+        buyDollar(
+          sessionPortfolio.portfolio.id,
+          search.toUpperCase(),
+          parseFloat(userAmount),
+          true
+        )
+      )
     }
     dispatch(getPortfolio(sessionUser.id))
     dispatch(getAllStocks(sessionUser.id))
   }
 
   async function handleSell() {
-    dispatch(
-      buyStock(
-        sessionPortfolio.portfolio.id,
-        search.toUpperCase(),
-        parseInt(userQty),
-        false
-      )
+    if (type === 'share') {
+      console.log('firing buyStock')
+      dispatch(
+        buyStock(
+          sessionPortfolio.portfolio.id,
+          search.toUpperCase(),
+          parseInt(userQty),
+          false
+        )
       );
-      dispatch(getPortfolio(sessionUser.id));
-      dispatch(getAllStocks(sessionUser.id))
-      setOwnedShares(ownedShares - userQty)
+    } else if (type === 'dollar') {
+      dispatch(
+        buyDollar(
+          sessionPortfolio.portfolio.id,
+          search.toUpperCase(),
+          parseFloat(userAmount),
+          false
+        )
+      )
+    }
+    dispatch(getPortfolio(sessionUser.id));
+    dispatch(getAllStocks(sessionUser.id))
   }
 
   useEffect(() => {
@@ -166,7 +184,7 @@ function OrderTab() {
 
   useEffect(() => {
     if (qtyLoaded && type === 'share') {
-      setEstimatedValue((stockInfo.price * userQty).toFixed(2));
+      setEstimatedValue((stockInfo?.price * userQty).toFixed(2));
       setEstimatedFunds((prevEstimatedFunds) => {
         if (sellToggle) {
         const totalFunds = (
@@ -182,25 +200,25 @@ function OrderTab() {
           return totalFunds;
         }
       });
-    } else if (qtyLoaded && type === 'dollar') {
+    } else if (stockIsLoaded && type === 'dollar') {
       setEstimatedAmount((userAmount / stockInfo?.price).toFixed(4));
       setEstimatedFunds(() => {
         if (sellToggle) {
           const totalFunds = (
             sessionPortfolio?.portfolio?.current_funds +
-            parseFloat(userAmount)
+            (parseFloat(userAmount) || 0)
           ).toFixed(2);
           return totalFunds;
         } else if (buyToggle) {
           const totalFunds = (
             sessionPortfolio?.portfolio?.current_funds - 
-            parseFloat(userAmount)
+            (parseFloat(userAmount) || 0)
           ).toFixed(2);
           return totalFunds;
         }
       })
     }
-  }, [ownedShares, qtyLoaded, userQty, userAmount, buyToggle, estimatedValue, sessionPortfolio, dispatch]);
+  }, [ownedShares, qtyLoaded, userQty, userAmount, buyToggle, estimatedFunds, sessionPortfolio, dispatch]);
 
   useEffect(() => {
     if (stockIsLoaded) {
@@ -300,7 +318,7 @@ function OrderTab() {
             type="number"
             name="quantity"
             min="0"
-            defaultValue={userQty}
+            value={userQty}
             onChange={(e) => setUserQty(e.target.value)}
           ></input>
           <label className={dollarClass} htmlFor="amount">Amount:</label>
@@ -310,7 +328,7 @@ function OrderTab() {
             name="amount"
             min="0"
             step="0.01"
-            defaultValue={userAmount}
+            value={userAmount}
             onChange={(e) => setUserAmount(e.target.value)}
             ></input>
           </div>
@@ -325,7 +343,7 @@ function OrderTab() {
         </div>
         <div className="transaction-details">
           <p>Current Owned Shares: </p>
-          <p>{ownedShares}</p>
+          <p>{ownedShares.toFixed(2)}</p>
         </div>
         <div className={shareClass + ` transaction-details`}>
           <p>Estimated Value: </p>
@@ -333,7 +351,7 @@ function OrderTab() {
         </div>
         <div className={dollarClass + ` transaction-details`}>
           <p>Estimated Shares: </p>
-          <p>{estimatedAmount}</p>
+          <p>{parseFloat(estimatedAmount).toFixed(2)}</p>
         </div>
         <div className="transaction-details">
           <p>Estimated Funds: </p>
@@ -341,7 +359,7 @@ function OrderTab() {
         </div>
         <div className="transaction-details">
           <p>Total Shares: </p>
-          <p>{totalShares}</p>
+          <p>{totalShares.toFixed(2)}</p>
         </div>
       </div>
       </div>
