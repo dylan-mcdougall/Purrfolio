@@ -41,9 +41,14 @@ export const buyStock = (id, ticker, quantity, buy) => async (dispatch) => {
         body: JSON.stringify(formData)
     })
 
-    const data = await response.json()
-    console.log('stock transaction data', data)
-    dispatch(getPortfolio(id))
+    if (response.ok) {
+        const data = await response.json()
+        dispatch(getPortfolio(id))
+        return data
+    } else {
+        const data = await response.json()
+        throw new Error(data.errors)
+    }
 }
 
 export const buyDollar = (id, ticker, quantity, buy) => async (dispatch) => {
@@ -64,9 +69,14 @@ export const buyDollar = (id, ticker, quantity, buy) => async (dispatch) => {
         body: JSON.stringify(formData)
     })
 
-    const data = await response.json()
-    dispatch(getPortfolio(id))
-    console.log(data)
+    if (response.ok) {
+        const data = await response.json()
+        dispatch(getPortfolio(id))
+        return data
+    } else {
+        const data = await response.json()
+        throw new Error(data.errors)
+    }
 }
 
 

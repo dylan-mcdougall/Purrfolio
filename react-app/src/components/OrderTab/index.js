@@ -28,12 +28,19 @@ function OrderTab() {
   const [userAmount, setUserAmount] = useState(0);
   const [buyToggle, setBuyToggle] = useState(false);
   const [sellToggle, setSellToggle] = useState(false);
+  const [renderModal, setRenderModal] = useState(false);
+  const [errors, setErrors] = useState([]);
 
   const dispatch = useDispatch();
 
   const handleSearchResultSelect = async (ticker) => {
     setSearch(ticker);
     await fetchStockInfo(ticker);
+    setUserQty(0);
+    setOwnedShares(0);
+    setEstimatedFunds(0);
+    setEstimatedValue(0);
+    setUserAmount(0);
   };
 
   function handleClick() {
@@ -44,6 +51,9 @@ function OrderTab() {
     setType(e.target.value);
     setUserQty(0);
     setUserAmount(0);
+    setErrors([]);
+    setEstimatedValue(0);
+    setEstimatedFunds(sessionPortfolio?.portfolio?.current_funds)
   }
 
   function handleBuyClick() {
@@ -75,10 +85,9 @@ function OrderTab() {
     e.preventDefault();
     fetchStockInfo(search);
     setQtyLoaded(false);
-    setUserQty(0);
     setStockIsLoaded(false);
-    setStockInfo();
     setOwnedShares(0);
+    setUserQty(0);
     setEstimatedFunds(0);
     setEstimatedValue(0);
     setUserAmount(0);
@@ -86,6 +95,7 @@ function OrderTab() {
 
   function handleOrderSubmit(e) {
     e.preventDefault()
+    setErrors([])
     if (buyToggle) {
       handleBuy()
     }
@@ -96,23 +106,33 @@ function OrderTab() {
 
   async function handleBuy() {
     if (type === 'share') {
-      dispatch(
-        buyStock(
-          sessionPortfolio.portfolio.id,
-          search.toUpperCase(),
-          parseInt(userQty),
-          true
-        )
-        );
+      try {
+        await dispatch(
+          buyStock(
+            sessionPortfolio.portfolio.id,
+            search.toUpperCase(),
+            parseInt(userQty),
+            true
+          )).then(() => {
+            setRenderModal(true)
+          })
+      } catch (error) {
+        setErrors(error);
+      }
     } else if (type === 'dollar') {
-      dispatch(
-        buyDollar(
-          sessionPortfolio.portfolio.id,
-          search.toUpperCase(),
-          parseFloat(userAmount),
-          true
-        )
-      )
+      try {
+        await dispatch(
+          buyDollar(
+            sessionPortfolio.portfolio.id,
+            search.toUpperCase(),
+            parseFloat(userAmount),
+            true
+          )).then(() => {
+            setRenderModal(true)
+          })
+      } catch (error) {
+        setErrors(error)
+      }
     }
     dispatch(getPortfolio(sessionUser.id))
     dispatch(getAllStocks(sessionUser.id))
@@ -120,24 +140,33 @@ function OrderTab() {
 
   async function handleSell() {
     if (type === 'share') {
-      console.log('firing buyStock')
-      dispatch(
-        buyStock(
-          sessionPortfolio.portfolio.id,
-          search.toUpperCase(),
-          parseInt(userQty),
-          false
-        )
-      );
+      try {
+        await dispatch(
+          buyStock(
+            sessionPortfolio.portfolio.id,
+            search.toUpperCase(),
+            parseInt(userQty),
+            false
+          )).then(() => {
+            setRenderModal(true)
+          })
+      } catch (error) {
+        setErrors(error)
+      }
     } else if (type === 'dollar') {
-      dispatch(
-        buyDollar(
-          sessionPortfolio.portfolio.id,
-          search.toUpperCase(),
-          parseFloat(userAmount),
-          false
-        )
-      )
+      try{
+        await dispatch(
+          buyDollar(
+            sessionPortfolio.portfolio.id,
+            search.toUpperCase(),
+            parseFloat(userAmount),
+            false
+          )).then(() => {
+            setRenderModal(true)
+          })
+      } catch (error) {
+        setErrors(error)
+      }
     }
     dispatch(getPortfolio(sessionUser.id));
     dispatch(getAllStocks(sessionUser.id))
@@ -164,7 +193,6 @@ function OrderTab() {
       ).toFixed(2);
       let change = (stockInfo.price - stockInfo.open).toFixed(2);
       if (change < 0) {
-        console.log(change)
         setStockNegative(true);
       } else {
         setStockNegative(false)
@@ -185,7 +213,7 @@ function OrderTab() {
   useEffect(() => {
     if (qtyLoaded && type === 'share') {
       setEstimatedValue((stockInfo?.price * userQty).toFixed(2));
-      setEstimatedFunds((prevEstimatedFunds) => {
+      setEstimatedFunds(() => {
         if (sellToggle) {
         const totalFunds = (
           sessionPortfolio?.portfolio?.current_funds +
@@ -237,6 +265,8 @@ function OrderTab() {
       }
     }
   }, [stockIsLoaded, ownedShares, userQty, stockInfo]);
+
+  const transactionModalClass = "transaction-modal" + (renderModal ? "" : " hidden")
 
   let totalShares = 0;
   if (type === 'share') {
@@ -298,6 +328,7 @@ function OrderTab() {
         ) : (
           <p></p>
         )}
+        {errors && <p className="errors">{errors.message}</p>}
       </div>
       <div className="order-tab-detail-flex">
       <div className="order-tab-left">
@@ -358,7 +389,7 @@ function OrderTab() {
           <p>${estimatedFunds}</p>
         </div>
         <div className="transaction-details">
-          <p>Total Shares: </p>
+          <p>Resulting Shares: </p>
           <p>{totalShares.toFixed(2)}</p>
         </div>
       </div>
@@ -393,6 +424,20 @@ function OrderTab() {
         </div>
         </div>
       </div>
+      <div className={transactionModalClass}>
+        <div className="transaction-modal-content">
+          <div className="transaction-modal-top">
+          <h4 className="transaction-modal-header">
+            System Message
+          </h4>
+          <span onClick={() => setRenderModal(false)} className="close">&times;</span>
+          </div>
+          <div className="transaction-modal-bottom">
+            <p>Your transaction was successful! View the transactions tab to review.</p>
+          </div>
+        </div>
+      </div>
+
     </div>
   );
 }
