@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { buyStock, getPortfolio } from "../../store/portfolio";
+import { buyDollar, buyStock, getPortfolio } from "../../store/portfolio";
 import { getAllStocks } from "../../store/stocks";
 import OrderSearchBar from "../OrderSearchBar";
 import "./index.css";
@@ -13,27 +13,62 @@ function OrderTab() {
   const [ownedShares, setOwnedShares] = useState(0);
   const [estimatedValue, setEstimatedValue] = useState(0);
   const [estimatedFunds, setEstimatedFunds] = useState(0);
+  const [estimatedAmount, setEstimatedAmount] = useState(0);
   const [userQty, setUserQty] = useState(0);
-  const totalShares = parseFloat(userQty) + ownedShares;
   const [stockIsLoaded, setStockIsLoaded] = useState(false);
   const [stockInfo, setStockInfo] = useState();
   const [qtyLoaded, setQtyLoaded] = useState(false);
   const [stockPrice, setStockPrice] = useState(0);
   const [stockGrowth, setStockGrowth] = useState(0);
   const [stockChange, setStockChange] = useState(0);
+  const [type, setType] = useState('share')
   const [buyDisabled, setBuyDisabled] = useState(true);
   const [sellDisabled, setSellDisabled] = useState(true);
   const [stockNegative, setStockNegative] = useState(false);
+  const [userAmount, setUserAmount] = useState(0);
+  const [buyToggle, setBuyToggle] = useState(false);
+  const [sellToggle, setSellToggle] = useState(false);
+  const [renderModal, setRenderModal] = useState(false);
+  const [promptRender, setPromptRender] = useState(false);
+  const [errors, setErrors] = useState([]);
 
   const dispatch = useDispatch();
 
   const handleSearchResultSelect = async (ticker) => {
     setSearch(ticker);
     await fetchStockInfo(ticker);
+    setUserQty(0);
+    setOwnedShares(0);
+    setEstimatedFunds(0);
+    setEstimatedValue(0);
+    setUserAmount(0);
   };
 
   function handleClick() {
-    alert("Feature coming soon");
+    alert("Feature coming soon!");
+  }
+
+  function handleChange(e) {
+    setType(e.target.value);
+    setUserQty(0);
+    setUserAmount(0);
+    setErrors([]);
+    setEstimatedValue(0);
+    setEstimatedFunds(sessionPortfolio?.portfolio?.current_funds)
+  }
+
+  function handleBuyClick() {
+    if (sellToggle) {
+      setSellToggle(false)
+    }
+    setBuyToggle(true)
+  }
+
+  function handleSellClick() {
+    if (buyToggle) {
+      setBuyToggle(false)
+    }
+    setSellToggle(true)
   }
 
   async function fetchStockInfo(id) {
@@ -51,43 +86,97 @@ function OrderTab() {
     e.preventDefault();
     fetchStockInfo(search);
     setQtyLoaded(false);
-    setUserQty(0);
     setStockIsLoaded(false);
-    setStockInfo();
     setOwnedShares(0);
+    setUserQty(0);
     setEstimatedFunds(0);
     setEstimatedValue(0);
+    setUserAmount(0);
+  }
+
+  function handleOrderSubmit(e) {
+    e.preventDefault()
+    setErrors([])
+    if (buyToggle) {
+      handleBuy()
+    }
+    else if (sellToggle) {
+      handleSell()
+    }
+    setPromptRender(true)
   }
 
   async function handleBuy() {
-    dispatch(
-      buyStock(
-        sessionPortfolio.portfolio.id,
-        search.toUpperCase(),
-        parseInt(userQty),
-        true
-      )
-    );
+    if (type === 'share') {
+      try {
+        await dispatch(
+          buyStock(
+            sessionPortfolio.portfolio.id,
+            search.toUpperCase(),
+            parseInt(userQty),
+            true
+          )).then(() => {
+            setRenderModal(true)
+          })
+      } catch (error) {
+        setErrors(error);
+      }
+    } else if (type === 'dollar') {
+      try {
+        await dispatch(
+          buyDollar(
+            sessionPortfolio.portfolio.id,
+            search.toUpperCase(),
+            parseFloat(userAmount),
+            true
+          )).then(() => {
+            setRenderModal(true)
+          })
+      } catch (error) {
+        setErrors(error)
+      }
+    }
     dispatch(getPortfolio(sessionUser.id))
     dispatch(getAllStocks(sessionUser.id))
   }
 
   async function handleSell() {
-    dispatch(
-      buyStock(
-        sessionPortfolio.portfolio.id,
-        search.toUpperCase(),
-        parseInt(userQty),
-        false
-      )
-    );
+    if (type === 'share') {
+      try {
+        await dispatch(
+          buyStock(
+            sessionPortfolio.portfolio.id,
+            search.toUpperCase(),
+            parseInt(userQty),
+            false
+          )).then(() => {
+            setRenderModal(true)
+          })
+      } catch (error) {
+        setErrors(error)
+      }
+    } else if (type === 'dollar') {
+      try{
+        await dispatch(
+          buyDollar(
+            sessionPortfolio.portfolio.id,
+            search.toUpperCase(),
+            parseFloat(userAmount),
+            false
+          )).then(() => {
+            setRenderModal(true)
+          })
+      } catch (error) {
+        setErrors(error)
+      }
+    }
     dispatch(getPortfolio(sessionUser.id));
     dispatch(getAllStocks(sessionUser.id))
   }
 
   useEffect(() => {
     setQtyLoaded(false);
-    setUserQty(1);
+    setUserQty(0);
     setStockIsLoaded(false);
     setStockInfo();
   }, [search]);
@@ -106,7 +195,6 @@ function OrderTab() {
       ).toFixed(2);
       let change = (stockInfo.price - stockInfo.open).toFixed(2);
       if (change < 0) {
-        console.log(change)
         setStockNegative(true);
       } else {
         setStockNegative(false)
@@ -122,20 +210,46 @@ function OrderTab() {
     estimatedValue,
     sessionPortfolio,
     dispatch,
+    promptRender
   ]);
 
   useEffect(() => {
-    if (qtyLoaded) {
-      setEstimatedValue((stockInfo.price * ownedShares).toFixed(2));
-      setEstimatedFunds((prevEstimatedFunds) => {
+    if (qtyLoaded && type === 'share') {
+      setEstimatedValue((stockInfo?.price * userQty).toFixed(2));
+      setEstimatedFunds(() => {
+        if (sellToggle) {
         const totalFunds = (
           sessionPortfolio?.portfolio?.current_funds +
           parseFloat(estimatedValue)
         ).toFixed(2);
         return totalFunds;
+        } else if (buyToggle) {
+          const totalFunds = (
+            sessionPortfolio?.portfolio?.current_funds -
+            parseFloat(estimatedValue)
+          ).toFixed(2);
+          return totalFunds;
+        }
       });
+    } else if (stockIsLoaded && type === 'dollar') {
+      setEstimatedAmount((userAmount / stockInfo?.price).toFixed(4));
+      setEstimatedFunds(() => {
+        if (sellToggle) {
+          const totalFunds = (
+            sessionPortfolio?.portfolio?.current_funds +
+            (parseFloat(userAmount) || 0)
+          ).toFixed(2);
+          return totalFunds;
+        } else if (buyToggle) {
+          const totalFunds = (
+            sessionPortfolio?.portfolio?.current_funds - 
+            (parseFloat(userAmount) || 0)
+          ).toFixed(2);
+          return totalFunds;
+        }
+      })
     }
-  }, [ownedShares, qtyLoaded, estimatedValue, sessionPortfolio, dispatch]);
+  }, [ownedShares, qtyLoaded, userQty, userAmount, buyToggle, estimatedFunds, sessionPortfolio, dispatch]);
 
   useEffect(() => {
     if (stockIsLoaded) {
@@ -154,6 +268,36 @@ function OrderTab() {
       }
     }
   }, [stockIsLoaded, ownedShares, userQty, stockInfo]);
+
+  const transactionModalClass = "transaction-modal" + (renderModal ? "" : " hidden")
+
+  let totalShares = 0;
+  if (type === 'share') {
+    if (buyToggle) {
+      totalShares = parseFloat(userQty) + ownedShares
+    } else if (sellToggle && userQty <= ownedShares) {
+      totalShares = ownedShares - parseFloat(userQty)
+    }
+  } else if (type === 'dollar') {
+    if (buyToggle) {
+      totalShares = parseFloat(estimatedAmount) + ownedShares
+    } else if (sellToggle) {
+      if (ownedShares >= parseFloat(estimatedAmount)) {
+        totalShares = ownedShares - parseFloat(estimatedAmount)
+      } else {
+        totalShares = 0
+      }
+    }
+  }
+
+  let shareClass = "share"
+  let dollarClass = "dollar"
+
+  if (type === 'share') dollarClass = dollarClass + " hidden"
+  else if (type === 'dollar') shareClass = shareClass + " hidden"
+
+  const buyClass = "buy" + (buyToggle ? " on" : "")
+  const sellClass = "sell" + (sellToggle ? " on" : "")
 
   return (
     <div className="order-tab">
@@ -187,6 +331,7 @@ function OrderTab() {
         ) : (
           <p></p>
         )}
+        {errors && <p className="errors">{errors.message}</p>}
       </div>
       <div className="order-tab-detail-flex">
       <div className="order-tab-left">
@@ -195,20 +340,31 @@ function OrderTab() {
           <div className="transaction-details">
             <label className="transaction-form" htmlFor="transaction-type">Transaction Type: </label>
 
-          <select name="transaction-type" onClick={() => handleClick()}>
-            <option value="shares">Shares</option>
+          <select name="transaction-type" value={type} onChange={(e) => handleChange(e)}>
+            <option value="share">Shares</option>
+            <option value="dollar">Dollar</option>
           </select>
           </div>
           <div className="transaction-details">
-          <label htmlFor="quantity">Quantity:</label>
+          <label className={shareClass} htmlFor="quantity">Quantity:</label>
           <input
-            className="order-input"
+            className={shareClass + ` order-input`}
             type="number"
             name="quantity"
             min="0"
-            defaultValue={userQty}
+            value={userQty}
             onChange={(e) => setUserQty(e.target.value)}
           ></input>
+          <label className={dollarClass} htmlFor="amount">Amount:</label>
+          <input
+            className={dollarClass + ` order-input`}
+            type="number"
+            name="amount"
+            min="0"
+            step="0.01"
+            value={userAmount}
+            onChange={(e) => setUserAmount(e.target.value)}
+            ></input>
           </div>
         </form>
         <div className="transaction-details">
@@ -221,35 +377,39 @@ function OrderTab() {
         </div>
         <div className="transaction-details">
           <p>Current Owned Shares: </p>
-          <p>{ownedShares}</p>
+          <p>{ownedShares.toFixed(2)}</p>
         </div>
-        <div className="transaction-details">
+        <div className={shareClass + ` transaction-details`}>
           <p>Estimated Value: </p>
           <p>${estimatedValue}</p>
+        </div>
+        <div className={dollarClass + ` transaction-details`}>
+          <p>Estimated Shares: </p>
+          <p>{parseFloat(estimatedAmount).toFixed(2)}</p>
         </div>
         <div className="transaction-details">
           <p>Estimated Funds: </p>
           <p>${estimatedFunds}</p>
         </div>
         <div className="transaction-details">
-          <p>Total Shares: </p>
-          <p>{totalShares}</p>
+          <p>Resulting Shares: </p>
+          <p>{totalShares.toFixed(2)}</p>
         </div>
       </div>
       </div>
       <div className="right-info">
         <div className="order-tab-button-container">
         <button
+         className={buyClass}
           id="buy-button"
-          disabled={buyDisabled}
-          onClick={() => handleBuy()}
+          onClick={() => handleBuyClick()}
         >
           Buy
         </button>
         <button
+          className={sellClass}
           id="sell-button"
-          disabled={sellDisabled}
-          onClick={() => handleSell()}
+          onClick={() => handleSellClick()}
         >
           Sell
         </button>
@@ -260,10 +420,27 @@ function OrderTab() {
           <select name="order-type" onClick={() => handleClick()}>
             <option value="market">Market</option>
           </select>
+          <button className="submit" onClick={(e) => handleOrderSubmit(e)}>
+            Submit
+          </button>
         </form>
         </div>
         </div>
       </div>
+      <div className={transactionModalClass} onClick={() => setRenderModal(false)}>
+        <div className="transaction-modal-content">
+          <div className="transaction-modal-top">
+            <h4 className="transaction-modal-header">
+              System Message
+            </h4>
+            <span onClick={() => setRenderModal(false)} className="close">&times;</span>
+          </div>
+          <div className="transaction-modal-bottom">
+            <p>Your transaction was successful! View the transactions tab to review.</p>
+          </div>
+        </div>
+      </div>
+
     </div>
   );
 }

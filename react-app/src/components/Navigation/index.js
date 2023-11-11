@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { NavLink, useHistory } from 'react-router-dom';
+import { NavLink, Redirect } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import './Navigation.css';
 import * as sessionActions from '../../store/session'
@@ -14,7 +14,7 @@ function Navigation() {
 	const logoutRef = useRef();
 
 	const dispatch = useDispatch();
-	const history = useHistory();
+
 
 	
 	useEffect(() => {
@@ -35,8 +35,7 @@ function Navigation() {
 	const logout = (e) => {
 		e.preventDefault();
 		dispatch(sessionActions.logout());
-		history.push('/')
-		return null
+		return <Redirect to='/' />
 	};
 	useEffect(() => {
 		if(sessionPortfolio != null){

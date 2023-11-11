@@ -10,7 +10,7 @@ class Transaction(db.Model):
         __table_args__ = {'schema': SCHEMA}
 
     id = db.Column(db.Integer, primary_key=True)
-    quantity = db.Column(db.Integer, nullable=False)
+    quantity = db.Column(db.Float(4), nullable=False)
     price = db.Column(db.Float(2), nullable=False)
     buy = db.Column(db.Boolean, nullable=False)
     portfolio_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod("portfolios.id")), nullable=False)

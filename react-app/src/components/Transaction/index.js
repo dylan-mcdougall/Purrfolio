@@ -18,7 +18,7 @@ function Transaction({transaction}) {
     return (
         <tr className="transaction-row" onClick={() => handleClick()}>
             {transaction.buy ? (<td className="transaction-buy">Buy</td>) : (<td className="transaction-sell">Sell</td>)}
-            <td>{transaction.quantity}</td>
+            <td>{transaction.quantity.toFixed(2)}</td>
             <td>{transaction.stockData.ticker}</td>
             <td>{formattedDate}</td>
             <td>{transaction.price.toFixed(2)}</td>
