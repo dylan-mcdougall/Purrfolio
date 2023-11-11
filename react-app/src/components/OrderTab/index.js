@@ -29,6 +29,7 @@ function OrderTab() {
   const [buyToggle, setBuyToggle] = useState(false);
   const [sellToggle, setSellToggle] = useState(false);
   const [renderModal, setRenderModal] = useState(false);
+  const [promptRender, setPromptRender] = useState(false);
   const [errors, setErrors] = useState([]);
 
   const dispatch = useDispatch();
@@ -102,6 +103,7 @@ function OrderTab() {
     else if (sellToggle) {
       handleSell()
     }
+    setPromptRender(true)
   }
 
   async function handleBuy() {
@@ -208,6 +210,7 @@ function OrderTab() {
     estimatedValue,
     sessionPortfolio,
     dispatch,
+    promptRender
   ]);
 
   useEffect(() => {
@@ -424,13 +427,13 @@ function OrderTab() {
         </div>
         </div>
       </div>
-      <div className={transactionModalClass}>
+      <div className={transactionModalClass} onClick={() => setRenderModal(false)}>
         <div className="transaction-modal-content">
           <div className="transaction-modal-top">
-          <h4 className="transaction-modal-header">
-            System Message
-          </h4>
-          <span onClick={() => setRenderModal(false)} className="close">&times;</span>
+            <h4 className="transaction-modal-header">
+              System Message
+            </h4>
+            <span onClick={() => setRenderModal(false)} className="close">&times;</span>
           </div>
           <div className="transaction-modal-bottom">
             <p>Your transaction was successful! View the transactions tab to review.</p>
