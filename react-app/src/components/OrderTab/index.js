@@ -15,7 +15,6 @@ function OrderTab() {
   const [estimatedFunds, setEstimatedFunds] = useState(0);
   const [estimatedAmount, setEstimatedAmount] = useState(0);
   const [userQty, setUserQty] = useState(0);
-  const totalShares = parseFloat(userQty) + ownedShares;
   const [stockIsLoaded, setStockIsLoaded] = useState(false);
   const [stockInfo, setStockInfo] = useState();
   const [qtyLoaded, setQtyLoaded] = useState(false);
@@ -113,9 +112,10 @@ function OrderTab() {
         parseInt(userQty),
         false
       )
-    );
-    dispatch(getPortfolio(sessionUser.id));
-    dispatch(getAllStocks(sessionUser.id))
+      );
+      dispatch(getPortfolio(sessionUser.id));
+      dispatch(getAllStocks(sessionUser.id))
+      setOwnedShares(ownedShares - userQty)
   }
 
   useEffect(() => {
@@ -195,6 +195,14 @@ function OrderTab() {
       }
     }
   }, [stockIsLoaded, ownedShares, userQty, stockInfo]);
+
+  let totalShares = 0;
+  if (buyToggle) {
+    totalShares = parseFloat(userQty) + ownedShares
+  } else if (sellToggle && userQty <= ownedShares) {
+    totalShares = ownedShares - parseFloat(userQty)
+  }
+
 
   let shareClass = "share"
   let dollarClass = "dollar"
