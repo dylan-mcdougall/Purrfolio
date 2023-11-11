@@ -21,7 +21,7 @@ function OrderTab() {
   const [stockPrice, setStockPrice] = useState(0);
   const [stockGrowth, setStockGrowth] = useState(0);
   const [stockChange, setStockChange] = useState(0);
-  const [type, setType] = useState('shares')
+  const [type, setType] = useState('share')
   const [buyDisabled, setBuyDisabled] = useState(true);
   const [sellDisabled, setSellDisabled] = useState(true);
   const [stockNegative, setStockNegative] = useState(false);
@@ -40,6 +40,12 @@ function OrderTab() {
     alert("Feature coming soon!");
   }
 
+  function handleChange(e) {
+    setType(e.target.value);
+    setUserQty(0);
+    setUserAmount(0);
+  }
+
   function handleBuyClick() {
     if (sellToggle) {
       setSellToggle(false)
@@ -52,10 +58,6 @@ function OrderTab() {
       setBuyToggle(false)
     }
     setSellToggle(true)
-  }
-
-  function handleChange(e) {
-    setType(e.target.value);
   }
 
   async function fetchStockInfo(id) {
@@ -79,6 +81,7 @@ function OrderTab() {
     setOwnedShares(0);
     setEstimatedFunds(0);
     setEstimatedValue(0);
+    setUserAmount(0);
   }
 
   function handleOrderSubmit(e) {
@@ -92,14 +95,18 @@ function OrderTab() {
   }
 
   async function handleBuy() {
-    dispatch(
-      buyStock(
-        sessionPortfolio.portfolio.id,
-        search.toUpperCase(),
-        parseInt(userQty),
-        true
-      )
-    );
+    if (type === 'share') {
+      dispatch(
+        buyStock(
+          sessionPortfolio.portfolio.id,
+          search.toUpperCase(),
+          parseInt(userQty),
+          true
+        )
+      );
+    } else if (type === 'dollar') {
+      return
+    }
     dispatch(getPortfolio(sessionUser.id))
     dispatch(getAllStocks(sessionUser.id))
   }
@@ -158,7 +165,7 @@ function OrderTab() {
   ]);
 
   useEffect(() => {
-    if (qtyLoaded) {
+    if (qtyLoaded && type === 'share') {
       setEstimatedValue((stockInfo.price * userQty).toFixed(2));
       setEstimatedFunds((prevEstimatedFunds) => {
         if (sellToggle) {
@@ -175,8 +182,25 @@ function OrderTab() {
           return totalFunds;
         }
       });
+    } else if (qtyLoaded && type === 'dollar') {
+      setEstimatedAmount((userAmount / stockInfo?.price).toFixed(4));
+      setEstimatedFunds(() => {
+        if (sellToggle) {
+          const totalFunds = (
+            sessionPortfolio?.portfolio?.current_funds +
+            parseFloat(userAmount)
+          ).toFixed(2);
+          return totalFunds;
+        } else if (buyToggle) {
+          const totalFunds = (
+            sessionPortfolio?.portfolio?.current_funds - 
+            parseFloat(userAmount)
+          ).toFixed(2);
+          return totalFunds;
+        }
+      })
     }
-  }, [ownedShares, qtyLoaded, userQty, buyToggle, estimatedValue, sessionPortfolio, dispatch]);
+  }, [ownedShares, qtyLoaded, userQty, userAmount, buyToggle, estimatedValue, sessionPortfolio, dispatch]);
 
   useEffect(() => {
     if (stockIsLoaded) {
@@ -197,17 +221,28 @@ function OrderTab() {
   }, [stockIsLoaded, ownedShares, userQty, stockInfo]);
 
   let totalShares = 0;
-  if (buyToggle) {
-    totalShares = parseFloat(userQty) + ownedShares
-  } else if (sellToggle && userQty <= ownedShares) {
-    totalShares = ownedShares - parseFloat(userQty)
+  if (type === 'share') {
+    if (buyToggle) {
+      totalShares = parseFloat(userQty) + ownedShares
+    } else if (sellToggle && userQty <= ownedShares) {
+      totalShares = ownedShares - parseFloat(userQty)
+    }
+  } else if (type === 'dollar') {
+    if (buyToggle) {
+      totalShares = parseFloat(estimatedAmount) + ownedShares
+    } else if (sellToggle) {
+      if (ownedShares >= parseFloat(estimatedAmount)) {
+        totalShares = ownedShares - parseFloat(estimatedAmount)
+      } else {
+        totalShares = 0
+      }
+    }
   }
-
 
   let shareClass = "share"
   let dollarClass = "dollar"
 
-  if (type === 'shares') dollarClass = dollarClass + " hidden"
+  if (type === 'share') dollarClass = dollarClass + " hidden"
   else if (type === 'dollar') shareClass = shareClass + " hidden"
 
   const buyClass = "buy" + (buyToggle ? " on" : "")
@@ -253,8 +288,8 @@ function OrderTab() {
           <div className="transaction-details">
             <label className="transaction-form" htmlFor="transaction-type">Transaction Type: </label>
 
-          <select name="transaction-type" value={type} onChange={handleChange}>
-            <option value="shares">Shares</option>
+          <select name="transaction-type" value={type} onChange={(e) => handleChange(e)}>
+            <option value="share">Shares</option>
             <option value="dollar">Dollar</option>
           </select>
           </div>

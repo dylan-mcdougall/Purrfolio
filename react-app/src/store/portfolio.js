@@ -32,7 +32,7 @@ export const buyStock = (id, ticker, quantity, buy) => async (dispatch) => {
         order_type: "Market"
     }
 
-    const response = await fetch(`/api/portfolios/${id}/order`, {
+    const response = await fetch(`/api/portfolios/${id}/order/shares`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',

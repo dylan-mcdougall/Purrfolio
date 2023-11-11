@@ -100,7 +100,7 @@ def portfolio_funds(id):
     return {"errors": ["Invalid form submission"]}, 400
 
 # purchase and sell stocks
-@portfolio_routes.route('/<int:id>/order', methods=["POST"])
+@portfolio_routes.route('/<int:id>/order/shares', methods=["POST"])
 @login_required
 def portfolio_purchase(id):
     """
@@ -176,5 +176,4 @@ def portfolio_purchase(id):
             db.session.add(transaction)
             db.session.commit()
             return {"message": "Transaction completed successfully"}
-    print(form.errors)
     return {"errors": ["Invalid form submission"]}
