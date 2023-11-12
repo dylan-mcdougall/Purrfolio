@@ -4,11 +4,11 @@ from sqlalchemy.sql import text
 
 def seed_users():
     demo = User(
-        first_name='Demo', last_name='Boii', username='Demo', email='demo@aa.io', password='password')
+        first_name='Justin', last_name='Thyme', username='Demo', email='demo@aa.io', password='password')
     marnie = User(
-        first_name='Marnie', last_name='Brother', username='marnie', email='marnie@aa.io', password='password')
+        first_name='Chris P.', last_name='Bacon', username='Chris P.', email='chris@aa.io', password='password')
     bobbie = User(
-        first_name='Bobbie', last_name='Bobert', username='bobbie', email='bobbie@aa.io', password='password')
+        first_name='Anita', last_name='Job', username='Anita', email='anita@aa.io', password='password')
 
     db.session.add(demo)
     db.session.add(marnie)

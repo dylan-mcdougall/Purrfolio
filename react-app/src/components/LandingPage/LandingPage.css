@@ -73,7 +73,59 @@ img {
 
 .navigation-right-hamburger {
     display: none;
-    margin: .5rem 1rem
+    position: relative;
+    margin: 0 1rem
+}
+
+.navigation-right-hamburger button {
+    background-color: black;
+    border: none;
+    font-size: 1.5rem;
+}
+
+.navigation-right-hamburger button:hover {
+    cursor: pointer;
+}
+
+div.hamburger-dropdown {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    right: 0;
+    width: 6rem;
+    padding: .5rem;
+    border: .5px solid gray;
+    border-radius: .5rem;
+    background-color: rgb(47, 46, 46);
+    z-index: 10000;
+    transform: translateY(0);
+    opacity: 1;
+    visibility: visible;
+    transition: opacity 300ms ease-in-out, transform 300ms ease-in-out;
+}
+
+div.hamburger-dropdown button:first-child {
+    padding-bottom: .6rem;
+    border-bottom: .5px solid lightgray;
+}
+
+div.hamburger-dropdown button {
+    background-color: rgb(47, 46, 46);
+    color: #dcdbcb;
+    font-size: 1rem;
+    padding: .5rem 0;
+    width: 100%;
+}
+
+div.hamburger-dropdown button:hover {
+    color: white;
+}
+
+.hamburger-dropdown.hidden {
+    opacity: 0;
+    transform: translateY(-10px);
+    visibility: hidden;
 }
 
 .title {
@@ -147,7 +199,24 @@ img {
 .landing-signup-section button {
     background-color: #dcdbcb;
     cursor: pointer;
+    padding: .5rem 1rem;
+    font-size: 1rem;
+    border-radius: 18px;
     margin: .5rem 0 1rem;
+}
+
+.landing-signup-section button:hover {
+    background-color: #bab9a7;
+}
+
+div.signup-form-wrapper button.submit.prevent {
+    color: lightgray;
+    background-color: grey;
+}
+
+div.signup-form-wrapper button.submit.prevent:hover {
+    cursor: default;
+    color: lightgray;
 }
 
 @media screen and (max-width: 600px) {
@@ -195,6 +264,7 @@ img {
         height: auto;
         width: 100%;
     }
+
 }
 
 @media screen and (min-width: 600px) {

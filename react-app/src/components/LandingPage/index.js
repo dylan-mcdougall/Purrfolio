@@ -1,21 +1,17 @@
 import React from 'react';
-import { useHistory } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import './LandingPage.css';
 import OpenModalButton from '../OpenModalButton';
 import SignupFormModal from '../SignupFormModal';
 import LoginFormModal from '../LoginFormModal';
-import Footer from '../Footer';
-
-
+import HamburgerMenu from './HamburgerMenu';
 
 function LandingPage() {
     const sessionUser = useSelector(state => state.session.user);
-    const history = useHistory();
 
     if (sessionUser) {
-        history.push('/portfolio')
-        return null
+        return <Redirect to='/portfolio'/>
     }
     else {
 
@@ -36,9 +32,7 @@ function LandingPage() {
                     />
                 </div>
                 <div className='navigation-right-hamburger'>
-                    <button className='placeholder'>
-                        Placeholder
-                    </button>
+                    <HamburgerMenu />
                 </div>
             </div>
             <div className='landing-content-wrapper'>
