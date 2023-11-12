@@ -202,6 +202,20 @@ div.transaction-details input {
     border: 1px solid black;
 }
 
+button.order-submit {
+    border-radius: 10px;
+    padding: 12px 24px;
+    border: 1px solid black;
+    color: black;
+    background-color: #b3ffa0;
+}
+
+button.order-submit:disabled {
+    background-color: grey;
+    color: white;
+    cursor: default;
+}
+
 .transaction-modal {
     display: flex; 
     position: fixed; 

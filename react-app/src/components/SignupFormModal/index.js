@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useModal } from "../../context/Modal";
 import { signUp, demoUser } from "../../store/session";
@@ -15,6 +15,7 @@ function SignupFormModal() {
 	const [password, setPassword] = useState("");
 	const [confirmPassword, setConfirmPassword] = useState("");
 	const [errors, setErrors] = useState([]);
+	const [emptyFields, setEmptyFields] = useState(true);
 	const { closeModal } = useModal();
 
 	const handleSubmit = async (e) => {
@@ -46,6 +47,17 @@ function SignupFormModal() {
 		dispatch(demoUser());
 		closeModal();
 	}
+
+	useEffect(() => {
+		if (firstName && lastName && email && password && confirmPassword) {
+			setEmptyFields(false)
+		}
+		return () => {
+			setEmptyFields(true)
+		}
+	}, [firstName, lastName, email, password, confirmPassword])
+
+	const signupClass = "submit" + (emptyFields ? " prevent" : "")
 
 	return (
 		<div className="signup-form-wrapper">
@@ -120,7 +132,7 @@ function SignupFormModal() {
 				</label>
 				<div className="button-interface">
 					<a className="demo-user" onClick={handleClick}>Demo User</a>
-					<button className="submit" type="submit">Sign Up</button>
+					<button className={signupClass} type="submit">Sign Up</button>
 				</div>
 			</form>
 		</div>
