@@ -24,6 +24,7 @@ function OrderTab() {
   const [type, setType] = useState('share')
   const [buyDisabled, setBuyDisabled] = useState(true);
   const [sellDisabled, setSellDisabled] = useState(true);
+  const [submitDisabled, setSubmitDisabled] = useState(true);
   const [stockNegative, setStockNegative] = useState(false);
   const [userAmount, setUserAmount] = useState(0);
   const [buyToggle, setBuyToggle] = useState(false);
@@ -267,7 +268,13 @@ function OrderTab() {
         setSellDisabled(true);
       }
     }
-  }, [stockIsLoaded, ownedShares, userQty, stockInfo]);
+
+    if ((!buyDisabled && !sellDisabled) && (userAmount !== 0 || userQty !== 0) && (buyToggle || sellToggle)) {
+      setSubmitDisabled(false)
+    } else {
+      setSubmitDisabled(true)
+    }
+  }, [stockIsLoaded, ownedShares, userQty, userAmount, stockInfo, buyToggle]);
 
   const transactionModalClass = "transaction-modal" + (renderModal ? "" : " hidden")
 
@@ -420,7 +427,7 @@ function OrderTab() {
           <select name="order-type" onClick={() => handleClick()}>
             <option value="market">Market</option>
           </select>
-          <button className="submit" onClick={(e) => handleOrderSubmit(e)}>
+          <button className="order-submit" disabled={submitDisabled} onClick={(e) => handleOrderSubmit(e)}>
             Submit
           </button>
         </form>
