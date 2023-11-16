@@ -440,7 +440,7 @@ function OrderTab() {
             <h4 className="transaction-modal-header">
               System Message
             </h4>
-            <span onClick={() => setRenderModal(false)} className="close">&times;</span>
+            <span onClick={() => setRenderModal(false)} className="close-modal">&times;</span>
           </div>
           <div className="transaction-modal-bottom">
             <p>Your transaction was successful! View the transactions tab to review.</p>

@@ -259,7 +259,7 @@ button.order-submit:disabled {
     padding: .5rem;
 }
 
-.close {
+.close-modal {
     margin-right: .5rem;
     margin-left: 4.25rem;
     color: #aaa;
@@ -268,8 +268,8 @@ button.order-submit:disabled {
     font-weight: bold;
 }
 
-.close:hover,
-.close:focus {
+.close-modal:hover,
+.close-modal:focus {
   color: black;
   text-decoration: none;
   cursor: pointer;

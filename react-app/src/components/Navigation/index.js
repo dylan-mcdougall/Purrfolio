@@ -117,7 +117,7 @@ function Navigation() {
 								<div className='nav-context'>
 									<OpenModalButton
 									     buttonText={"Add Funds"}
-										 modalComponent={< AddFundsModal />} />
+										 modalComponent={<AddFundsModal />} />
 								</div>
 							</div>
 							<span className='nav-tooltip'>
