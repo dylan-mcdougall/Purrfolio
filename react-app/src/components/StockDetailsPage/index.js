@@ -1,13 +1,12 @@
 import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
-import { NavLink, Route, useParams, useHistory } from "react-router-dom";
+import { useParams, useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { getStock } from "../../store/stocks";
 import "./StockDetail.css"
 import StockDetailGraph from "../StockDetailsGraph";
 import { getPortfolio } from "../../store/portfolio";
 import BottomTabMenu from "../BottomTabMenu";
-import OrderTab from "../OrderTab";
 import AddStockToList from "../StockToWatchListModal";
 import OpenModalButton from "../OpenModalButton";
 import WatchlistsBar from "../WatchlistsBar";
@@ -21,7 +20,6 @@ const StockDetails = () => {
     const portfolio = useSelector((state) => state.portfolio.portfolio)
     const [data2, setData2] = useState(null)
     const sessionUser = useSelector((state) => state.session.user);
-    const [quantity1, setQuantity1] = useState(0)
     const [color, setColor] = useState("sdmP green");
 
     useEffect(() => {

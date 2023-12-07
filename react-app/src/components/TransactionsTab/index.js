@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
-
 import './index.css'
 import Transaction from "../Transaction";
 
@@ -41,12 +40,6 @@ function TransactionTab() {
 
 
    }, []);
-
-
-
-  useEffect(() => {
-   console.log(transactionsWithStockData)
-  }, [transactionsWithStockData])
 
   return (
 

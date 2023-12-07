@@ -8,14 +8,12 @@ import './StockToWatchlist.css'
 const AddStockToList = ({stockId}) => {
     const { closeModal } = useModal()
     const dispatch = useDispatch()
-    // const [selectedList, setSelectedList] = useState([])
     const watchlists = useSelector((state) => state.watchlists.userWatchlists)
     const sessionUser = useSelector((state) => state.session.user)
     const [toggleState, setToggleState] = useState([])
 
 
     const checker = (listId) => {
-        console.log(toggleState)
         let arr = toggleState
         if (arr.length){
             for (let i = 0; i < arr.length; i++){
@@ -46,14 +44,10 @@ const AddStockToList = ({stockId}) => {
             setToggleState([listId])
         }else if (checker(listId)){
             const newArr = toggleState
-            console.log(newArr)
             const slicedArr = makeNew(newArr, listId)
-
-            console.log(newArr, slicedArr)
             setToggleState(slicedArr)
         } else if (!checker(listId)){
             const newArr = [...toggleState]
-            console.log(newArr)
             newArr.push(listId)
             setToggleState(newArr)
         }
@@ -63,11 +57,6 @@ const AddStockToList = ({stockId}) => {
     useEffect(() => {
         if(sessionUser)dispatch(getUserWatchlists())
     },[dispatch, sessionUser])
-
-    // const handleClick = (id) => {
-    //     console.log(id)
-    //     setToggleState(id)
-    // }
     const handleSub = async() => {
         const arr = toggleState
         arr.forEach(async(el) => {
