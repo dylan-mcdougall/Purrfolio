@@ -1,7 +1,6 @@
 
 const SET_PORTFOLIO = "portfolio/SET_PORTFOLIO";
 const DELETE_PORTFOLIO = "portfolio/DELETE_PORTFOLIO";
-const BUY_STOCK = "portfolio/BUY_STOCK"
 
 const setPortfolio = (portfolio) => ({
     type: SET_PORTFOLIO,
@@ -15,7 +14,7 @@ export const removePortfolio = () => ({
 
 const initialState = { portfolio: null };
 
-export const getPortfolio = (id) => async (dispatch) => {
+export const getPortfolio = () => async (dispatch) => {
     const response = await fetch(`/api/users/current/portfolio`);
     const data = await response.json();
     dispatch(setPortfolio(data));
@@ -23,7 +22,6 @@ export const getPortfolio = (id) => async (dispatch) => {
 };
 
 export const buyStock = (id, ticker, quantity, buy) => async (dispatch) => {
-    console.log('entering store action')
     const formData = {
         id,
         ticker,

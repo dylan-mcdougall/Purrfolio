@@ -14,8 +14,6 @@ function Navigation() {
 	const logoutRef = useRef();
 
 	const dispatch = useDispatch();
-
-
 	
 	useEffect(() => {
 		const handleHover = (e) => {

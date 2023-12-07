@@ -8,24 +8,16 @@ import WatchlistContent from "../WatchlistsContent";
 import OpenModalButton from "../OpenModalButton";
 import CreateNewWatchlist from "../NewWatchlistModal";
 
-// const sample = [{x: 'pistachio', y: "is a nut", id: 1},{x: 'strawberry', y:"is a fruit", id: 2}]
-
 
 const WatchlistsPage = () => {
     const dispatch = useDispatch()
     const sessionUser = useSelector((state) => state.session.user)
-    const sessionPortfolio = useSelector((state) => state.portfolio.portfolio)
     const watchlists = useSelector((state) => state.watchlists.userWatchlists)
     const fWatch = useSelector((state) => state.watchlists.userWatchlists)
 
     useEffect(() => {
         if(sessionUser)dispatch(getUserWatchlists())
     },[dispatch, sessionUser])
-    console.log(sessionUser)
-    console.log(watchlists)
-    console.log(fWatch)
-
-
 
     const [toggleState, setToggleState] =useState(1)
     const toggleTab = (index) => {
@@ -36,11 +28,6 @@ const WatchlistsPage = () => {
             setToggleState(watchlists[0].id)
         }
     }, [watchlists, setToggleState])
-
-
-
-
-
 
     return(
         <div className="body-wrapper">
@@ -103,35 +90,6 @@ const WatchlistsPage = () => {
         </div>}
         </div>
 
-
-
-
-        // <div className='WatchlistContainer'>
-        //     <div className='addWatchlist'>
-        //         <button
-        //         onClick={() => {return(alert("Feature Coming Soon!"))}}
-        //         >Create new Watchlist</button>
-        //     </div>
-        //     <div className="wlTopBar">
-        //         {sample ? (
-        //             sample.map((el) => (
-        //                 <div
-        //                 className={toggleState === el.id ? "tabs active-tabs" : "tabs"}
-        //                 onClick={() => toggleTab(el.id)}
-        //                 >{el.x}</div>
-        //             ))
-        //         ): <div>...loading</div>}
-        //     </div>
-        //     <div className="wlContent">
-        //        {sample ? (
-        //         sample.map((el) => (
-        //             <div
-        //             className={toggleState === el.id ? "content active-content" : "content"}
-        //             >{el.y} </div>
-        //         ))
-        //        ): <div>...loading</div>}
-        //     </div>
-        // </div>
     )
 }
 

@@ -22,15 +22,12 @@ const UpdateWatchlist = (listId) => {
         let err = {}
         if (name.length < 1){
             err.name = 'Name must be longer than one charater'
-            console.log(err.name)
         } else if (name.length >= 20){
             err.name = 'Name must be less than 20 characters'
-            console.log(err.name)
         }
         if (Object.values(err).length > 0){
             setErrors(err)
         } else {
-            console.log(name)
             await dispatch(updateWatchlist(name, listId))
             await dispatch(getUserWatchlists())
             .then(closeModal)

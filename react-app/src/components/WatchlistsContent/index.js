@@ -1,6 +1,4 @@
-import { useState, useEffect } from "react";
-import { useSelector } from "react-redux";
-import { NavLink, Route, useParams, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import './WatchlistContent.css'
 import OpenModalButton from "../OpenModalButton";
@@ -11,7 +9,6 @@ import { getUserWatchlists } from "../../store/watchlists";
 
 const WatchlistContent = (stocks) => {
  const dispatch = useDispatch()
- console.log(stocks.stocks)
 
  const history = useHistory()
 
@@ -39,12 +36,6 @@ const WatchlistContent = (stocks) => {
                     </div>
                 </div>
                 <div className="tbRightSide">
-                    {/* <div className="editName">
-                        <OpenModalButton
-                            buttonText={<i class="fa-regular fa-pen-to-square"></i>}
-                            modalComponent={<UpdateWatchlist listId={stocks.id} />}
-                        />
-                    </div> */}
                     <div className="DeleteWatchlist">
                         <OpenModalButton
                             buttonText={<i class="fa-solid fa-trash" ></i>}

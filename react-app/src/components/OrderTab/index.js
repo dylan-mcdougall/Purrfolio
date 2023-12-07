@@ -254,27 +254,44 @@ function OrderTab() {
 
   useEffect(() => {
     if (stockIsLoaded) {
-      if (
-        sessionPortfolio.portfolio.current_funds >
-        stockInfo.price * userQty
-      ) {
-        setBuyDisabled(false);
-      } else {
-        setBuyDisabled(true);
+      if (buyToggle) {
+        if (type === 'share') {
+          if (sessionPortfolio.portfolio.current_funds > stockInfo.price * userQty && userQty && userQty > 0) {
+            setBuyDisabled(false)
+          } else setBuyDisabled(true)
+        } else if (type === 'dollar') {
+          if (sessionPortfolio.portfolio.current_funds > userAmount && userAmount && userAmount > 0) {
+            setBuyDisabled(false)
+          } else setBuyDisabled(true)
+        }
+      } else if (sellToggle) {
+        if (type === 'share') {
+          if (ownedShares > userQty && userQty && userQty > 0) {
+            setSellDisabled(false)
+          } else setSellDisabled(true)
+        } else if (type === 'dollar') {
+          if (ownedShares > userAmount / stockInfo.price && userAmount && userAmount > 0) {
+            setSellDisabled(false)
+          } else setSellDisabled(true)
+        }
       }
-      if (ownedShares >= userQty) {
-        setSellDisabled(false);
-      } else {
-        setSellDisabled(true);
-      }
+    } else {
+      setBuyDisabled(true)
+      setSellDisabled(true)
     }
 
-    if ((!buyDisabled && !sellDisabled) && (userAmount !== 0 || userQty !== 0) && (buyToggle || sellToggle)) {
-      setSubmitDisabled(false)
-    } else {
+    if (buyToggle && buyDisabled) {
       setSubmitDisabled(true)
+    } else if (buyToggle && !buyDisabled) {
+      setSubmitDisabled(false)
     }
-  }, [stockIsLoaded, ownedShares, userQty, userAmount, stockInfo, buyToggle]);
+    if (sellToggle && sellDisabled) {
+      setSubmitDisabled(true)
+    } else if (sellToggle && !sellDisabled) {
+      setSubmitDisabled(false)
+    }
+
+  }, [stockIsLoaded, ownedShares, userQty, userAmount, stockInfo, buyToggle, sellToggle]);
 
   const transactionModalClass = "transaction-modal" + (renderModal ? "" : " hidden")
 

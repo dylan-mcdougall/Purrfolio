@@ -1,7 +1,4 @@
-
 const SINGLESTOCK = 'stocks/singleStock'
-
-
 
 const singleStock = (stock) => ({
     type: SINGLESTOCK,

@@ -27,8 +27,6 @@ export const removeWatchlist = (listId) => async(dispatch) => {
     }
 }
 export const removeStock = (listId, stockId) => async(dispatch) => {
-    console.log('listId',listId)
-    console.log('stockId',stockId)
     const response = await fetch(`/api/watchlists/${listId}/remove-stock`, {
         method: 'DELETE',
         headers: {
@@ -39,9 +37,7 @@ export const removeStock = (listId, stockId) => async(dispatch) => {
         })
     })
     if (response.ok){
-        console.log('ok')
         const data = response.json()
-        console.log(data)
         dispatch(deleteStock(stockId))
     }
 }
@@ -57,26 +53,19 @@ export const addStock = (listId, stockId) => async(dispatch) => {
     })
     if (response.ok){
         const data = await response.json()
-        console.log(data)
         dispatch(getList(data))
     }
 }
 
 export const getUserWatchlists = (page) => async(dispatch) => {
-    console.log('start')
     const response = await fetch('/api/users/current/watchlists')
     if(response.ok){
-        console.log('response is ok')
         const list = await response.json()
-        console.log(list.watchlists)
         dispatch(userWatchlists(list.watchlists))
         return page
     }
 }
 export const updateWatchlist = (name, listId) => async(dispatch) => {
-    console.log(name)
-    console.log(listId.listId)
-    console.log('start')
     const response = await fetch(`api/watchlists/${listId.listId}`,{
         method: 'PATCH',
         headers: {
@@ -92,8 +81,6 @@ export const updateWatchlist = (name, listId) => async(dispatch) => {
     }
 }
 export const newUserWatchlist = (name) => async(dispatch) => {
-    console.log('start')
-    console.log(name)
     const response = await fetch('/api/watchlists/new', {
 		method: "POST",
 		headers: {
@@ -105,7 +92,6 @@ export const newUserWatchlist = (name) => async(dispatch) => {
     })
     if(response.ok) {
         const data = await response.json()
-        console.log(data)
         dispatch(getList(data))
     }
 }

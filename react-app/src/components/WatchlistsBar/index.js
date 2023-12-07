@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
-import { NavLink, Route, useParams, useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import './WatchlistBar.css'
 import { getUserWatchlists } from "../../store/watchlists";
@@ -16,11 +15,7 @@ const WatchlistsBar = () => {
         if(sessionUser)dispatch(getUserWatchlists())
     },[dispatch, sessionUser])
 
-
-    console.log(watchlists)
-
     const checker = (listId) => {
-        console.log(toggleState)
         let arr = toggleState
         if (arr.length){
             for (let i = 0; i < arr.length; i++){
@@ -51,14 +46,10 @@ const WatchlistsBar = () => {
             setToggleState([listId])
         }else if (checker(listId)){
             const newArr = toggleState
-            console.log(newArr)
             const slicedArr = makeNew(newArr, listId)
-
-            console.log(newArr, slicedArr)
             setToggleState(slicedArr)
         } else if (!checker(listId)){
             const newArr = [...toggleState]
-            console.log(newArr)
             newArr.push(listId)
             setToggleState(newArr)
         }

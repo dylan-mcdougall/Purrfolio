@@ -1,9 +1,9 @@
 from flask import Blueprint, jsonify, request
 from sqlalchemy.orm import joinedload
-from flask_login import login_required, current_user
-from app.models import User, Portfolio, Stock, Transaction, db, PortfolioStock
-from app.forms import UpdateFundsForm, TransactionForm
-from .auth_routes import authenticate, validation_errors_to_error_messages
+from flask_login import login_required
+from app.models import Portfolio, Stock, Transaction, db, PortfolioStock
+from app.forms import UpdateFundsForm
+from .auth_routes import authenticate
 from .fetch_logic import fetch_portfolio_details
 
 portfolio_routes = Blueprint('portfolios', __name__)
@@ -85,7 +85,6 @@ def portfolio_funds(id):
             db.session.commit()
             return portfolio.to_dict()
         return { "errors": ["desired funds must be greater than 0 and less than 10,000,000"] }
-    # return {'errors': ['Unauthorized']}
     if portfolio == None:
         return {"errors": ["Portfolio associated with this id does not exist"]}, 404
     if form.validate_on_submit():

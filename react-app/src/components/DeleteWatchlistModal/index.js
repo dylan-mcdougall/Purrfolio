@@ -14,7 +14,6 @@ const DeleteWatchlistModal = ({listId}) => {
         await dispatch(getUserWatchlists())
         closeModal()
     }
-    console.log(listId)
 
     return(
         <div className="deleteWLContaint">
