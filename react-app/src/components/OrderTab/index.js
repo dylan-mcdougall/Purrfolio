@@ -251,7 +251,26 @@ function OrderTab() {
       })
     }
   }, [ownedShares, qtyLoaded, userQty, userAmount, buyToggle, estimatedFunds, sessionPortfolio, dispatch]);
-
+  
+  let totalShares = 0;
+  if (type === 'share') {
+    if (buyToggle) {
+      totalShares = parseFloat(userQty) + ownedShares
+    } else if (sellToggle && userQty <= ownedShares) {
+      totalShares = ownedShares - parseFloat(userQty)
+    }
+  } else if (type === 'dollar') {
+    if (buyToggle) {
+      totalShares = parseFloat(estimatedAmount) + ownedShares
+    } else if (sellToggle) {
+      if (ownedShares >= parseFloat(estimatedAmount)) {
+        totalShares = ownedShares - parseFloat(estimatedAmount)
+      } else {
+        totalShares = 0
+      }
+    }
+  }
+  
   useEffect(() => {
     if (stockIsLoaded) {
       if (buyToggle) {
@@ -279,7 +298,9 @@ function OrderTab() {
       setBuyDisabled(true)
       setSellDisabled(true)
     }
+  }, [stockIsLoaded, ownedShares, userQty, userAmount, stockInfo, buyToggle, sellToggle]);
 
+  useEffect(() => {
     if (buyToggle && buyDisabled) {
       setSubmitDisabled(true)
     } else if (buyToggle && !buyDisabled) {
@@ -290,30 +311,9 @@ function OrderTab() {
     } else if (sellToggle && !sellDisabled) {
       setSubmitDisabled(false)
     }
-
-  }, [stockIsLoaded, ownedShares, userQty, userAmount, stockInfo, buyToggle, sellToggle]);
+  }, [buyToggle, sellToggle, buyDisabled, sellDisabled])
 
   const transactionModalClass = "transaction-modal" + (renderModal ? "" : " hidden")
-
-  let totalShares = 0;
-  if (type === 'share') {
-    if (buyToggle) {
-      totalShares = parseFloat(userQty) + ownedShares
-    } else if (sellToggle && userQty <= ownedShares) {
-      totalShares = ownedShares - parseFloat(userQty)
-    }
-  } else if (type === 'dollar') {
-    if (buyToggle) {
-      totalShares = parseFloat(estimatedAmount) + ownedShares
-    } else if (sellToggle) {
-      if (ownedShares >= parseFloat(estimatedAmount)) {
-        totalShares = ownedShares - parseFloat(estimatedAmount)
-      } else {
-        totalShares = 0
-      }
-    }
-  }
-
   let shareClass = "share"
   let dollarClass = "dollar"
 
