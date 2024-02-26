@@ -98,6 +98,21 @@ div.login-form-wrapper button.submit {
 div.login-form-wrapper button.submit:hover {
     color: white;
 }
+div.login-form-wrapper button.disabledsubmit{
+    font-family: 'Poppins', sans-serif;
+    color: #dcdbcb;
+    background-color: #808080;
+    cursor: pointer;
+    border: none;
+    margin: 10px;
+    width: 28%;
+    font-size: 16px;
+    padding: 6px 10px;
+    border-radius: 16px;
+}
+div.login-form-wrapper button.disabledsubmit:hover{
+    cursor: default;
+}
 
 div.login-form-wrapper a.demo-user {
     color: #dcdbcb;

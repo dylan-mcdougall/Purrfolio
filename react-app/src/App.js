@@ -35,6 +35,9 @@ function App() {
           <Route path='/stocks/:ticker'>
             <StockDetails />
           </Route>
+          <Route path='*'>
+            <LandingPage />
+          </Route>
         </Switch>
       )}
       <Footer />

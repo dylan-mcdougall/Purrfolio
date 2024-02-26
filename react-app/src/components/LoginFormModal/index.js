@@ -13,6 +13,12 @@ function LoginFormModal() {
   const [errors, setErrors] = useState([]);
   const { closeModal } = useModal();
 
+  const isDisabled = () => {
+    if (email === '' || password === ''){
+      return true
+    }else return false
+  }
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     const data = await dispatch(login(email, password));
@@ -68,7 +74,7 @@ function LoginFormModal() {
         </label>
         <div className="button-interface">
         <a className="demo-user" onClick={handleClick}>Demo User</a>
-        <button className="submit" type="submit">Log In</button>
+        <button className={isDisabled() ? 'disabledsubmit' : 'submit'} type="submit" disabled={isDisabled()}>Log In</button>
         </div>
       </form>
     </div>
