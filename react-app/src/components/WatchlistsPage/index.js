@@ -10,6 +10,7 @@ import CreateNewWatchlist from "../NewWatchlistModal";
 
 
 const WatchlistsPage = () => {
+    const history = useHistory()
     const dispatch = useDispatch()
     const sessionUser = useSelector((state) => state.session.user)
     const watchlists = useSelector((state) => state.watchlists.userWatchlists)
@@ -17,6 +18,7 @@ const WatchlistsPage = () => {
 
     useEffect(() => {
         if(sessionUser)dispatch(getUserWatchlists())
+        else return history.push('/')
     },[dispatch, sessionUser])
 
     const [toggleState, setToggleState] =useState(1)

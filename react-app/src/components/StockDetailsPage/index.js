@@ -23,6 +23,13 @@ const StockDetails = () => {
     const [color, setColor] = useState("sdmP green");
 
     useEffect(() => {
+        if(!sessionUser){
+            navigate.push("/")
+            return
+        }
+        else dispatch(getPortfolio(sessionUser.id))
+    },[navigate,sessionUser, dispatch])
+    useEffect(() => {
         if (stock) {
             let calculated = ((stock.price - stock.open) / stock.open) * 100;
             calculated = calculated.toFixed(2);
@@ -46,9 +53,10 @@ const StockDetails = () => {
         let x = await dispatch(getStock(ticker))
         if (x.errors) navigate.push('/')
     }, [dispatch, ticker])
-    useEffect(() => {
-        dispatch(getPortfolio(sessionUser.id))
-    }, [dispatch, sessionUser])
+    // useEffect(() => {
+    //     dispatch(getPortfolio(sessionUser.id))
+    // }, [dispatch, sessionUser])
+
 
 
     const PostionChecker = () => {
@@ -69,6 +77,9 @@ const StockDetails = () => {
         )
 
     }
+
+
+
 
     return (
         <div className="body-wrapper">
@@ -160,6 +171,7 @@ const StockDetails = () => {
             </div>
         </div>
     )
+
 }
 
 export default StockDetails

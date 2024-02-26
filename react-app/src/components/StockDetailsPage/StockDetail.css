@@ -11,6 +11,7 @@
   padding: 0;
 }
 
+
 div.stock-details-page-wrapper {
   display: flex;
   flex-direction: column;
@@ -18,7 +19,7 @@ div.stock-details-page-wrapper {
   padding: 0;
   height: 100%;
   width: 60%;
-  margin: 5% 0 2% 0%; 
+  margin: 5% 0 2% 0%;
 }
 
 .stockDetailsContainer {
@@ -73,6 +74,8 @@ div.small-screen {
   background-color: #474844;
   color: #dcdbcb;
   padding: 6px;
+  border-radius: 10px;
+  border: solid 1px black;
 }
 
 .sdtb_right > button:hover {
@@ -323,7 +326,7 @@ td.table-issue {
     margin-top: 3rem;
     margin-left: 4rem;
   }
-  
+
   .graph4Stock {
     margin: 2rem 0;
   }
