@@ -1,6 +1,8 @@
 # Purrfolio :money_with_wings:
 ##### Afford the life your cat deserves. :smiley_cat:
 
+First collaborative project I had made when I was first learning to code. Dead but keeping for the sake of it.
+
 __Purrfolio__ is a stock trading website. __Purrfolio__ allows users to buy and sell stocks and to watch stocks. __Purrfolio__ was created by [Dylan](https://github.com/dylan-mcdougall), [Charles](https://github.com/C-Carroll), and [Emily](https://github.com/eanorman) Check it out [here](http://https://purrfolio.onrender.com/).
 
 ## Technologies Used
